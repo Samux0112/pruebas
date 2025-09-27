@@ -9,9 +9,6 @@ const tblPlanes = document.querySelector('#tblPlanes');
 const tipo_operacion = document.querySelector('#tipo_operacion');
 const tipo_ingreso = document.querySelector('#tipo_ingreso');
 const pdv = document.querySelector('#pdv');
-var prueba = Julio;
-
-
 
 
 var ventasGravadas = 0;

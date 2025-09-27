@@ -1,0 +1,410 @@
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- Bootstrap CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/>
+	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+  </head>
+  <body>
+  <input type="text" class="form-control" value="Enviando Factura..." aria-label="Username" aria-describedby="basic-addon1" id="txtEstado" disabled>
+  </body>
+  </html>
+
+<?php
+require_once 'config/Config.php';
+require_once __DIR__ . '../../../mpdf/vendor/autoload.php';
+require_once __DIR__ .'../../../phpqrcode/qrlib.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+$mpdf = new \Mpdf\Mpdf();
+$servername = HOST;
+$username = USER;
+$password = PASS;
+$dbname = DBNAME;
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+$sql = "select dte as objeto_json from dtesSujetoExcluido where id =(".$data['idVenta'].")";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  // output data of each row
+  while($row = $result->fetch_assoc()) {
+		$dte = $row["objeto_json"]; 	  
+  }
+} 
+else {
+  echo "0";
+}
+$conn->close();	
+$dteStr = $dte;
+$tempDir = "qrimages/";
+$dte = json_decode($dte,true);
+$fecha = substr($dte["fhProcesamiento"],0,10);
+$fecha = substr($dte["fhProcesamiento"],6,4)."-".substr($dte["fhProcesamiento"],3,2)."-".substr($dte["fhProcesamiento"],0,2);
+$codeContents = 'https://admin.factura.gob.sv/consultaPublica?ambiente=00&codGen='.$dte["dteJson"]["identificacion"]["codigoGeneracion"].'&fechaEmi='.$fecha;
+QRcode::png($codeContents, $tempDir.'008_4.png', QR_ECLEVEL_L, 3, 4); 
+
+
+$html = "<style>
+td.a {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+p.b{
+	font-size: 10px;
+}
+
+table.c, td.d, th {
+  border: 1px solid;
+  border-collapse: collapse;
+}
+table.c{
+	border-collapse: collapse;
+	width: 100%;
+}
+</style>
+<table>
+<tr>
+<td WIDTH='33%'>
+<p align='left'><img src='".BASE_URL."assets/images/logo.png' width='100px' ></p>
+</td>
+<td align='center' WIDTH='33%'>
+<h5><p align='center'><b>
+Documento tributario electrónico <br>
+Sujeto Excluido
+<b></p></h5>
+</td>
+<td WIDTH='33%'>
+&nbsp;
+</td>
+</tr>
+</table>
+<hr>
+<div>
+<table>
+<tr>
+<td>
+<table align = 'left'>
+<tr>
+<td>
+<p style ='font-size: 8px'><b>Código de generación:</p>
+</td>
+<td>
+<p style ='font-size: 8px'>".$dte["dteJson"]["identificacion"]["codigoGeneracion"]."</p>
+</td>
+</tr>
+<tr>
+<td align='right'>
+<p style ='font-size: 8px'><b>Número control:</p>
+</td>
+<td>
+<p style ='font-size: 8px'>".$dte["dteJson"]["identificacion"]["numeroControl"]."</p>
+</td>
+</tr>
+<tr>
+<td align='right'>
+<p style ='font-size: 8px'><b>Sello de recepción::</p>
+</td>
+<td>
+<p style ='font-size: 8px'>".$dte["selloRecibido"]."</p>
+</td>
+</tr>
+</table>
+</td>
+<td>
+<img src='qrimages/008_4.png' width='100px' >
+</td>
+<td>
+
+<table align = 'right'>
+<tr>
+<td align='right'>
+<p style ='font-size: 8px'><b>Modelo de Facturación:</p>
+</td>
+<td>";
+if($dte["dteJson"]["identificacion"]["tipoModelo"] == 2 ){
+$html .= "<p style ='font-size: 8px'>Diferido</p>
+</td>
+</tr>
+<tr>
+<td align='right'>
+<p style ='font-size: 8px'><b>Tipo de Transmisión:</p>
+</td>
+<td>
+<p style ='font-size: 8px'>Contingencia</p>
+</td>
+</tr>";
+}else{
+$html .= "<p style ='font-size: 8px'>Previo</p>
+</td>
+</tr>
+<tr>
+<td align='right'>
+<p style ='font-size: 8px'><b>Tipo de Transmisión:</p>
+</td>
+<td>
+<p style ='font-size: 8px'>Normal</p>
+</td>
+</tr>";	
+}
+
+$html .= "<tr>
+<td align='right'>
+<p style ='font-size: 8px'><b>Fecha y Hora de Generación:</p>
+</td>
+<td>
+<p style ='font-size: 8px'>".$dte["fhProcesamiento"]."</p>
+</td>
+</tr>
+</table>
+
+</td>
+</tr>
+</table>
+</div>
+<! – EMISOR –>
+
+<div align='center'>
+<table>
+<tr>
+<td align='center'>
+<h5><p align='center'><b>EMISOR<b></p></h5>
+</td>
+<td align='center'>
+</td>
+<td align='center'>
+<h5><p align='center'><b>RECEPTOR<b></p></h5>
+</td>
+</tr>
+<tr>
+<td class='a'>
+<table align = 'left'>
+<tr>
+<td>
+<p style ='font-size: 8px'><b>Nombre o razón social:</p>
+</td>
+<td>
+<p style ='font-size: 8px'>".($dte["dteJson"]["emisor"]["nombre"])."</p>
+</td>
+</tr>
+<tr>
+<td align='right'>
+<p style ='font-size: 8px'><b>NIT:</p>
+</td>
+<td>
+<p style ='font-size: 8px'>".$dte["nit"]."</p>
+</td>
+</tr>
+<tr>
+<td align='right'>
+<p style ='font-size: 8px'><b>NRC:</p>
+</td>
+<td>
+<p style ='font-size: 8px'>".$dte["dteJson"]["emisor"]["nrc"]."</p>
+</td>
+</tr>
+<tr>
+<td align='right'>
+<p style ='font-size: 8px'><b>Actividad económica:</p>
+</td>
+<td>
+<p style ='font-size: 8px'>".($dte["dteJson"]["emisor"]["descActividad"])."</p>
+</td>
+</tr>
+<tr>
+<td align='right'>
+<p style ='font-size: 8px'><b>Dirección:</p>
+</td>
+<td>
+<p style ='font-size: 8px'>".($dte["dteJson"]["emisor"]["direccion"]["complemento"])."</p>
+</td>
+</tr>
+<tr>
+<td align='right'>
+<p style ='font-size: 8px'><b>Número de teléfono:</p>
+</td>
+<td>
+<p style ='font-size: 8px'>".$dte["dteJson"]["emisor"]["telefono"]."</p>
+</td>
+</tr>
+<tr>
+<td align='right'>
+<p style ='font-size: 8px'><b>Correo electrónico:</p>
+</td>
+<td>
+<p style ='font-size: 8px'>".$dte["dteJson"]["emisor"]["correo"]."</p>
+</td>
+</tr>
+<tr>
+<td align='right'>
+<p style ='font-size: 8px'><b>Tipo de establecimiento:</p>
+</td>
+<td>
+<p style ='font-size: 8px'>".nomEstablecimiento."</p>
+</td>
+</tr>
+</table>
+</td>
+
+<td>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+
+<! – RECEPTOR –>
+
+<td class ='a'>
+
+<table align = 'left'>
+<tr>
+<td>
+<p style ='font-size: 8px'><b>Nombre o razón social:</p>
+</td>
+<td>
+<p style ='font-size: 8px'>".($dte["dteJson"]["sujetoExcluido"]["nombre"])."</p>
+</td>
+</tr>
+<tr>
+<td align='right'>";
+if(strlen($dte["dteJson"]["sujetoExcluido"]["numDocumento"])<11){
+$html .= "<p style ='font-size: 8px'><b>DUI:</p>";
+}else{
+$html .= "<p style ='font-size: 8px'><b>NIT:</p>";	
+}
+$html .="</td>
+<td>
+<p style ='font-size: 8px'>".$dte["dteJson"]["sujetoExcluido"]["numDocumento"]."</p>
+</td>
+</tr>
+<tr>
+<td align='right'>
+<p style ='font-size: 8px'><b>Número de teléfono:</p>
+</td>
+<td>
+<p style ='font-size: 8px'>".$dte["dteJson"]["sujetoExcluido"]["telefono"]."</p>
+</td>
+</tr>
+<tr>
+<td align='right'>
+<p style ='font-size: 8px'><b>Correo electrónico:</p>
+</td>
+<td>
+<p style ='font-size: 8px'>".$dte["dteJson"]["sujetoExcluido"]["correo"]."</p>
+</td>
+</tr>
+</table>
+
+</td>
+</tr>
+
+</table>
+
+</div>
+<br>
+
+<! – RECEPTOR –>
+
+<div>
+
+<table class='c'>
+<tr>
+<td WIDTH='25' class='d'><p style ='font-size: 10px'><b>N°<b></p></td>
+<td WIDTH='25'  class='d'><p style ='font-size: 10x'><b>Cantidad<b></p></td>
+<td WIDTH='25'  class='d'><p style ='font-size: 10px'><b>Unidad<b></p></td>
+<td WIDTH='400'  class='d'><p style ='font-size: 10px'><b>Descripción<b></p></td>
+<td WIDTH='50' class='d'><p style ='font-size: 10px'><b>Precio unitario <b></p></td>
+<td WIDTH='50'  class='d'><p style ='font-size: 10px'><b>Compras<b></p></td>
+</tr>
+";
+$array = $dte["dteJson"]["cuerpoDocumento"];
+
+foreach ($array as $value) {
+
+
+$html .= "<tr><td  class='d'><p class='b'>".($value['numItem'])."</b></td><td  class='d'><p class='b'>". ($value['cantidad'])."</p></td><td  class='d'><p class='b'>Unidad</p></td><td  class='d'><p class='b'>".($value['descripcion'])."<p/></td><td  class='d'><p class='b'>$".(number_format($value['precioUni'],2,'.',''))."</p></td><td  class='d'><p class='b'>$".(number_format($value['compra'],2,'.',''))."</p></td></tr>";
+
+	
+}
+$html .="<tr><td class='d' colspan='5' align='right'><p class='b'><b>Sumas : <b></p></td></td><td class='d'><p class='b'>$".(number_format($dte["dteJson"]["resumen"]["totalCompra"],2,'.',''))."</p></td></tr>
+<tr><td class='d' colspan='5' align='right'><p class='b'><b>Descuento:<b></p></td><td class='d'><p class='b'>$".(number_format($dte["dteJson"]["resumen"]["descu"],2,'.',''))."</p></td></tr>
+<tr><td class='d' colspan='5' align='right'><p class='b'><b>Sub-Total:<b></p></td><td class='d'><p class='b'>$".(number_format($dte["dteJson"]["resumen"]["subTotal"],2,'.',''))."</p></td></tr>
+<tr><td class='d' colspan='5' align='right'><p class='b'><b>Iva Retenido :<b></p></td><td class='d'><p class='b'>$0.00</p></td></tr>
+<tr><td class='d' colspan='5' align='right'><p class='b'><b>Retención Renta :<b></p></td><td class='d'><p class='b'>$".number_format($dte["dteJson"]["resumen"]["reteRenta"],2,'.','')."</p></td></tr>
+<tr><td class='d' colspan='5' align='right'><p class='b'><b>Total a Pagar :<b></p></td><td class='d'><p class='b'>$".number_format($dte["dteJson"]["resumen"]["totalPagar"],2,'.','')."</p></td></tr>
+</table>
+
+</div>
+
+<div>
+<table>
+<tr><td align='right'><p class='b'><b>Valor en Letras :</b></p></td><td><p class='b'> ".($dte["dteJson"]["resumen"]["totalLetras"])."</p></td></tr>
+<tr><td><p class='b'><b>Condición de la Operación: </b></p></td><td><p class='b'>CONTADO</p></td></tr>
+<tr><td align='right'><p class='b'><b>Observaciones :</b></p></td><td><p class='b'>".($dte["dteJson"]["resumen"]["observaciones"])."</p></td></tr>
+</table>
+</div>
+";
+$html1 = "<h5><p align='center'><b>
+Documento tributario electrónico <br>
+Factura Comprobante crédito fiscal
+<b></p></h5>";
+$mpdf->WriteHTML($html);
+
+//$mpdf->Output();
+
+
+$mpdf->Output('facturas/'.$dte["dteJson"]["identificacion"]["codigoGeneracion"].'.pdf', 'F'); //guarda a ruta
+$jsonFile = fopen('facturas/'.$dte["dteJson"]["identificacion"]["codigoGeneracion"].'.json', 'w+') or die("Error creando archivo");
+fwrite($jsonFile,$dteStr) or die("Error escribiendo en el archivo");
+fclose($jsonFile);
+//$fpdf->Output('D', 'report.pdf');
+
+
+
+// PHP Mailer
+
+ $mail = new PHPMailer(true);
+ //Enable verbose debug output
+                $mail->SMTPDebug = 0;                      //Enable verbose debug output
+                $mail->isSMTP();                                            //Send using SMTP
+                $mail->Host       = HOST_SMTP;                     //Set the SMTP server to send through
+                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                $mail->Username   = USER_SMTP;                     //SMTP username
+                $mail->Password   = CLAVE_SMTP;                               //SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                $mail->Port       = PUERTO_SMTP; 
+                $mail->From = 'pruebas@fabianscorp.top'; //Sets the From email address for the message
+$mail->FromName = "Carlos Fabian"; //Sets the From name of the message
+$mail->AddAddress('pruebas@fabianscorp.top','Carlos Fabian' ); //Adds a
+$mail->AddAddress($dte["dteJson"]["sujetoExcluido"]["correo"], $dte["dteJson"]["sujetoExcluido"]["nombre"]); //Adds a"To" address
+$mail->WordWrap = 50; 
+$mail->IsHTML(true); //Sets message type to HTML
+$file = 'facturas/'.$dte["dteJson"]["identificacion"]["codigoGeneracion"].'.pdf';
+$file2 = 'facturas/'.$dte["dteJson"]["identificacion"]["codigoGeneracion"].'.json';
+$mail->AddAttachment($file); //Adds an attachment from a path on the filesystem
+$mail->AddAttachment($file2); //Adds an attachment from a path on the filesystem
+
+$mail->Subject = 'Sujeto Excluido '.$dte["dteJson"]["identificacion"]["codigoGeneracion"]; //Sets the Subject of the message
+ $mail->Body    = 'Documento DTE Sujeto Excluido';
+ if($mail->Send()){
+     echo "<script>document.getElementById('txtEstado').value= 'DTE : ".$dte["dteJson"]["identificacion"]["numeroControl"]." enviado con exito al Correo : ".$dte["dteJson"]["sujetoExcluido"]["correo"]."';</script>";
+ }else{
+     echo "<script>document.getElementById('txtEstado').value= 'Error al enviar DTE';</script>";
+ }
+ 
+ 
+ 
+//PHP Mailer 
+
+?>

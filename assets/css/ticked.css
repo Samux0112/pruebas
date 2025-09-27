@@ -1,0 +1,73 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    padding: 5px;
+}
+.datos-empresa{
+    text-align: right;
+    font-size: 10px;
+}
+.datos-empresa{
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.datos-factu{
+    text-align: left;
+    font-size: 8.5px;
+}
+.datos-factu{
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+img{
+    position: absolute;
+    width: 130px;
+    left: 0px;
+    top: 5px;
+}
+
+.title{
+    text-align: center;
+    padding: 10px;
+    font-size: 12px;
+}
+
+.datos-info{
+    font-size: 9px;
+}
+
+table,
+th, td, tr{
+    border-bottom: 1px solid black;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+table td, th{
+    font-size: 8px;
+    padding: 5px;
+}
+
+.text-right{
+    text-align: right;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.dan{
+    
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    top: 5px;
+}
+
+.mensaje{
+    font-size: 10px;
+    text-align: center;
+    margin-top: 10px;
+}

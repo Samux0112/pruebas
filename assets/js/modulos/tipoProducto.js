@@ -28,15 +28,15 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 
 	// Limpiar campos
-	if (btnNuevo) {
-		btnNuevo.addEventListener('click', function () {
-			id.value = '';
-			btnAccion.textContent = 'Registrar';
-			formulario.reset();
-			descripcion.focus();
-			limpiarCampos();
-		});
-	}
+
+    btnNuevo.addEventListener('click', function () {
+        id.value = '';
+        btnAccion.textContent = 'Registrar';
+        clave.removeAttribute('readonly');
+        formulario.reset();
+        descripcion.focus();
+        limpiarCampos();
+    })
 
 	// Registrar o actualizar tipo de producto
 	formulario.addEventListener('submit', function (e) {

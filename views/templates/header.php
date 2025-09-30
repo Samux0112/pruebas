@@ -121,6 +121,14 @@
 						<?php } if ( verificar('contingencias') || verificar('tasaMora') || verificar('medidas') || verificar('categorias' ) || verificar('productos' ) || verificar('bodegas')) { ?>
                     </ul>
                 </li>
+                <?php }  if (verificar('tipoProducto')) { ?>
+                <li>
+                    <a href="<?php echo BASE_URL . 'tipoProducto'; ?>">
+                        <div class="parent-icon"><i class="fa-solid fa-boxes-stacked"></i>
+                        </div>
+                        <div class="menu-title">Tipo de Producto</div>
+                    </a>
+                </li>
                 <?php }  if (verificar('clientes')) { ?>
                 <li>
                     <a href="<?php echo BASE_URL . 'clientes'; ?>">

@@ -114,6 +114,18 @@
                             </div>
                             <span id="errorCategoria" class="text-danger"></span>
                         </div>
+                        <div class="col-md-5 mb-3">
+                            <div class="form-group">
+                                <label for="id_tipoProducto">Tipo de Producto <span class="text-danger">*</span></label>
+                                <select id="id_tipoProducto" class="form-control" name="id_tipoProducto">
+                                    <option value="">Seleccionar</option>
+                                    <?php if(isset($data['tipoProducto'])) { foreach ($data['tipoProducto'] as $tipo) { ?>
+                                        <option value="<?php echo $tipo['descripcion']; ?>"><?php echo $tipo['descripcion']; ?></option>
+                                    <?php } } ?>
+                                </select>
+                            </div>
+                            <span id="errorTipoProducto" class="text-danger"></span>
+                        </div>
                         <div class="col-md-6 mb-3">
                             <div class="form-group">
                                 <label for="foto">Foto (Opcional)</label>

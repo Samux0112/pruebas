@@ -16,6 +16,12 @@ return $this->selectAll($sql);
 	ON p.id_medida = m.id INNER JOIN categorias c ON p.id_categoria = c.id join Stock s on p.id = s.idProducto WHERE p.estado = $estado and s.idBodega=$bodega";
 	return $this->selectAll($sql);
 	}
+
+        public function getTipoProducto()
+    {
+        $sql = "SELECT * FROM tipoProducto";
+        return $this->selectAll($sql);
+    }
     
     public function getProductosUni($id)
     {

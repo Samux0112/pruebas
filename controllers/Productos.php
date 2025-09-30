@@ -25,11 +25,12 @@ class Productos extends Controller
             header('Location: ' . BASE_URL . 'admin/permisos');
             exit;
         }
-        $data['title'] = 'Productos';
-        $data['script'] = 'productos.js';
-        $data['medidas'] = $this->model->getDatos('medidas');
-        $data['categorias'] = $this->model->getDatos('categorias');
-        $this->views->getView('productos', 'index', $data);
+    $data['title'] = 'Productos';
+    $data['script'] = 'productos.js';
+    $data['medidas'] = $this->model->getDatos('medidas');
+    $data['categorias'] = $this->model->getDatos('categorias');
+    $data['tipoProducto'] = $this->model->getTipoProducto();
+    $this->views->getView('productos', 'index', $data);
     }
     public function listar()
     {

@@ -108,11 +108,11 @@ return $this->selectAll($sql);
     }
 
     public function actualizar($codigo, $nombre, $precio_venta2, $precio_venta, 
-    $id_medida, $id_categoria, $ubi, $foto, $id)
+    $id_medida, $id_categoria, $ubi, $foto, $id_tipoProducto, $id)
     {
-        $sql = "UPDATE productos SET codigo=?, descripcion=?, precio_venta2=?, precio_venta=?, id_medida=?, id_categoria=?, foto=?, ubi=? WHERE id=?";
+        $sql = "UPDATE productos SET codigo=?, descripcion=?, precio_venta2=?, precio_venta=?, id_medida=?, id_categoria=?, foto=?, ubi=?, tipoProducto=? WHERE id=?";
         $array = array($codigo, $nombre, $precio_venta2, $precio_venta, 
-        $id_medida, $id_categoria, $foto, $ubi, $id);
+        $id_medida, $id_categoria, $foto, $ubi, $id_tipoProducto, $id);
         return $this->save($sql, $array);
     }
 

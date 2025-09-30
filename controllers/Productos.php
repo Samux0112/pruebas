@@ -187,6 +187,7 @@ class Productos extends Controller
                             $id_categoria,
                             $ubi,
                             $destino,
+                            $id_tipoProducto,
                             $id
                         );
                         if ($data > 0) {

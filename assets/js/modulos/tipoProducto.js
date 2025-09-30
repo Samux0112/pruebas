@@ -1,15 +1,16 @@
-// Adaptación de la lógica de ventas.js para tipoProducto
 
-const tblTipoProducto = document.querySelector('#tblTipoProducto tbody');
+let tblTipoProducto;
+const formulario = document.querySelector('#formulario');
 const descripcion = document.querySelector('#descripcion');
 const codTipoProducto = document.querySelector('#codTipoProducto');
+const id = document.querySelector('#id');
+const errordescripcion = document.querySelector('#errordescripcion');
+const errorcodTipoProducto = document.querySelector('#errorcodTipoProducto');
 const btnAccion = document.querySelector('#btnAccion');
-const errorDescripcion = document.querySelector('#errordescripcion');
-const errorCodTipoProducto = document.querySelector('#errorcodTipoProducto');
+const btnNuevo = document.querySelector('#btnNuevo');
 
-// Cargar datos con el plugin datatables
-$(document).ready(function () {
-	$('#tblTipoProducto').DataTable({
+document.addEventListener('DOMContentLoaded', function () {
+	tblTipoProducto = $('#tblTipoProducto').DataTable({
 		ajax: {
 			url: base_url + 'tipoProducto/listar',
 			dataSrc: ''
@@ -25,40 +26,58 @@ $(document).ready(function () {
 		responsive: true,
 		order: [[0, 'asc']],
 	});
-});
 
-// Registrar o modificar tipo de producto
-if (btnAccion) {
-	btnAccion.addEventListener('click', function () {
+	// Limpiar campos
+	if (btnNuevo) {
+		btnNuevo.addEventListener('click', function () {
+			id.value = '';
+			btnAccion.textContent = 'Registrar';
+			formulario.reset();
+			descripcion.focus();
+			limpiarCampos();
+		});
+	}
+
+	// Registrar o actualizar tipo de producto
+	formulario.addEventListener('submit', function (e) {
+		e.preventDefault();
+		limpiarCampos();
 		if (descripcion.value === '') {
-			errorDescripcion.textContent = 'La descripción es requerida';
+			errordescripcion.textContent = 'La descripción es requerida';
 			return;
-		} else {
-			errorDescripcion.textContent = '';
 		}
 		if (codTipoProducto.value === '') {
-			errorCodTipoProducto.textContent = 'El código es requerido';
+			errorcodTipoProducto.textContent = 'El código es requerido';
 			return;
-		} else {
-			errorCodTipoProducto.textContent = '';
 		}
-		// Enviar datos al backend
-		$.ajax({
-			url: base_url + 'tipoProducto/registrar',
-			type: 'POST',
-			data: {
-				descripcion: descripcion.value,
-				codTipoProducto: codTipoProducto.value,
-				id: document.querySelector('#id').value
-			},
-			success: function (response) {
-				const res = JSON.parse(response);
-				Swal.fire(res.msg, '', res.type);
-				if (res.type === 'success') {
-					$('#tblTipoProducto').DataTable().ajax.reload();
-					document.getElementById('formulario').reset();
-				}
-			}
-		});
+		const url = base_url + 'tipoProducto/registrar';
+		insertarRegistros(url, this, tblTipoProducto, btnAccion, false);
 	});
+});
+
+function eliminarTipoProducto(idTipoProducto) {
+	const url = base_url + 'tipoProducto/eliminar/' + idTipoProducto;
+	eliminarRegistros(url, tblTipoProducto);
+}
+
+function editarTipoProducto(idTipoProducto) {
+	limpiarCampos();
+	const url = base_url + 'tipoProducto/editar/' + idTipoProducto;
+	const http = new XMLHttpRequest();
+	http.open('GET', url, true);
+	http.send();
+	http.onreadystatechange = function () {
+		if (this.readyState == 4 && this.status == 200) {
+			const res = JSON.parse(this.responseText);
+			id.value = res.id_tipoProducto;
+			descripcion.value = res.descripcion;
+			codTipoProducto.value = res.codTipoProductoMH;
+			btnAccion.textContent = 'Actualizar';
+		}
+	}
+}
+
+function limpiarCampos() {
+	errordescripcion.textContent = '';
+	errorcodTipoProducto.textContent = '';
 }

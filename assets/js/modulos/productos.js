@@ -134,6 +134,7 @@ function editarProducto(idProducto) {
             precio_venta2.value = res.precio_venta2;
             precio_venta.value = res.precio_venta;
             id_medida.value = res.id_medida;
+             id_tipoProducto.value = res.id_tipoProducto;
             id_categoria.value = res.id_categoria;
             foto_actual.value = res.foto;
             ubi.value = res.ubi

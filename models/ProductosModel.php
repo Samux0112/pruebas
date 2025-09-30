@@ -36,11 +36,11 @@ return $this->selectAll($sql);
     }
 
     public function registrar($codigo, $nombre, $precio_venta2, $precio_venta, 
-    $id_medida, $id_categoria, $ubi, $foto)
+    $id_medida, $id_categoria, $ubi, $foto, $id_tipoProducto)
     {
-        $sql = "INSERT INTO productos (codigo, descripcion, precio_venta2, precio_venta, id_medida, id_categoria, ubi, foto) VALUES (?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO productos (codigo, descripcion, precio_venta2, precio_venta, id_medida, id_categoria, ubi, foto, tipoProducto) VALUES (?,?,?,?,?,?,?,?,?)";
         $array = array($codigo, $nombre, $precio_venta2, $precio_venta, 
-        $id_medida, $id_categoria, $ubi, $foto);
+        $id_medida, $id_categoria, $ubi, $foto, $id_tipoProducto);
         return $this->insertar($sql, $array);
     }
 	

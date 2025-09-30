@@ -110,6 +110,7 @@ class Productos extends Controller
             $foto = $_FILES['foto'];
             $name = $foto['name'];
             $tmp = $foto['tmp_name'];
+            $id_tipoProducto = strClean($_POST['id_tipoProducto']);
 			$cuentaContable = strClean($_POST['cuentaContable']);
 			if($cuentaContable!=''){
 			$cuentaContable = explode(" | ", $cuentaContable);
@@ -153,7 +154,8 @@ class Productos extends Controller
                             $id_medida,
                             $id_categoria,
                             $ubi,
-                            $destino
+                            $destino,
+                            $id_tipoProducto
                         );
                         if ($data > 0) {
 						$dataBodega = $this->model->registrarBodega_producto($data);

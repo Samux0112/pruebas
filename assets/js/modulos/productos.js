@@ -23,6 +23,7 @@ const errorVenta = document.querySelector('#errorVenta');
 const errorMedida = document.querySelector('#errorMedida');
 const errorCategoria = document.querySelector('#errorCategoria');
 const cuentaContable = document.querySelector('#cuentaContable');
+const id_tipoProducto = document.querySelector('#id_tipoProducto');
 
 document.addEventListener('DOMContentLoaded', function(){
     //cargar datos con el plugin datatables

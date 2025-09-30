@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function(){
             { data: 'nombre_corto' },
             { data: 'categoria' },
             { data: 'imagen' },
+            { data: 'ubi' },
             { data: 'acciones' }
                 ],
         language: {

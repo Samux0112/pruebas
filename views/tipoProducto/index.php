@@ -58,7 +58,8 @@
                             <span id="errorcodTipoProducto" class="text-danger"></span>
                         </div>
                     </div>
-                    <button class="btn btn-primary" type="submit">Guardar</button>
+                    <button class="btn btn-danger" type="button" id="btnNuevo">Nuevo</button>
+                    <button class="btn btn-primary" type="submit" id="btnAccion">Registrar</button>
                 </form>
             </div>
         </div>

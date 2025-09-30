@@ -73,6 +73,7 @@ function editarTipoProducto(idTipoProducto) {
 			descripcion.value = res.descripcion;
 			codTipoProducto.value = res.codTipoProductoMH;
 			btnAccion.textContent = 'Actualizar';
+			firstTab.show()
 		}
 	}
 }

@@ -30,6 +30,58 @@ class TipoProducto extends Controller
         $data['script'] = 'tipoProducto.js';
         $this->views->getView('tipoProducto', 'index', $data);
     }
+    public function listar()
+    {
+        if (!verificar('usuarios')) {
+            header('Location: ' . BASE_URL . 'admin/permisos');
+            exit;
+        }
+        $data = $this->model->getTipoProducto();
+        for ($i = 0; $i < count($data); $i++) {
+            $data[$i]['acciones'] = '<div>
+                <button class="btn btn-danger" type="button" onclick="eliminarTipoProducto(' . $data[$i]['id_tipoProducto'] . ')"><i class="fas fa-times-circle"></i></button>
+                <button class="btn btn-info" type="button" onclick="editarTipoProducto(' . $data[$i]['id_tipoProducto'] . ')"><i class="fas fa-edit"></i></button>
+            </div>';
+            $data[$i]['id_tipoProducto'] = '<span class="badge bg-success">'.$data[$i]['id_tipoProducto'].'</span>';
+        }
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function editar($id)
+    {
+        if (!verificar('usuarios')) {
+            header('Location: ' . BASE_URL . 'admin/permisos');
+            exit;
+        }
+        $data = $this->model->editar($id);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function eliminar($id)
+    {
+        if (!verificar('usuarios')) {
+            header('Location: ' . BASE_URL . 'admin/permisos');
+            exit;
+        }
+        if (isset($_GET)) {
+            if (is_numeric($id)) {
+                $data = $this->model->eliminar($id);
+                if ($data == 1) {
+                    $res = array('msg' => 'TIPO DE PRODUCTO DADO DE BAJA', 'type' => 'success');
+                } else {
+                    $res = array('msg' => 'ERROR AL ELIMINAR', 'type' => 'error');
+                }
+            } else {
+                $res = array('msg' => 'ERROR DESCONOCIDO', 'type' => 'error');
+            }
+        } else {
+            $res = array('msg' => 'ERROR DESCONOCIDO', 'type' => 'error');
+        }
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
     //metodo para registrar y modificar
     public function registrar()
     {

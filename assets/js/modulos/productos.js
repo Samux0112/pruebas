@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function(){
             { data: 'categoria' },
             { data: 'imagen' },
             { data: 'ubi' },
+            { data: 'tipoProducto' },
             { data: 'acciones' }
                 ],
         language: {

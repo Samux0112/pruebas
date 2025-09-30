@@ -42,6 +42,7 @@
                                 <th>Categoria</th>
                                 <th>Foto</th>
                                 <th>ubicacion</th>
+                                 <th>Tipo</th>
                                 <th></th>
                             </tr>
                         </thead>

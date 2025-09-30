@@ -18,7 +18,7 @@ class TipoProducto extends Controller
             header('Location: ' . BASE_URL);
             exit;
         }
-        if (!verificar('ventas')) {
+        if (!verificar('tipoProducto')) {
             header('Location: ' . BASE_URL . 'admin/permisos');
             exit;
         }
@@ -32,7 +32,7 @@ class TipoProducto extends Controller
     }
     public function listar()
     {
-        if (!verificar('usuarios')) {
+        if (!verificar('tipoProducto')) {
             header('Location: ' . BASE_URL . 'admin/permisos');
             exit;
         }
@@ -50,7 +50,7 @@ class TipoProducto extends Controller
 
     public function editar($id)
     {
-        if (!verificar('usuarios')) {
+        if (!verificar('tipoProducto')) {
             header('Location: ' . BASE_URL . 'admin/permisos');
             exit;
         }
@@ -61,7 +61,7 @@ class TipoProducto extends Controller
 
     public function eliminar($id)
     {
-        if (!verificar('usuarios')) {
+        if (!verificar('tipoProducto')) {
             header('Location: ' . BASE_URL . 'admin/permisos');
             exit;
         }
@@ -85,7 +85,7 @@ class TipoProducto extends Controller
     //metodo para registrar y modificar
     public function registrar()
     {
-        if (!verificar('usuarios')) {
+        if (!verificar('tipoProducto')) {
             header('Location: ' . BASE_URL . 'admin/permisos');
             exit;
         }

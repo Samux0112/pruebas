@@ -28,7 +28,6 @@
                     <thead>
                         <tr>
                             <th>Descripción</th>
-                            <th>Código tipo de producto MH</th>
                             <th></th>
                         </tr>
                     </thead>

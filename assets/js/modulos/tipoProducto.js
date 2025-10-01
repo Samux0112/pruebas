@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		},
 		columns: [
 			{ data: 'descripcion' },
-			{ data: 'codTipoProductoMH' },
 			{ data: 'acciones' }
 		],
 		language: {

@@ -26,6 +26,7 @@
                     <tr>
                         <th>Fecha</th>
                         <th>Comentario</th>
+                        <th>Usuario</th>
                     </tr>
                 </thead>
                 <tbody>

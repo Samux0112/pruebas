@@ -16,7 +16,7 @@ class CotizacionesModel extends Query{
         }
         public function listarComentarios($id_cotizacion)
         {
-            $sql = "SELECT fecha, comentario FROM comentarios_cotizacion WHERE id_cotizacion = $id_cotizacion ORDER BY fecha DESC";
+            $sql = "SELECT c.fecha, c.comentario, u.nombre as usuario FROM comentarios_cotizacion c INNER JOIN usuarios u ON c.id_usuario = u.id WHERE c.id_cotizacion = $id_cotizacion ORDER BY c.fecha DESC";
             return $this->selectAll($sql);
         }
 	public function getProductoCotizacion($id)

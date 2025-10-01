@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const row = tblComentarios.insertRow();
                     row.insertCell(0).textContent = item.fecha;
                     row.insertCell(1).textContent = item.comentario;
+                    row.insertCell(2).textContent = item.usuario;
                 });
             }
         });

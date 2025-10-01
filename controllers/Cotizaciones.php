@@ -2,6 +2,17 @@
 require 'vendor/autoload.php';
 use Dompdf\Dompdf;
 class Cotizaciones extends Controller{
+    public function verComentarios($id_cotizacion)
+    {
+        if (!verificar('cotizaciones')) {
+            header('Location: ' . BASE_URL . 'admin/permisos');
+            exit;
+        }
+        $data['title'] = 'Comentarios de Cotización';
+        $data['id_cotizacion'] = $id_cotizacion;
+        $this->views->getView('cotizaciones', 'comentarios', $data);
+    }
+
     public function __construct() {
         parent::__construct();
         session_start();
@@ -14,6 +25,42 @@ class Cotizaciones extends Controller{
             header('Location: ' . BASE_URL . 'admin/permisos');
             exit;
         }
+    }
+        public function listarComentarios()
+        {
+            if (!verificar('cotizaciones')) {
+                header('Location: ' . BASE_URL . 'admin/permisos');
+                exit;
+            }
+            $id_cotizacion = isset($_REQUEST['id_cotizacion']) ? intval($_REQUEST['id_cotizacion']) : 0;
+            $data = [];
+            if ($id_cotizacion > 0) {
+                $data = $this->model->listarComentarios($id_cotizacion);
+            }
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
+            die();
+        }
+    public function registrarComentario()
+    {
+        if (!verificar('cotizaciones')) {
+            header('Location: ' . BASE_URL . 'admin/permisos');
+            exit;
+        }
+        $comentario = isset($_POST['comentario']) ? strClean($_POST['comentario']) : '';
+        $fecha = isset($_POST['fecha']) ? strClean($_POST['fecha']) : date('Y-m-d');
+        $id_cotizacion = isset($_POST['id_cotizacion']) ? intval($_POST['id_cotizacion']) : 0;
+        if (empty($comentario) || $id_cotizacion == 0) {
+            $res = array('msg' => 'El comentario y la cotización son requeridos', 'type' => 'warning');
+        } else {
+            $data = $this->model->registrarComentario($comentario, $fecha, $id_cotizacion);
+            if ($data > 0) {
+                $res = array('msg' => 'Comentario registrado', 'type' => 'success');
+            } else {
+                $res = array('msg' => 'Error al registrar', 'type' => 'error');
+            }
+        }
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
     }
     public function index()
     {

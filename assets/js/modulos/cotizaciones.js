@@ -237,6 +237,10 @@ function mostrarProducto() {
     }
 }
 
+function verComentarios(idCotizacion) {
+    window.location.href = base_url + 'cotizaciones/verComentarios/' + idCotizacion;
+}
+
 function verReporte(id) {
     Swal.fire({
         title: 'Desea Generar Reporte?',

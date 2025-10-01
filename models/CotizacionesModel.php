@@ -8,6 +8,18 @@ class CotizacionesModel extends Query{
         $sql = "SELECT * FROM productos WHERE id = $idProducto";
         return $this->select($sql);
     }
+        public function registrarComentario($comentario, $fecha, $id_cotizacion)
+        {
+            $sql = "INSERT INTO comentarios_cotizacion (comentario, fecha, id_cotizacion) VALUES (?,?,?)";
+            $array = array($comentario, $fecha, $id_cotizacion);
+            return $this->insertar($sql, $array);
+        }
+        public function listarComentarios($id_cotizacion)
+        {
+            $sql = "SELECT fecha, comentario FROM comentarios_cotizacion WHERE id_cotizacion = ? ORDER BY fecha DESC";
+            $array = array($id_cotizacion);
+            return $this->selectAll($sql, $array);
+        }
 	public function getProductoCotizacion($id)
 	{
 	$sql = "Select cot.*, c.nombre, c.contribuyente, c.direccion, c.telefono,c.id as idCliente from cotizaciones cot join clientes c on cot.id_cliente = c.id where cot.id = $id;";

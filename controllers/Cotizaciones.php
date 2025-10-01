@@ -178,7 +178,7 @@ class Cotizaciones extends Controller{
         $data = $this->model->getCotizaciones();
         for ($i=0; $i < count($data); $i++) { 
             //$data[$i]['acciones'] = '<a class="btn btn-danger" href="#" onclick="verReporte(' . $data[$i]['id'] . ')"><i class="fas fa-file-pdf"></i></a> <a class="btn btn-warning" href="#" onclick="detalle(' . $data[$i]['id'] . ')"><i class="fas fa-file-edit"></i></a> <a class="btn btn-success" href="#" onclick="venta(' . $data[$i]['id'] . ')"><i class="fas fa-file-edit"></i></a>';
-$data[$i]['acciones'] = '<a class="btn btn-danger" href="#" onclick="verReporte(' . $data[$i]['id'] . ')"><i class="fas fa-file-pdf"></i></a> <a class="btn btn-warning" href="#" onclick="detalle(' . $data[$i]['id'] . ')"><i class="fas fa-file-edit"></i></a>';			
+$data[$i]['acciones'] = '<a class="btn btn-danger" href="#" onclick="verReporte(' . $data[$i]['id'] . ')"><i class="fas fa-file-pdf"></i></a> <a class="btn btn-warning" href="#" onclick="detalle(' . $data[$i]['id'] . ')"><i class="fas fa-file-edit"></i></a><a class="btn btn-success" href="#" onclick="verComentarios(' . $data[$i]['id'] . ')"><i class="fas fa-file-edit"></i></a>';			
         }
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();

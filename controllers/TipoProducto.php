@@ -92,8 +92,6 @@ class TipoProducto extends Controller
         if (isset($_POST)) {
             if (empty($_POST['descripcion'])) {
                 $res = array('msg' => 'LA DESCRIPCION ES REQUERIDA', 'type' => 'warning');
-            } else if (empty($_POST['codTipoProducto'])) {
-                $res = array('msg' => 'EL CODIGO DE TIPO DE PRODUCTO ES REQUERIDO', 'type' => 'warning');
             } else {
                 $descripcion = strClean($_POST['descripcion']);
                 $codTipoProducto = strClean($_POST['codTipoProducto']);

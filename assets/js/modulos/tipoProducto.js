@@ -45,10 +45,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			errordescripcion.textContent = 'La descripción es requerida';
 			return;
 		}
-		if (codTipoProducto.value === '') {
-			errorcodTipoProducto.textContent = 'El código es requerido';
-			return;
-		}
 		const url = base_url + 'tipoProducto/registrar';
 		insertarRegistros(url, this, tblTipoProducto, btnAccion, false);
 	});

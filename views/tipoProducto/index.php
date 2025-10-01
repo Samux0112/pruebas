@@ -51,7 +51,7 @@
                         </div>
                         <div class="col-lg-4 col-sm-6 mb-2">
                             <label>Código de tipo de producto</label>
-                            <div class="input-group">
+                            <div class="input-group" hidden>
                                 <span class="input-group-text"><i class="fas fa-list-alt"></i></span>
                                 <input type="text" id="codTipoProducto" name="codTipoProducto" class="form-control" placeholder="Código de tipo de producto">
                             </div>

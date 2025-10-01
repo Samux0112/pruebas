@@ -14,6 +14,10 @@ document.addEventListener('DOMContentLoaded', function () {
             Swal.fire('El comentario y la cotización son requeridos', '', 'warning');
             return;
         }
+        if (fecha === '') {
+            Swal.fire('Debe seleccionar una fecha válida', '', 'warning');
+            return;
+        }
         $.ajax({
             url: base_url + 'cotizaciones/registrarComentario',
             type: 'POST',

@@ -2,6 +2,7 @@
 require 'vendor/autoload.php';
 use Dompdf\Dompdf;
 class Cotizaciones extends Controller{
+    private $id_usuario;
     public function verComentarios($id_cotizacion)
     {
         if (!verificar('cotizaciones')) {
@@ -25,6 +26,7 @@ class Cotizaciones extends Controller{
             header('Location: ' . BASE_URL . 'admin/permisos');
             exit;
         }
+        $this->id_usuario = $_SESSION['id_usuario'];
     }
         public function listarComentarios()
         {
@@ -52,7 +54,7 @@ class Cotizaciones extends Controller{
         if (empty($comentario) || $id_cotizacion == 0) {
             $res = array('msg' => 'El comentario y la cotización son requeridos', 'type' => 'warning');
         } else {
-            $data = $this->model->registrarComentario($comentario, $fecha, $id_cotizacion);
+            $data = $this->model->registrarComentario($comentario, $fecha, $id_cotizacion,$this->id_usuario);
             if ($data > 0) {
                 $res = array('msg' => 'Comentario registrado', 'type' => 'success');
             } else {

@@ -8,10 +8,10 @@ class CotizacionesModel extends Query{
         $sql = "SELECT * FROM productos WHERE id = $idProducto";
         return $this->select($sql);
     }
-        public function registrarComentario($comentario, $fecha, $id_cotizacion)
+        public function registrarComentario($comentario, $fecha, $id_cotizacion, $id_usuario)
         {
-            $sql = "INSERT INTO comentarios_cotizacion (comentario, fecha, id_cotizacion) VALUES (?,?,?)";
-            $array = array($comentario, $fecha, $id_cotizacion);
+            $sql = "INSERT INTO comentarios_cotizacion (comentario, fecha, id_cotizacion, id_usuario) VALUES (?,?,?,?)";
+            $array = array($comentario, $fecha, $id_cotizacion, $id_usuario);
             return $this->insertar($sql, $array);
         }
         public function listarComentarios($id_cotizacion)

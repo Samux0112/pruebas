@@ -16,9 +16,8 @@ class CotizacionesModel extends Query{
         }
         public function listarComentarios($id_cotizacion)
         {
-            $sql = "SELECT fecha, comentario FROM comentarios_cotizacion WHERE id_cotizacion = ? ORDER BY fecha DESC";
-            $array = array($id_cotizacion);
-            return $this->selectAll($sql, $array);
+            $sql = "SELECT fecha, comentario FROM comentarios_cotizacion WHERE id_cotizacion = $id_cotizacion ORDER BY fecha DESC";
+            return $this->selectAll($sql);
         }
 	public function getProductoCotizacion($id)
 	{

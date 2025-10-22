@@ -149,7 +149,7 @@
                             <div class="menu-title">Traslados</div>
                         </a>
                         <ul>
-                            <?php if (verificar('ingresos')) { ?>
+                            <?php } if (verificar('ingresos')) { ?>
                             <li> <a href="<?php echo BASE_URL . 'ingresos'; ?>"><i class="bx bx-right-arrow-alt"></i>Ingresos</a>
                             </li>
                            

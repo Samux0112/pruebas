@@ -1,0 +1,28 @@
+<?php
+class OrdenesCompraModel extends Query{
+    public function __construct() {
+        parent::__construct();
+    }
+    public function getProducto($idProducto)
+    {
+        $sql = "SELECT * FROM productos WHERE id = $idProducto";
+        return $this->select($sql);
+    }
+    public function registrarOrden($productos, $total, $fecha, $hora, $idUsuario, $idProveedor = null, $requisicion_id = null, $observaciones = null)
+    {
+        $sql = "INSERT INTO ordenes_compra (productos, total, fecha, hora, id_proveedor, id_usuario, requisicion_id, observaciones) VALUES (?,?,?,?,?,?,?,?)";
+        $array = array($productos, $total, $fecha, $hora, $idProveedor, $idUsuario, $requisicion_id, $observaciones);
+        return $this->insertar($sql, $array);
+    }
+    public function getOrden($idOrden)
+    {
+        $sql = "SELECT o.*, p.nombre as proveedor, u.nombre as usuario FROM ordenes_compra o LEFT JOIN proveedor p ON o.id_proveedor = p.id LEFT JOIN usuarios u ON o.id_usuario = u.id WHERE o.id = $idOrden";
+        return $this->select($sql);
+    }
+    public function getOrdenes()
+    {
+        $sql = "SELECT o.*, p.nombre as proveedor, u.nombre as usuario FROM ordenes_compra o LEFT JOIN proveedor p ON o.id_proveedor = p.id LEFT JOIN usuarios u ON o.id_usuario = u.id ORDER BY o.created_at DESC";
+        return $this->selectAll($sql);
+    }
+}
+?>

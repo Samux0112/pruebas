@@ -141,16 +141,15 @@
                     </a>
                 </li> 
 				
-				<?php } if ((verificar('ingresos')) || (verificar('salidas')) ) { ?>
+                <?php } if ((verificar('ingresos')) || (verificar('salidas')) ) { ?>
                     <li>
                         <a href="javascript:;" class="has-arrow">
                             <div class="parent-icon"><i class="fa-solid fa-screwdriver-wrench"></i>
-                <?php }  
                             </div>
                             <div class="menu-title">Traslados</div>
                         </a>
                         <ul>
-                            <?php } if (verificar('ingresos')) { ?>
+                            <?php if (verificar('ingresos')) { ?>
                             <li> <a href="<?php echo BASE_URL . 'ingresos'; ?>"><i class="bx bx-right-arrow-alt"></i>Ingresos</a>
                             </li>
                            

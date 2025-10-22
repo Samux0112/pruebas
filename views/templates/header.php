@@ -84,35 +84,19 @@
                             <li> <a href="<?php echo BASE_URL . 'admin/logs'; ?>"><i class="bx bx-right-arrow-alt"></i>Log de Acceso</a>
                             </li>
 							
-							<?php } if (verificar('puntoVentas')) { ?>
-                            <li> <a href="<?php echo BASE_URL . 'puntoVentas'; ?>"><i class="bx bx-right-arrow-alt"></i>Punto de Ventas</a>
+                            <?php }  if (verificar('compras')) { ?>
+                
+                            <li>
+                                <a href="<?php echo BASE_URL . 'ventas2'; ?>">
+                                    <div class="parent-icon"><i class="fa-solid fa-credit-card"></i>
+                                    </div>
+                                    <div class="menu-title">Compras</div>
+                                </a>
                             </li>
-                        </ul>
-                    </li>
-                <?php } ?>
 
-                <?php if (verificar('medidas') || verificar('categorias') || verificar('productos') || verificar('contingencias')) { ?>
 
-                <li>
-                    <a href="javascript:;" class="has-arrow">
-                        <div class="parent-icon"><i class="fa-solid fa-clipboard-list"></i>
-                        </div>
-                        <div class="menu-title">Mantenimiento</div>
-                    </a>
-                    <ul>
-                    <?php } if (verificar('tasaMora')) { ?>
-                        <li> <a href="<?php echo BASE_URL . 'tasaMora'; ?>"><i class="bx bx-right-arrow-alt"></i>Interes por mora</a>
-                        </li>
-                        <?php } if (verificar('medidas')) { ?>
-                        <li> <a href="<?php echo BASE_URL . 'medidas'; ?>"><i class="bx bx-right-arrow-alt"></i>Medidas</a>
-                        </li>
-                        <?php } if (verificar('categorias')) { ?>
-                        <li> <a href="<?php echo BASE_URL . 'categorias'; ?>"><i class="bx bx-right-arrow-alt"></i>Categorias</a>
-                        </li>
-                        <?php } if (verificar('productos')) { ?>
-                        <li> <a href="<?php echo BASE_URL . 'productos'; ?>"><i class="bx bx-right-arrow-alt"></i>Productos</a>
-                        </li>
-						<?php } if (verificar('bodegas')) { ?>
+
+                            <?php }  if (verificar('ventas')) { ?>
                         <li> <a href="<?php echo BASE_URL . 'bodegas'; ?>"><i class="bx bx-right-arrow-alt"></i>Bodegas</a>
                         </li>
 						<?php } if (verificar('contingencias')) { ?>

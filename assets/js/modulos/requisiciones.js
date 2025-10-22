@@ -1,6 +1,5 @@
 const tblNuevaRequisicion = document.querySelector('#tblNuevaRequisicion tbody');
 const observaciones = document.querySelector('#observaciones');
-const nombreKey = 'posCotizaciones';
 let listaCarrito = [];
 
 document.addEventListener('DOMContentLoaded', function () {

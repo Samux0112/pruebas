@@ -1,6 +1,6 @@
 const tblNuevaRequisicion = document.querySelector('#tblNuevaRequisicion tbody');
 const observaciones = document.querySelector('#observaciones');
-let listaCarrito = [];
+
 
 document.addEventListener('DOMContentLoaded', function () {
     if (localStorage.getItem(nombreKey) != null) {

@@ -202,6 +202,15 @@
                         <div class="menu-title">Ventas</div>
                     </a>
                 </li>
+
+                 <?php }  if (verificar('requisiciones')) { ?>
+                <li>
+                    <a href="<?php echo BASE_URL . 'requisiciones'; ?>">
+                        <div class="parent-icon"><i class="fa-solid fa-cash-register"></i>
+                        </div>
+                        <div class="menu-title">Requisiciones</div>
+                    </a>
+                </li>
 				
 				<?php }if (verificar('Nota de credito')) { ?>
                 <li>

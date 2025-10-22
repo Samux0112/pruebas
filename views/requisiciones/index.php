@@ -1,5 +1,5 @@
 <?php
-require 'views/header.php';
+require 'views/templates/header.php';
 ?>
 <div class="page-content">
     <div class="container-fluid">
@@ -67,5 +67,5 @@ require 'views/header.php';
 </div>
 
 <?php
-require 'views/footer.php';
+require 'views/templates/footer.php';
 ?>

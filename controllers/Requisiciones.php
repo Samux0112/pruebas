@@ -15,7 +15,7 @@ class Requisiciones extends Controller{
         $data['title'] = 'Requisiciones';
         $data['script'] = 'requisiciones.js';
         $data['busqueda'] = 'busqueda.js';
-        $data['carrito'] = 'posRequisiciones';
+    $data['carrito'] = 'posCotizaciones';
         $this->views->getView('requisiciones', 'index', $data);
     }
 

@@ -1,6 +1,5 @@
 const tblNuevaRequisicion = document.querySelector('#tblNuevaRequisicion tbody');
 const observaciones = document.querySelector('#observaciones');
-const btnAccion = document.querySelector('#btnAccion');
 const totalPagar = document.querySelector('#totalPagar');
 const nombreKey = 'posCotizaciones';
 let listaCarrito = [];

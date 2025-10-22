@@ -139,28 +139,13 @@
                         </div>
                         <div class="menu-title">Cajas</div>
                     </a>
-                </li>
+                </li> 
 				
 				<?php } if ((verificar('ingresos')) || (verificar('salidas')) ) { ?>
                     <li>
                         <a href="javascript:;" class="has-arrow">
                             <div class="parent-icon"><i class="fa-solid fa-screwdriver-wrench"></i>
-                <?php }  if (verificar('requisiciones')) { ?>
-                <li>
-                    <a href="<?php echo BASE_URL . 'requisiciones'; ?>">
-                        <div class="parent-icon"><i class="fa-solid fa-list-check"></i>
-                        </div>
-                        <div class="menu-title">Requisiciones</div>
-                    </a>
-                </li>
-                <?php }  if (verificar('ordenesCompra')) { ?>
-                <li>
-                    <a href="<?php echo BASE_URL . 'ordenesCompra'; ?>">
-                        <div class="parent-icon"><i class="fa-solid fa-file-invoice"></i>
-                        </div>
-                        <div class="menu-title">Órdenes de Compra</div>
-                    </a>
-                </li>
+                <?php }  
                             </div>
                             <div class="menu-title">Traslados</div>
                         </a>

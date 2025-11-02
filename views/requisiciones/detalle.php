@@ -1,52 +1,66 @@
 <?php
 require 'views/templates/header.php';
-// Vista limpia, solo muestra datos recibidos por $data desde el controlador
 $requisicion = $data['requisicion'];
 $productos = $data['productos'];
 $msg = $data['msg'];
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Detalle de Requisición</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
-</head>
-<body>
-    <h2>Detalle de Requisición #<?php echo htmlspecialchars($requisicion['id']); ?></h2>
-    <p>Estado actual: <strong><?php echo htmlspecialchars($requisicion['estado']); ?></strong></p>
-    <form method="post" action="actualizar_estado.php?id=<?php echo urlencode($requisicion['id']); ?>">
-        <label for="estado">Actualizar estado:</label>
-        <select name="estado" id="estado">
-            <option value="Pendiente" <?php if($requisicion['estado']=='Pendiente') echo 'selected'; ?>>Pendiente</option>
-            <option value="Aprobada" <?php if($requisicion['estado']=='Aprobada') echo 'selected'; ?>>Aprobada</option>
-            <option value="Rechazada" <?php if($requisicion['estado']=='Rechazada') echo 'selected'; ?>>Rechazada</option>
-        </select>
-        <button type="submit">Actualizar</button>
-    </form>
-    <h3>Productos de la Requisición</h3>
-    <table border="1" cellpadding="5">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Cantidad</th>
-                <th>Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($productos as $prod): ?>
-            <tr>
-                <td><?php echo htmlspecialchars($prod['nombre']); ?></td>
-                <td><?php echo htmlspecialchars($prod['cantidad']); ?></td>
-                <td><?php echo htmlspecialchars($prod['descripcion']); ?></td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <br>
-    <a href="index.php">Volver a la lista de requisiciones</a>
-</body>
-</html>
-<?php
-require 'views/templates/footer.php';
-?>
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Detalle de Requisición #<?php echo htmlspecialchars($requisicion['id']); ?></h4>
+                    </div>
+                    <div class="card-body">
+                        <?php if (!empty($msg)) echo $msg; ?>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <p><strong>Estado actual:</strong> <?php echo htmlspecialchars($requisicion['estado']); ?></p>
+                            </div>
+                            <div class="col-md-6 text-end">
+                                <form method="post" action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>">
+                                    <div class="input-group">
+                                        <label class="input-group-text" for="estado">Actualizar estado</label>
+                                        <select name="estado" id="estado" class="form-select">
+                                            <option value="Pendiente" <?php if($requisicion['estado']=='Pendiente') echo 'selected'; ?>>Pendiente</option>
+                                            <option value="Aprobada" <?php if($requisicion['estado']=='Aprobada') echo 'selected'; ?>>Aprobada</option>
+                                            <option value="Rechazada" <?php if($requisicion['estado']=='Rechazada') echo 'selected'; ?>>Rechazada</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-success">Actualizar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <h5 class="mt-4">Productos de la Requisición</h5>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Cantidad</th>
+                                        <th>Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($productos as $prod): ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($prod['nombre']); ?></td>
+                                        <td><?php echo htmlspecialchars($prod['cantidad']); ?></td>
+                                        <td><?php echo htmlspecialchars($prod['descripcion']); ?></td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-3">
+                            <a href="index.php" class="btn btn-secondary">Volver a la lista de requisiciones</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php require 'views/templates/footer.php'; ?>
+

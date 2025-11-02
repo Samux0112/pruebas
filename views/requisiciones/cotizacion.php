@@ -39,7 +39,7 @@ $id = isset($data['id']) ? intval($data['id']) : '';
                                                     <td><?php echo htmlspecialchars($prod['descripcion'] ?? ''); ?></td>
                                                     <td><input type="number" class="form-control input-precio" value="0" min="0" step="0.01"></td>
                                                     <td><input type="number" class="form-control input-descuento" value="0" min="0" step="0.01"></td>
-                                                    <td><input type="number" class="form-control input-subtotal" value="<?php echo number_format(($prod['cantidad'] * (isset($prod['precio']) ? $prod['precio'] : 0)), 2); ?>" readonly></td>
+                                                    <td><input type="number" class="form-control input-subtotal" value="0.00" readonly></td> 
                                                 </tr>
                                                 <?php endforeach; ?>
                                             <?php endif; ?>

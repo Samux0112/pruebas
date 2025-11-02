@@ -8,14 +8,14 @@ class RequisicionesModel extends Query{
 
     public function getCotizacionById($idCotizacion)
     {
-        $sql = "SELECT * FROM cotizaciones_requisicion WHERE id = ?";
-        return $this->select($sql, [$idCotizacion]);
+        $sql = "SELECT * FROM cotizaciones_requisicion WHERE id = $idCotizacion";
+        return $this->select($sql);
     }
 
     public function getProductosCotizacion($idCotizacion)
     {
-        $sql = "SELECT * FROM cotizaciones_productos WHERE id_cotizacion = ?";
-        return $this->selectAll($sql, [$idCotizacion]);
+        $sql = "SELECT * FROM cotizaciones_productos WHERE id_cotizacion = $idCotizacion";
+        return $this->selectAll($sql);
     }
     public function guardarCotizacion($idRequisicion, $proveedor, $monto, $detalle, $productos)
     {

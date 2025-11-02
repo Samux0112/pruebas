@@ -132,7 +132,7 @@ function cargarHistorial() {
 }
 
 function verRequisicion(id) {
-    window.location.href = base_url + 'views/requisiciones/detalle.php?id=' + id;
+    window.location.href = base_url + 'views/requisiciones/detalle/'+ id;
 }
 
 // función auxiliar para agregar producto al carrito desde otras vistas

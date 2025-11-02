@@ -51,7 +51,7 @@ class Requisiciones extends Controller{
         $data = [
             'requisicion' => $requisicion,
             'productos' => $productos,
-            //'cotizaciones' => $cotizaciones,
+            'cotizaciones' => $cotizaciones,
             'script' => 'detalleRequisicion.js',
             'msg' => $msg
         ];

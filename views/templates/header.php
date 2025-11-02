@@ -113,7 +113,7 @@
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class="fa-solid fa-clipboard-list"></i>
                         </div>
-                        <div class="menu-title">Mantenimiento</div>
+                        <div class="menu-title">Mantenimientos</div>
                     </a>
                     <ul>
                     <?php } if (verificar('tasaMora')) { ?>

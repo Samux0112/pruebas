@@ -3,7 +3,7 @@ class RequisicionesModel extends Query{
     public function getCotizacionesRequisicion($idRequisicion)
     {
         $sql = "SELECT * FROM cotizaciones_requisicion WHERE id_requisicion = ? ORDER BY fecha DESC";
-        return $this->selectAll($sql, [$idRequisicion]);
+        return $this->select($sql, [$idRequisicion]);
     }
 
     public function getCotizacionById($idCotizacion)

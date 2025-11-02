@@ -132,18 +132,7 @@ function cargarHistorial() {
 }
 
 function verRequisicion(id) {
-    const url = base_url + 'requisiciones/ver/' + id;
-    const http = new XMLHttpRequest();
-    http.open('GET', url, true);
-    http.send();
-    http.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            const res = JSON.parse(this.responseText);
-            // mostrar modal o consola por ahora
-            console.log(res);
-            alertaPersonalizada('info', 'Requisición cargada en consola (ver).');
-        }
-    }
+    window.location.href = base_url + 'views/requisiciones/detalle.php?id=' + id;
 }
 
 // función auxiliar para agregar producto al carrito desde otras vistas

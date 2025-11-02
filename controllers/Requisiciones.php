@@ -1,5 +1,26 @@
 <?php
 class Requisiciones extends Controller{
+    public function detalle($id) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['estado'])) {
+            $estado = $_POST['estado'];
+            if (in_array($estado, ['Pendiente','Aprobada','Rechazada'])) {
+                $ok = $this->model->actualizarEstado($id, $estado);
+                $msg = $ok ? 'Estado actualizado correctamente.' : 'Error al actualizar estado.';
+            } else {
+                $msg = 'Estado inválido.';
+            }
+        } else {
+            $msg = '';
+        }
+        $requisicion = $this->model->getRequisicion($id);
+        $productos = json_decode($requisicion['productos'], true);
+        $data = [
+            'requisicion' => $requisicion,
+            'productos' => $productos,
+            'msg' => $msg
+        ];
+        $this->views->getView('requisiciones', 'detalle', $data);
+    }
     private $id_usuario;
     public function __construct(){
         parent::__construct();

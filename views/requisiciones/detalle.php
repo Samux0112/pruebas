@@ -56,7 +56,6 @@ $msg = $data['msg'];
                             <div class="mt-3">
                                 <button id="btnVolverRequisiciones" class="btn btn-secondary">Volver a la lista de requisiciones</button>
                             </div>
-    <script src="/assets/js/modulos/detalleRequisicion.js"></script>
                     </div>
                 </div>
             </div>

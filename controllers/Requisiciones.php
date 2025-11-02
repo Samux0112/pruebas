@@ -17,6 +17,7 @@ class Requisiciones extends Controller{
         $data = [
             'requisicion' => $requisicion,
             'productos' => $productos,
+            'script' => 'detalleRequisicion.js',
             'msg' => $msg
         ];
         $this->views->getView('requisiciones', 'detalle', $data);

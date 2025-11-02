@@ -47,13 +47,25 @@ class Requisiciones extends Controller{
         }
         $requisicion = $this->model->getRequisicion($id);
         $productos = json_decode($requisicion['productos'], true);
+        $cotizaciones = $this->model->getCotizacionesRequisicion($id);
         $data = [
             'requisicion' => $requisicion,
             'productos' => $productos,
+            'cotizaciones' => $cotizaciones,
             'script' => 'detalleRequisicion.js',
             'msg' => $msg
         ];
         $this->views->getView('requisiciones', 'detalle', $data);
+    public function verCotizacion($idCotizacion) {
+        $cotizacion = $this->model->getCotizacionById($idCotizacion);
+        $productos = $this->model->getProductosCotizacion($idCotizacion);
+        $data = [
+            'cotizacion' => $cotizacion,
+            'productos' => $productos,
+            'script' => 'detalleCotizacionRequisicion.js'
+        ];
+        $this->views->getView('requisiciones', 'detalleCotizacion', $data);
+    }
     }
     private $id_usuario;
     public function __construct(){

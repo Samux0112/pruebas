@@ -13,6 +13,39 @@ $msg = $data['msg'];
                         <h4 class="mb-0">Detalle de Requisición #<?php echo htmlspecialchars($requisicion['id']); ?></h4>
                     </div>
                     <div class="card-body">
+        <?php if (!empty($data['cotizaciones'])): ?>
+        <div class="mb-4">
+            <h5>Cotizaciones asociadas</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Proveedor</th>
+                            <th>Monto</th>
+                            <th>Detalle</th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($data['cotizaciones'] as $cot): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($cot['id']); ?></td>
+                            <td><?php echo htmlspecialchars($cot['proveedor']); ?></td>
+                            <td><?php echo htmlspecialchars($cot['monto']); ?></td>
+                            <td><?php echo htmlspecialchars($cot['detalle']); ?></td>
+                            <td><?php echo htmlspecialchars($cot['fecha']); ?></td>
+                            <td>
+                                <button class="btn btn-info btn-sm btnVerCotizacion" data-id="<?php echo $cot['id']; ?>">Ver</button>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <?php endif; ?>
                         <?php if (!empty($msg)) echo $msg; ?>
                         <div class="row mb-3">
                             <div class="col-md-6">

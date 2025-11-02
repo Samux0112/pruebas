@@ -1,5 +1,22 @@
 <?php
 class RequisicionesModel extends Query{
+    public function getCotizacionesRequisicion($idRequisicion)
+    {
+        $sql = "SELECT * FROM cotizaciones_requisicion WHERE id_requisicion = ? ORDER BY fecha DESC";
+        return $this->selectAll($sql, [$idRequisicion]);
+    }
+
+    public function getCotizacionById($idCotizacion)
+    {
+        $sql = "SELECT * FROM cotizaciones_requisicion WHERE id = ?";
+        return $this->select($sql, [$idCotizacion]);
+    }
+
+    public function getProductosCotizacion($idCotizacion)
+    {
+        $sql = "SELECT * FROM cotizaciones_productos WHERE id_cotizacion = ?";
+        return $this->selectAll($sql, [$idCotizacion]);
+    }
     public function guardarCotizacion($idRequisicion, $proveedor, $monto, $detalle, $productos)
     {
         // Guardar cotización principal

@@ -17,4 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = base_url+'requisiciones/cotizacion/' + encodeURIComponent(id);
         });
 
+    document.querySelectorAll('.btnVerCotizacion').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var idCot = btn.getAttribute('data-id');
+            window.location.href = base_url + 'requisiciones/verCotizacion/' + idCot;
+        });
+    });
 });

@@ -31,8 +31,12 @@ require 'views/templates/header.php';
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if (!empty($data['productos'])): ?>
-                                        <?php foreach ($data['productos'] as $prod): ?>
+                                    <?php 
+                                    $total = 0;
+                                    if (!empty($data['productos'])): 
+                                        foreach ($data['productos'] as $prod): 
+                                            $total += floatval($prod['subtotal']);
+                                    ?>
                                         <tr>
                                             <td><?php echo htmlspecialchars($prod['nombre']); ?></td>
                                             <td><?php echo htmlspecialchars($prod['cantidad']); ?></td>
@@ -41,7 +45,12 @@ require 'views/templates/header.php';
                                             <td><?php echo htmlspecialchars($prod['descuento']); ?></td>
                                             <td><?php echo htmlspecialchars($prod['subtotal']); ?></td>
                                         </tr>
-                                        <?php endforeach; ?>
+                                    <?php endforeach; ?>
+                                    <!-- Fila de total -->
+                                    <tr class="table-info">
+                                        <td colspan="5" class="text-end"><strong>Total</strong></td>
+                                        <td><strong><?php echo number_format($total, 2); ?></strong></td>
+                                    </tr>
                                     <?php endif; ?>
                                 </tbody>
                             </table>

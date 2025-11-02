@@ -16,6 +16,31 @@ $id = isset($data['id']) ? intval($data['id']) : '';
                                 <label for="requisicion_id" class="form-label">ID Requisición</label>
                                 <input type="text" class="form-control" id="requisicion_id" name="requisicion_id" value="<?php echo htmlspecialchars($id); ?>" readonly required>
                             </div>
+                            <div class="mb-4">
+                                <h5>Productos asociados</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>Cantidad</th>
+                                                <th>Descripción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (!empty($data['productos'])): ?>
+                                                <?php foreach ($data['productos'] as $prod): ?>
+                                                <tr>
+                                                    <td><?php echo htmlspecialchars($prod['nombre']); ?></td>
+                                                    <td><?php echo htmlspecialchars($prod['cantidad']); ?></td>
+                                                    <td><?php echo htmlspecialchars($prod['descripcion'] ?? ''); ?></td>
+                                                </tr>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                             <div class="mb-3">
                                 <label for="proveedor" class="form-label">Proveedor</label>
                                 <input type="text" class="form-control" id="proveedor" name="proveedor" required>

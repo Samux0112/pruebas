@@ -1,8 +1,12 @@
 <?php
 class Requisiciones extends Controller{
     public function cotizacion($id) {
+        $requisicion = $this->model->getRequisicion($id);
+        $productos = json_decode($requisicion['productos'], true);
         $data = [
             'id' => $id,
+            'productos' => $productos,
+            'requisicion' => $requisicion,
             'script' => 'cotizacionRequisicion.js'
         ];
         $this->views->getView('requisiciones', 'cotizacion', $data);

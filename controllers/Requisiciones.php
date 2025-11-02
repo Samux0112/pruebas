@@ -1,5 +1,12 @@
 <?php
 class Requisiciones extends Controller{
+    public function cotizacion($id) {
+        $data = [
+            'id' => $id,
+            'script' => 'cotizacionRequisicion.js'
+        ];
+        $this->views->getView('requisiciones', 'cotizacion', $data);
+    }
     public function detalle($id) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['estado'])) {
             $estado = $_POST['estado'];

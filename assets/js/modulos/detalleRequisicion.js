@@ -1,12 +1,20 @@
 // JS para la vista detalle de requisición
-// Redirecciona a la lista de requisiciones
-const btnVolver = document.querySelector('#btnVolverRequisiciones');
+// Redirecciona a la lista de requisiciones y a cotización
+// JS para la vista detalle de requisición
+// Redirecciona a la lista de requisiciones y a cotización
 document.addEventListener('DOMContentLoaded', function() {
-
+    const btnVolver = document.getElementById('btnVolverRequisiciones');
+    if (btnVolver) {
         btnVolver.addEventListener('click', function(e) {
             e.preventDefault();
-            const url = base_url + 'requisiciones/index';
-            window.location.href = url;
+            window.location.href = 'index.php';
         });
-    
+    }
+    const btnCotizar = document.getElementById('btnCotizarRequisicion');
+        btnCotizar.addEventListener('click', function(e) {
+            e.preventDefault();
+            const id = btnCotizar.getAttribute('data-id');
+            window.location.href = base_url+'requisiciones/cotizacion/' + encodeURIComponent(id);
+        });
+
 });

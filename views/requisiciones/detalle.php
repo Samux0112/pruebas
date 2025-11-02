@@ -53,8 +53,9 @@ $msg = $data['msg'];
                                 </tbody>
                             </table>
                         </div>
-                            <div class="mt-3">
+                            <div class="mt-3 d-flex gap-2">
                                 <button id="btnVolverRequisiciones" class="btn btn-secondary">Volver a la lista de requisiciones</button>
+                                <button id="btnCotizarRequisicion" class="btn btn-info" data-id="<?php echo htmlspecialchars($requisicion['id']); ?>">Ingresar Cotización</button>
                             </div>
                     </div>
                 </div>

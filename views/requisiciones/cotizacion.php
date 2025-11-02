@@ -25,6 +25,9 @@ $id = isset($data['id']) ? intval($data['id']) : '';
                                                 <th>Nombre</th>
                                                 <th>Cantidad</th>
                                                 <th>Descripción</th>
+                                                <th>Precio Unitario</th>
+                                                <th>Descuento</th>
+                                                <th>Subtotal</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -32,8 +35,11 @@ $id = isset($data['id']) ? intval($data['id']) : '';
                                                 <?php foreach ($data['productos'] as $prod): ?>
                                                 <tr>
                                                     <td><?php echo htmlspecialchars($prod['nombre']); ?></td>
-                                                    <td><?php echo htmlspecialchars($prod['cantidad']); ?></td>
+                                                    <td><input type="number" class="form-control input-cantidad" value="<?php echo htmlspecialchars($prod['cantidad']); ?>" readonly></td>
                                                     <td><?php echo htmlspecialchars($prod['descripcion'] ?? ''); ?></td>
+                                                    <td><input type="number" class="form-control input-precio" value="0" min="0" step="0.01"></td>
+                                                    <td><input type="number" class="form-control input-descuento" value="0" min="0" step="0.01"></td>
+                                                    <td><input type="number" class="form-control input-subtotal" value="<?php echo number_format(($prod['cantidad'] * (isset($prod['precio']) ? $prod['precio'] : 0)), 2); ?>" readonly></td>
                                                 </tr>
                                                 <?php endforeach; ?>
                                             <?php endif; ?>

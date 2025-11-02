@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function mostrarProducto() {
-    if (listaCarrito.length > 0) {
+    if (localStorage.getItem(nombreKey) != null) {
         const url = base_url + 'productos/mostrarDatos';
         const http = new XMLHttpRequest();
         http.open('POST', url, true);

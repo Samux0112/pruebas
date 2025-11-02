@@ -47,7 +47,7 @@ class Requisiciones extends Controller{
         }
         $requisicion = $this->model->getRequisicion($id);
         $productos = json_decode($requisicion['productos'], true);
-        //$cotizaciones = $this->model->getCotizacionesRequisicion($id);
+        $cotizaciones = $this->model->getCotizacionesRequisicion($id);
         $data = [
             'requisicion' => $requisicion,
             'productos' => $productos,

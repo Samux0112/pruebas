@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 msg += 'El monto de cotización debe ser mayor a 0.\n';
             }
             if (!valid) {
-                alert(msg);
+                alertaPersonalizada('warning', msg);
                 return;
             }
             btnGuardar.disabled = true;
@@ -97,15 +97,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (this.status == 200) {
                         try {
                             const res = JSON.parse(this.responseText);
-                            alert(res.msg);
+                            alertaPersonalizada(res.success ? 'success' : 'error', res.msg);
                             if (res.success) {
-                                window.location.href = base_url + 'requisiciones/cotizacion/' + data.requisicion_id;
+                                setTimeout(function() {
+                                    window.location.href = base_url + 'requisiciones/cotizacion/' + data.requisicion_id;
+                                }, 1500);
                             }
                         } catch (e) {
-                            alert('Error al procesar respuesta.');
+                            alertaPersonalizada('error', 'Error al procesar respuesta.');
                         }
                     } else {
-                        alert('Error al guardar cotización.');
+                        alertaPersonalizada('error', 'Error al guardar cotización.');
                     }
                 }
             };

@@ -53,7 +53,7 @@ $id = isset($data['id']) ? intval($data['id']) : '';
                             </div>
                             <div class="mb-3">
                                 <label for="monto" class="form-label">Monto Cotización</label>
-                                <input type="number" class="form-control" id="monto" name="monto" required>
+                                <input type="number" class="form-control" id="monto" name="monto" readonly>
                             </div>
                             <div class="mb-3">
                                 <label for="detalle" class="form-label">Detalle</label>

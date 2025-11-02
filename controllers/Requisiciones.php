@@ -56,6 +56,7 @@ class Requisiciones extends Controller{
             'msg' => $msg
         ];
         $this->views->getView('requisiciones', 'detalle', $data);
+    }
     public function verCotizacion($idCotizacion) {
         $cotizacion = $this->model->getCotizacionById($idCotizacion);
         $productos = $this->model->getProductosCotizacion($idCotizacion);
@@ -66,7 +67,7 @@ class Requisiciones extends Controller{
         ];
         $this->views->getView('requisiciones', 'detalleCotizacion', $data);
     }
-    }
+    
     private $id_usuario;
     public function __construct(){
         parent::__construct();

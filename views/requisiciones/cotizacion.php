@@ -49,7 +49,14 @@ $id = isset($data['id']) ? intval($data['id']) : '';
                             </div>
                             <div class="mb-3">
                                 <label for="proveedor" class="form-label">Proveedor</label>
-                                <input type="text" class="form-control" id="proveedor" name="proveedor" required>
+                                <input type="text" class="form-control" id="proveedor" name="proveedor" list="proveedoresList" autocomplete="off" required>
+                                <datalist id="proveedoresList">
+                                    <?php if (!empty($data['proveedores'])): ?>
+                                        <?php foreach ($data['proveedores'] as $prov): ?>
+                                            <option value="<?php echo htmlspecialchars($prov['nombre']); ?>">
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </datalist>
                             </div>
                             <div class="mb-3">
                                 <label for="monto" class="form-label">Monto Cotización</label>

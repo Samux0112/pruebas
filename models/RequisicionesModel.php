@@ -1,5 +1,10 @@
 <?php
 class RequisicionesModel extends Query{
+    public function getProveedores($estado = 1)
+    {
+        $sql = "SELECT * FROM clientes2 WHERE estado = $estado";
+        return $this->selectAll($sql);
+    }
     public function __construct() {
         parent::__construct();
     }

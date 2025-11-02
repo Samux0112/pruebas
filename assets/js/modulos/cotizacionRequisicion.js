@@ -38,4 +38,78 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Inicializar totales al cargar
     actualizarTotales();
+
+    // Guardar cotización por AJAX
+    const btnGuardar = document.getElementById('btnGuardarCotizacion');
+        btnGuardar.addEventListener('click', function () {
+            let valid = true;
+            let msg = '';
+            // Validar proveedor
+            const proveedor = document.getElementById('proveedor').value.trim();
+            if (!proveedor) {
+                valid = false;
+                msg += 'El proveedor es obligatorio.\n';
+            }
+            // Validar productos
+            const productos = [];
+            document.querySelectorAll('tbody tr').forEach(function(row, idx) {
+                if (row.querySelector('.input-precio')) {
+                    const nombre = row.cells[0].textContent.trim();
+                    const cantidad = parseFloat(row.querySelector('.input-cantidad').value) || 0;
+                    const descripcion = row.cells[2].textContent.trim();
+                    const precio = parseFloat(row.querySelector('.input-precio').value) || 0;
+                    const descuento = parseFloat(row.querySelector('.input-descuento').value) || 0;
+                    const subtotal = parseFloat(row.querySelector('.input-subtotal').value) || 0;
+                    if (precio <= 0) {
+                        valid = false;
+                        msg += `El precio unitario del producto ${idx+1} debe ser mayor a 0.\n`;
+                    }
+                    productos.push({nombre, cantidad, descripcion, precio, descuento, subtotal});
+                }
+            });
+            // Validar monto
+            const monto = parseFloat(document.getElementById('monto').value) || 0;
+            if (monto <= 0) {
+                valid = false;
+                msg += 'El monto de cotización debe ser mayor a 0.\n';
+            }
+            if (!valid) {
+                alert(msg);
+                return;
+            }
+            btnGuardar.disabled = true;
+            // Preparar datos
+            const data = {
+                requisicion_id: document.getElementById('requisicion_id').value,
+                proveedor,
+                monto,
+                detalle: document.getElementById('detalle').value,
+                productos
+            };
+            // Enviar por AJAX
+            const url = base_url + 'requisiciones/guardarCotizacion';
+            const http = new XMLHttpRequest();
+            http.open('POST', url, true);
+            http.setRequestHeader('Content-Type', 'application/json');
+            http.onreadystatechange = function () {
+                if (this.readyState == 4) {
+                    btnGuardar.disabled = false;
+                    if (this.status == 200) {
+                        try {
+                            const res = JSON.parse(this.responseText);
+                            alert(res.msg);
+                            if (res.success) {
+                                window.location.href = base_url + 'requisiciones/cotizacion/' + data.requisicion_id;
+                            }
+                        } catch (e) {
+                            alert('Error al procesar respuesta.');
+                        }
+                    } else {
+                        alert('Error al guardar cotización.');
+                    }
+                }
+            };
+            http.send(JSON.stringify(data));
+        });
+    
 });

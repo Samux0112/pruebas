@@ -1,5 +1,22 @@
 <?php
 class RequisicionesModel extends Query{
+    public function guardarCotizacion($idRequisicion, $proveedor, $monto, $detalle, $productos)
+    {
+        // Guardar cotización principal
+        $sql = "INSERT INTO cotizaciones_requisicion (id_requisicion, proveedor, monto, detalle) VALUES (?,?,?,?)";
+        $array = array($idRequisicion, $proveedor, $monto, $detalle);
+        $idCotizacion = $this->insertar($sql, $array);
+        if ($idCotizacion > 0) {
+            // Guardar productos/ofertas asociadas
+            foreach ($productos as $prod) {
+                $sqlProd = "INSERT INTO cotizaciones_productos (id_cotizacion, nombre, cantidad, descripcion, precio, descuento, subtotal) VALUES (?,?,?,?,?,?,?)";
+                $arrProd = array($idCotizacion, $prod['nombre'], $prod['cantidad'], $prod['descripcion'], $prod['precio'], $prod['descuento'], $prod['subtotal']);
+                $this->insertar($sqlProd, $arrProd);
+            }
+            return true;
+        }
+        return false;
+    }
     public function getProveedores($estado = 1)
     {
         $sql = "SELECT * FROM clientes2 WHERE estado = $estado";

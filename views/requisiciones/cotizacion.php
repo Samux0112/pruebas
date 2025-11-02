@@ -66,7 +66,7 @@ $id = isset($data['id']) ? intval($data['id']) : '';
                                 <label for="detalle" class="form-label">Detalle</label>
                                 <textarea class="form-control" id="detalle" name="detalle" rows="3"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-success">Guardar Cotización</button>
+                            <button type="button" class="btn btn-success" id="btnGuardarCotizacion">Guardar Cotización</button>
                             <a href="index.php" class="btn btn-secondary ms-2">Volver</a>
                         </form>
                     </div>

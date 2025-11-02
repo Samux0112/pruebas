@@ -1,4 +1,5 @@
 <?php
+require 'views/templates/header.php';
 // Vista limpia, solo muestra datos recibidos por $data desde el controlador
 $requisicion = $data['requisicion'];
 $productos = $data['productos'];
@@ -46,3 +47,6 @@ $msg = $data['msg'];
     <a href="index.php">Volver a la lista de requisiciones</a>
 </body>
 </html>
+<?php
+require 'views/templates/footer.php';
+?>

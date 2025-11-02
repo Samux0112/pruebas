@@ -1,7 +1,7 @@
 <?php
-define('BASE_URL', 'https://maquinariaagricola.top/postwo/');
+define('BASE_URL', 'https://maquinariaagricola.in.net/postwo/');
 define('HOST', 'localhost');
-define('USER', 'maquigd8_fabpostwo');
+define('USER', 'maquigd8_maquinaria');
 define('PASS', 'Gatoperro12');
 define('DBNAME', 'maquigd8_maquinaria');
 define('CHARSET', 'UTF-8');

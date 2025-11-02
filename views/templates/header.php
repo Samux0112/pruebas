@@ -105,6 +105,41 @@
 						<?php } if ( verificar('contingencias') || verificar('tasaMora') || verificar('medidas') || verificar('categorias' ) || verificar('productos' ) || verificar('bodegas')) { ?>
                     </ul>
                 </li>
+                
+                
+                <!--DESDE AQUI PUSE EL CODIGO DE NUEVO SI ES NECESARIO QUITARLO LO QUITAS PARA NO INTERFERIR CON TU PROGRAMACION SI ESTA BIEN DEJARLO-->
+                
+                 <li>
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><i class="fa-solid fa-clipboard-list"></i>
+                        </div>
+                        <div class="menu-title">Mantenimiento</div>
+                    </a>
+                    <ul>
+                    <?php } if (verificar('tasaMora')) { ?>
+                        <li> <a href="<?php echo BASE_URL . 'tasaMora'; ?>"><i class="bx bx-right-arrow-alt"></i>Interes por mora</a>
+                        </li>
+                        <?php } if (verificar('medidas')) { ?>
+                        <li> <a href="<?php echo BASE_URL . 'medidas'; ?>"><i class="bx bx-right-arrow-alt"></i>Medidas</a>
+                        </li>
+                        <?php } if (verificar('categorias')) { ?>
+                        <li> <a href="<?php echo BASE_URL . 'categorias'; ?>"><i class="bx bx-right-arrow-alt"></i>Categorias</a>
+                        </li>
+                        <?php } if (verificar('productos')) { ?>
+                        <li> <a href="<?php echo BASE_URL . 'productos'; ?>"><i class="bx bx-right-arrow-alt"></i>Productos</a>
+                        </li>
+						<?php } if (verificar('bodegas')) { ?>
+                        <li> <a href="<?php echo BASE_URL . 'bodegas'; ?>"><i class="bx bx-right-arrow-alt"></i>Bodegas</a>
+                        </li>
+						<?php } if (verificar('contingencias')) { ?>
+                        <li> <a href="<?php echo BASE_URL . 'contingencias'; ?>"><i class="bx bx-right-arrow-alt"></i>Contingencias</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!--FIN DESDE AQUI PUSE EL CODIGO DE NUEVO SI ES NECESARIO QUITARLO LO QUITAS PARA NO INTERFERIR CON TU PROGRAMACION SI ESTA BIEN DEJARLO-->
+                
+                
                 <?php }  if (verificar('tipoProducto')) { ?>
                 <li>
                     <a href="<?php echo BASE_URL . 'tipoProducto'; ?>">
@@ -113,6 +148,7 @@
                         <div class="menu-title">Tipo de Producto</div>
                     </a>
                 </li>
+                
                 <?php }  if (verificar('clientes')) { ?>
                 <li>
                     <a href="<?php echo BASE_URL . 'clientes'; ?>">

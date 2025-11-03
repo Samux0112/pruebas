@@ -40,6 +40,21 @@ require 'views/templates/header.php';
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>
+                                <!-- Fila de totales por cotización -->
+                                <tr class="table-info">
+                                    <td class="text-end"><strong>Total</strong></td>
+                                    <?php foreach ($data['cotizaciones'] as $cot): ?>
+                                        <?php 
+                                            $totalCot = 0;
+                                            foreach ($data['productosComparados'] as $comparativo) {
+                                                if (isset($comparativo[$cot['id']])) {
+                                                    $totalCot += floatval($comparativo[$cot['id']]['subtotal']);
+                                                }
+                                            }
+                                        ?>
+                                        <td><strong><?php echo number_format($totalCot, 2); ?></strong></td>
+                                    <?php endforeach; ?>
+                                </tr>
                             </table>
                         </div>
                         <?php else: ?>

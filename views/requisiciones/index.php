@@ -58,10 +58,8 @@ require 'views/templates/header.php';
                         <table class="table table-bordered" id="tblNuevaRequisicion">
                             <thead>
                                 <tr>
-                                    <th>Producto</th>
-                                    <th>Precio</th>
+                                    <th>Producto</th> 
                                     <th>Cantidad</th>
-                                    <th>Subtotal</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>

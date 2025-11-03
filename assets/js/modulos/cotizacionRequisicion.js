@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             alertaPersonalizada(res.success ? 'success' : 'error', res.msg);
                             if (res.success) {
                                 setTimeout(function() {
-                                    window.location.href = base_url + 'requisiciones/cotizacion/' + data.requisicion_id;
+                                    window.location.href = base_url + 'requisiciones/detalle/' + data.requisicion_id;
                                 }, 1500);
                             }
                         } catch (e) {

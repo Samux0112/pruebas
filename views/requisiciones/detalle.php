@@ -59,7 +59,7 @@ $msg = $data['msg'];
         </div>
     </div>
 </div>
-<?php if (!empty($data['cotizaciones'])): ?>
+<?php if (!empty($data['cotizaciones'])){ ?>
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-lg-12">
@@ -104,7 +104,11 @@ $msg = $data['msg'];
         </div>
     </div>
 </div>
-<?php endif; ?>
+<?php } else { ?>
+<div class="mb-3 text-end" hidden>
+                            <button id="btnCompararCotizaciones" class="btn btn-warning" data-id="<?php echo htmlspecialchars($requisicion['id']); ?>">Comparar cotizaciones</button>
+                        </div>
+    <?php }?>
                         </div>
                             <div class="mt-3 d-flex gap-2">
                                 <button id="btnVolverRequisiciones" class="btn btn-secondary">Volver a la lista de requisiciones</button>

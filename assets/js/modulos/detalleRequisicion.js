@@ -4,12 +4,11 @@
 // Redirecciona a la lista de requisiciones y a cotización
 document.addEventListener('DOMContentLoaded', function() {
     const btnVolver = document.getElementById('btnVolverRequisiciones');
-    if (btnVolver) {
         btnVolver.addEventListener('click', function(e) {
             e.preventDefault();
-            window.location.href = 'index.php';
+            window.location.href = base_url + 'requisiciones';
         });
-    }
+    
     const btnCotizar = document.getElementById('btnCotizarRequisicion');
         btnCotizar.addEventListener('click', function(e) {
             e.preventDefault();

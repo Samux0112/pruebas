@@ -52,39 +52,56 @@ $msg = $data['msg'];
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
-                                    <?php if (!empty($data['cotizaciones'])): ?>
-        <div class="mb-4">
-            <h5>Cotizaciones asociadas</h5>
-            <div class="table-responsive">
-                <table class="table table-bordered table-striped">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>ID</th>
-                            <th>Proveedor</th>
-                            <th>Monto</th>
-                            <th>Detalle</th>
-                            <th>Fecha</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($data['cotizaciones'] as $cot): ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($cot['id']); ?></td>
-                            <td><?php echo htmlspecialchars($cot['proveedor']); ?></td>
-                            <td><?php echo htmlspecialchars($cot['monto']); ?></td>
-                            <td><?php echo htmlspecialchars($cot['detalle']); ?></td>
-                            <td><?php echo htmlspecialchars($cot['fecha']); ?></td>
-                            <td>
-                                <button class="btn btn-info btn-sm btnVerCotizacion" data-id="<?php echo $cot['id']; ?>">Ver</button>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-        <?php endif; ?>
+    </div>
+</div>
+<?php if (!empty($data['cotizaciones'])): ?>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Cotizaciones asociadas</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Proveedor</th>
+                                    <th>Monto</th>
+                                    <th>Detalle</th>
+                                    <th>Fecha</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($data['cotizaciones'] as $cot): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($cot['id']); ?></td>
+                                    <td><?php echo htmlspecialchars($cot['proveedor']); ?></td>
+                                    <td><?php echo htmlspecialchars($cot['monto']); ?></td>
+                                    <td><?php echo htmlspecialchars($cot['detalle']); ?></td>
+                                    <td><?php echo htmlspecialchars($cot['fecha']); ?></td>
+                                    <td>
+                                        <button class="btn btn-info btn-sm btnVerCotizacion" data-id="<?php echo $cot['id']; ?>">Ver</button>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
                         </div>
                             <div class="mt-3 d-flex gap-2">
                                 <button id="btnVolverRequisiciones" class="btn btn-secondary">Volver a la lista de requisiciones</button>

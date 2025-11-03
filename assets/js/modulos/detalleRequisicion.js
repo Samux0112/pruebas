@@ -3,6 +3,12 @@
 // JS para la vista detalle de requisición
 // Redirecciona a la lista de requisiciones y a cotización
 document.addEventListener('DOMContentLoaded', function() {
+    const btnComparar = document.getElementById('btnCompararCotizaciones');
+        btnComparar.addEventListener('click', function(e) {
+            e.preventDefault();
+            const id = btnComparar.getAttribute('data-id');
+            window.location.href = base_url + 'requisiciones/comparativoCotizaciones/' + encodeURIComponent(id);
+        });
     const btnVolver = document.getElementById('btnVolverRequisiciones');
         btnVolver.addEventListener('click', function(e) {
             e.preventDefault();

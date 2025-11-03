@@ -1,5 +1,29 @@
 <?php
 class Requisiciones extends Controller{
+    public function comparativoCotizaciones($idRequisicion) {
+        $cotizaciones = $this->model->getCotizacionesRequisicion($idRequisicion);
+        // Construir comparativo de productos
+        $productosComparados = [];
+        foreach ($cotizaciones as $cot) {
+            $productos = $this->model->getProductosCotizacion($cot['id']);
+            foreach ($productos as $prod) {
+                $nombre = $prod['nombre'];
+                if (!isset($productosComparados[$nombre])) {
+                    $productosComparados[$nombre] = [];
+                }
+                $productosComparados[$nombre][$cot['id']] = [
+                    'precio' => $prod['precio'],
+                    'descuento' => $prod['descuento'],
+                    'subtotal' => $prod['subtotal']
+                ];
+            }
+        }
+        $data = [
+            'cotizaciones' => $cotizaciones,
+            'productosComparados' => $productosComparados
+        ];
+        $this->views->getView('requisiciones', 'comparativoCotizaciones', $data);
+    }
     public function guardarCotizacion() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $json = file_get_contents('php://input');

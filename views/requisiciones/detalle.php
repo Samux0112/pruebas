@@ -14,6 +14,9 @@ $msg = $data['msg'];
                     </div>
                     <div class="card-body">
                         <?php if (!empty($msg)) echo $msg; ?>
+                        <div class="mb-3 text-end">
+                            <button id="btnCompararCotizaciones" class="btn btn-warning" data-id="<?php echo htmlspecialchars($requisicion['id']); ?>">Comparar cotizaciones</button>
+                        </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <p><strong>Estado actual:</strong> <?php echo htmlspecialchars($requisicion['estado']); ?></p>

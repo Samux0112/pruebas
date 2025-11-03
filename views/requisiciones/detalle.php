@@ -62,7 +62,7 @@ $msg = $data['msg'];
 <?php if (!empty($data['cotizaciones'])): ?>
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-lg-10">
+        <div class="col-lg-12">
             <div class="card mb-4">
                 <div class="card-header bg-info text-white">
                     <h5 class="mb-0">Cotizaciones asociadas</h5>

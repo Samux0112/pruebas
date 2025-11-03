@@ -71,7 +71,8 @@ require 'views/templates/header.php';
                         </table>
 
                         <div class="row mt-3">
-                            <div class="col-md-6" hidden>
+                            <div class="col-md-6 d-none">
+                                <!-- Total a Pagar oculto -->
                                 <label>Total a Pagar</label>
                                 <div class="input-group mb-2">
                                     <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
@@ -98,7 +99,7 @@ require 'views/templates/header.php';
                                     <th>ID</th>
                                     <th>Fecha</th>
                                     <th>Solicitante</th>
-                                    <th hidden>Total</th>
+                                    <!-- <th>Total</th> -->
                                     <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>

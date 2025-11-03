@@ -120,7 +120,6 @@ function cargarHistorial() {
                         <td>${r.id}</td>
                         <td>${r.fecha}</td>
                         <td>${r.solicitante}</td>
-                        <td>${r.total}</td>
                         <td>${r.estado}</td>
                         <td><button class="btn btn-sm btn-primary" onclick="verRequisicion(${r.id})">Ver</button></td>
                     </tr>`;

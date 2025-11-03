@@ -12,6 +12,7 @@ class Requisiciones extends Controller{
                     $productosComparados[$nombre] = [];
                 }
                 $productosComparados[$nombre][$cot['id']] = [
+                    'cantidad' => $prod['cantidad'],
                     'precio' => $prod['precio'],
                     'descuento' => $prod['descuento'],
                     'subtotal' => $prod['subtotal']

@@ -28,6 +28,7 @@ require 'views/templates/header.php';
                                         <?php foreach ($data['cotizaciones'] as $cot): ?>
                                             <?php if (isset($comparativo[$cot['id']])): ?>
                                                 <td>
+                                                    <strong>Cantidad:</strong> <?php echo htmlspecialchars($comparativo[$cot['id']]['cantidad'] ?? ''); ?><br>
                                                     <strong>Precio:</strong> <?php echo htmlspecialchars($comparativo[$cot['id']]['precio']); ?><br>
                                                     <strong>Descuento:</strong> <?php echo htmlspecialchars($comparativo[$cot['id']]['descuento']); ?><br>
                                                     <strong>Subtotal:</strong> <?php echo htmlspecialchars($comparativo[$cot['id']]['subtotal']); ?>

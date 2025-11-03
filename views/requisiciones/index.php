@@ -28,6 +28,9 @@ require 'views/templates/header.php';
                                     <label class="btn btn-info">
                                         <input type="radio" id="nombre" name="buscarProducto"><i class="fas fa-list"></i> Nombre
                                     </label>
+                                    <label class="btn btn-secondary">
+                                        <input type="radio" id="gasto" name="buscarProducto"><i class="fas fa-list"></i> Gasto
+                                    </label>
                                     <!-- hidden flags used by agregarProducto / busqueda.js -->
                                     <input type="checkbox" id="chekExento" style="display:none;">
                                     <input type="checkbox" id="chekServicio" style="display:none;">

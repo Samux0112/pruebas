@@ -4,7 +4,7 @@ require 'views/templates/header.php';
 <div class="page-content">
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-lg-10">
+            <div class="col-lg-12">
                 <div class="card mb-4">
                     <div class="card-header bg-primary text-white">
                         <h4 class="mb-0">Detalle de Cotización</h4>

@@ -4,7 +4,6 @@ const idCliente = document.querySelector('#idCliente');
 const telefonoCliente = document.querySelector('#telefonoCliente');
 const direccionCliente = document.querySelector('#direccionCliente');
 const fecha_traslado = document.querySelector('#fecha_traslado');
-const bodegaSalida = document.querySelector('#bodegaSalida');
 const bodegaEntrada = document.querySelector('#bodegaEntrada');
 
 

@@ -84,22 +84,7 @@
                             <li> <a href="<?php echo BASE_URL . 'admin/logs'; ?>"><i class="bx bx-right-arrow-alt"></i>Log de Acceso</a>
                             </li>
 							
-                            <?php }  if (verificar('compras')) { ?>
-                
-                            <li>
-                                <a href="<?php echo BASE_URL . 'ventas2'; ?>">
-                                    <div class="parent-icon"><i class="fa-solid fa-credit-card"></i>
-                                    </div>
-                                    <div class="menu-title">Compras</div>
-                                </a>
-                            </li>
-
-
-
-                            <?php }  if (verificar('ventas')) { ?>
-                        <li> <a href="<?php echo BASE_URL . 'bodegas'; ?>"><i class="bx bx-right-arrow-alt"></i>Bodegas</a>
-                        </li>
-						<?php } if (verificar('contingencias')) { ?>
+                            <?php } if (verificar('contingencias')) { ?>
                         <li> <a href="<?php echo BASE_URL . 'contingencias'; ?>"><i class="bx bx-right-arrow-alt"></i>Contingencias</a>
                         </li>
 						<?php } if ( verificar('contingencias') || verificar('tasaMora') || verificar('medidas') || verificar('categorias' ) || verificar('productos' ) || verificar('bodegas')) { ?>

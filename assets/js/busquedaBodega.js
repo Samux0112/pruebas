@@ -3,7 +3,7 @@ const inputBuscarNombre = document.querySelector('#buscarProductoNombre');
 const chekExento = document.querySelector('#chekExento');
 const chekServicio = document.querySelector('#chekServicio');
 const inputBuscarGasto = document.querySelector('#buscarGasto');
-
+const bodegaSalida = document.querySelector('#bodegaSalida');
 
 const barcode = document.querySelector('#barcode');
 const nombre = document.querySelector('#nombre');
@@ -73,6 +73,8 @@ document.addEventListener('DOMContentLoaded', function () {
     //autocomplete productos
     $("#buscarProductoNombre").autocomplete({
         source: function (request, response) {
+            let bodegaS = bodegaSalida.value;
+            debugger;
             $.ajax({
                 url: base_url + 'productos/buscarPorNombreTraslado',
                 dataType: "json",

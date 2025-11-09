@@ -73,13 +73,12 @@ document.addEventListener('DOMContentLoaded', function () {
     //autocomplete productos
     $("#buscarProductoNombre").autocomplete({
         source: function (request, response) {
-            let bodegaS = bodegaSalida.value;
-            debugger;
             $.ajax({
                 url: base_url + 'productos/buscarPorNombreTraslado',
                 dataType: "json",
                 data: {
-                    term: request.term
+                    term: request.term,
+                    bodegaSalida: bodegaSalida.value
                 },
                 success: function (data) {
                     response(data);

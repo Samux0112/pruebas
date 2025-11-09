@@ -146,5 +146,11 @@ return $this->selectAll($sql);
         $sql = "SELECT * FROM configuracion";
         return $this->select($sql);
     }
+    public function getStock($id, $bodega)
+{
+//$sql = "SELECT id, descripcion, cantidad, precio_venta2, precio_venta FROM productos WHERE codigo ='$valor'AND estado = 1";
+$sql = "SELECT cantidad from Stock WHERE idProducto = $id AND idBodega = $bodega";
+return $this->select($sql);
+}
 
 }

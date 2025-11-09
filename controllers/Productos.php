@@ -320,11 +320,13 @@ public function buscarPorNombre()
     {
         $array = array();
         $valor = $_GET['term'];
+        $bodegaSalida = $_GET['bodegaSalida'];
         $data = $this->model->buscarPorNombre($valor);
         foreach ($data as $row) {
             $result['id'] = $row['id'];
             $result['label'] = $row['descripcion'];
-            $result['stock'] = $row['cantidad'];
+            $result['stock'] = $this->model->getStock($row['id'], $bodegaSalida);
+            //$result['stock'] = $row['cantidad'];
             $result['precio_venta'] = $row['precio_venta'];
             $result['precio_venta2'] = $row['precio_venta2'];
 			$result['medida'] = $row['medida'];
@@ -339,7 +341,9 @@ public function buscarPorNombre()
     {
         $array = array();
         $valor = $_GET['term'];
+        $bodegaSalida = $_GET['bodegaSalida'];
         $data = $this->model->buscarPorNombreTraslado($valor);
+
         foreach ($data as $row) {
             $result['id'] = $row['id'];
             $result['label'] = $row['descripcion'];

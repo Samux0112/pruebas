@@ -346,6 +346,7 @@ public function buscarPorNombre()
             $result['id'] = $row['id'];
             $result['label'] = $row['descripcion'];
             $result['stock'] = $this->model->getStock($row['id'], $bodegaSalida);
+            $result['stock'] = $result['stock']['cantidad'];
             //$result['stock'] = $row['cantidad'];
             $result['precio_venta'] = $row['precio_venta'];
             $result['precio_venta2'] = $row['precio_venta2'];

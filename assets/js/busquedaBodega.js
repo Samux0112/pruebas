@@ -187,12 +187,16 @@ function agregarProducto(descripcion, idProducto, cantidad, stockActual, precio,
     }
 
     //si lista carrito no existe
-    if (nombreKey === 'posVenta' || nombreKey === 'posApartados') {
+    if(bodegaSalida.options[bodegaSalida.selectedIndex].text !="BODEGA VIRTUAL"){
+            if (nombreKey === 'posVenta' || nombreKey === 'posApartados') {
     if (stockActual <= 0) {
         alertaPersonalizada('warning', 'STOCK NO DISPONIBLE');
         return;
     }
 }
+
+    }
+
 
 if (nombreKey === 'posVenta2'){
 	        listaCarrito.push({

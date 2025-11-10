@@ -48,45 +48,58 @@ class Salidas extends Controller{
                     $result = $this->model->getProducto($producto['id'],$bodega1);
                     $data['id'] = $result['id'];
                     $data['id'] = $producto['id'];
-                        $data['nombre'] = $producto['descripcion'];
-                        $data['precio'] = $producto['precio'];
-                        $data['cantidad'] = $producto['cantidad'];
-						$data['catalogo'] = $producto['catalogo'];
+                    $data['nombre'] = $producto['descripcion'];
+                    $data['precio'] = $producto['precio'];
+                    $data['cantidad'] = $producto['cantidad'];
+                    $data['catalogo'] = $producto['catalogo'];
                     $subTotal = $producto['precio'] * $producto['cantidad'];
                     array_push($array['productos'], $data);
                     $total += $subTotal;
                 }
                 $datosProductos = json_encode($array['productos']);
-				$tipoTraslado= "SALIDA";
+                $tipoTraslado= "SALIDA";
                 $traslado = $this->model->registrarTraslado($datosProductos, $fecha, $fecha_traslado,  $total, $idCliente , $bodega1, $tipoTraslado, $this->id_usuario);
                 if ($traslado > 0) {
-					foreach ($datos['productos'] as $producto) {
+                    // Obtener nombre de la bodega de salida
+                    $bodegaSalidaNombre = '';
+                    $bodegaSalida = $this->model->getDatos('bodegas');
+                    foreach ($bodegaSalida as $b) {
+                        if ($b['id'] == $bodega1) {
+                            $bodegaSalidaNombre = $b['nombre'];
+                            break;
+                        }
+                    }
+                    foreach ($datos['productos'] as $producto) {
                         $result = $this->model->getProducto($producto['id'],$bodega);
-						$result1 = $this->model->getProducto($producto['id'],$bodega1);
-                        //actualizar stock
+                        $result1 = $this->model->getProducto($producto['id'],$bodega1);
                         $dataValidar = $this->model->getProductoBodega($producto['id'],$bodega);
-							if($dataValidar['total']>0){
-								$nuevaCantidad = $result['stock'] + $producto['cantidad'];
-								$totalVentas2 = $result['ventas2'] + $producto['cantidad'];
-								$nuevaCantida1 = $result1['stock'] - $producto['cantidad'];
-								$totalVentas1 = $result1['ventas2'] - $producto['cantidad'];
-							}else{
-								$nuevaCantidad = 0 + $producto['cantidad'];
-								$totalVentas2 = 0 + $producto['cantidad'];
-								$nuevaCantida1 = $result1['stock'] - $producto['cantidad'];
-								$totalVentas1 = $result1['ventas2'] - $producto['cantidad'];
-							}
-                      $dataValidar = $this->model->getProductoBodega($producto['id'],$bodega);
-							if($dataValidar['total']>0){
-                            $this->model->actualizarStock($nuevaCantidad, $producto['id'], $bodega);
-							$this->model->actualizarStock($nuevaCantida1, $producto['id'], $bodega1);
-							}else{
-							$this->model->registrarStock($nuevaCantidad, $producto['id'], $bodega);	
-							$this->model->actualizarStock($nuevaCantida1, $producto['id'], $bodega1);
-							}                       
+                        // Si la bodega de salida es BODEGA VIRTUAL, solo sumar stock en bodega de entrada
+                        if (strtoupper($bodegaSalidaNombre) == 'BODEGA VIRTUAL') {
+                            if($dataValidar['total']>0){
+                                $nuevaCantidad = $result['stock'] + $producto['cantidad'];
+                                $this->model->actualizarStock($nuevaCantidad, $producto['id'], $bodega);
+                            }else{
+                                $nuevaCantidad = 0 + $producto['cantidad'];
+                                $this->model->registrarStock($nuevaCantidad, $producto['id'], $bodega);
+                            }
+                            // No se reduce stock en bodega de salida
+                        } else {
+                            // Proceso normal: sumar en entrada, restar en salida
+                            if($dataValidar['total']>0){
+                                $nuevaCantidad = $result['stock'] + $producto['cantidad'];
+                                $nuevaCantida1 = $result1['stock'] - $producto['cantidad'];
+                                $this->model->actualizarStock($nuevaCantidad, $producto['id'], $bodega);
+                                $this->model->actualizarStock($nuevaCantida1, $producto['id'], $bodega1);
+                            }else{
+                                $nuevaCantidad = 0 + $producto['cantidad'];
+                                $nuevaCantida1 = $result1['stock'] - $producto['cantidad'];
+                                $this->model->registrarStock($nuevaCantidad, $producto['id'], $bodega);
+                                $this->model->actualizarStock($nuevaCantida1, $producto['id'], $bodega1);
+                            }
+                        }
                         //movimientos
                         $movimiento = 'Apartado N°: ';
-                        $this->model->registrarMovimiento($movimiento, 'Salida por traslado', $producto['cantidad'], $nuevaCantidad, $producto['id'], $this->id_usuario);
+                        $this->model->registrarMovimiento($movimiento, 'Salida por traslado', $producto['cantidad'], $result['stock'], $producto['id'], $this->id_usuario);
                     }
                     $res = array('msg' => 'TRASLADO GENERADO', 'type' => 'success', 'idCotizacion' => $traslado);
                 } else {

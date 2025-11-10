@@ -290,6 +290,8 @@ function cambiarCantidad(idProducto, cantidad) {
                         }
                     }
                     localStorage.setItem(nombreKey, JSON.stringify(listaCarrito));
+                }else if(bodegaSalida.options[bodegaSalida.selectedIndex].text =="BODEGA VIRTUAL"){
+                    localStorage.setItem(nombreKey, JSON.stringify(listaCarrito));
                 } else {
                     alertaPersonalizada('warning', 'STOCK NO DISPONIBLE');
                 }

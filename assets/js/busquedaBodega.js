@@ -166,10 +166,13 @@ function agregarProducto(descripcion, idProducto, cantidad, stockActual, precio,
                     cantidadAgregado = parseInt(listaCarrito[i]['cantidad']) + parseInt(cantidad);
                 }
             }
-            if ((cantidadAgregado > stockActual || stockActual == 0) && (bodegaSalida.options[bodegaSalida.selectedIndex].text !="BODEGA VIRTUAL")) {
+            if(bodegaSalida.options[bodegaSalida.selectedIndex].text !="BODEGA VIRTUAL"){  
+                if (cantidadAgregado > stockActual || stockActual == 0) {
                 alertaPersonalizada('warning', 'STOCK NO DISPONIBLE');
                 return;
             }
+            }
+            
         }
         for (let i = 0; i < listaCarrito.length; i++) {
             if (listaCarrito[i]['id'] == idProducto) {

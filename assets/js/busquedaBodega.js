@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
         minLength: 2,
         select: function (event, ui) {
             let precio = nombreKey == 'posventa2' ? ui.item.precio_venta2 : ui.item.precio_venta;
-            agregarProducto(ui.item.label, ui.item.id, 1, parseFloat(ui.item.stock), precio, ui.item.catalogo, ui.item.nombre_corto, ui.item.medida);
+            agregarProducto(ui.item.label, ui.item.id, 1, ui.item.stock, precio, ui.item.catalogo, ui.item.nombre_corto, ui.item.medida);
             inputBuscarNombre.value = '';
             inputBuscarNombre.focus();
             return false;
@@ -166,7 +166,7 @@ function agregarProducto(descripcion, idProducto, cantidad, stockActual, precio,
                     cantidadAgregado = parseInt(listaCarrito[i]['cantidad']) + parseInt(cantidad);
                 }
             }
-            if (cantidadAgregado > stockActual || stockActual == 0) {
+            if (cantidadAgregado > stockActual || parseInt(stockActual) == 0) {
                 alertaPersonalizada('warning', 'STOCK NO DISPONIBLE');
                 return;
             }

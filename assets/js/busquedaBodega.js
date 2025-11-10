@@ -166,7 +166,7 @@ function agregarProducto(descripcion, idProducto, cantidad, stockActual, precio,
                     cantidadAgregado = parseInt(listaCarrito[i]['cantidad']) + parseInt(cantidad);
                 }
             }
-            if (cantidadAgregado > stockActual || stockActual == 0) {
+            if ((cantidadAgregado > stockActual || stockActual == 0) && (bodegaSalida.options[bodegaSalida.selectedIndex].text !="BODEGA VIRTUAL")) {
                 alertaPersonalizada('warning', 'STOCK NO DISPONIBLE');
                 return;
             }

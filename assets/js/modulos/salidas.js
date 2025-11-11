@@ -98,6 +98,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     })
 
+    bodegaSalida.addEventListener('click', function () {
+    localStorage.removeItem(nombreKey);
+    mostrarProducto();
+
+    })
+
     //cargar datos con el plugin datatables
     tblHistorial = $('#tblHistorial').DataTable({
         ajax: {

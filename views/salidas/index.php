@@ -32,9 +32,10 @@
                                     <?php } ?>
                                 </select>
                             </div>
+                            <br>
 
                     </div>
-                    <br>
+                    
                      <hr> 
                     <div class="col-md-6">
                         <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">

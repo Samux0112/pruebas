@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 function buscarProducto(valor) {
-    const url = base_url + 'productos/buscarPorCodigo/' + valor + bodegaSalida.value;
+    const url = base_url + 'productos/buscarPorCodigo/' + valor +'/'+ bodegaSalida.value;
     //hacer una instancia del objeto XMLHttpRequest 
     const http = new XMLHttpRequest();
     //Abrir una Conexion - POST - GET

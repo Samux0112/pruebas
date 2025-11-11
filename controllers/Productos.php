@@ -304,13 +304,15 @@ class Productos extends Controller
     }
 
     //buscar Productos por codigo
-    public function buscarPorCodigo($valor)
+    public function buscarPorCodigo($valor,$bodegaSalida)
     {
         $array = array('estado' => false, 'datos' => '');
         $data = $this->model->buscarPorCodigo($valor);
         if (!empty($data)) {
             $array['estado'] = true;
             $array['datos'] = $data;
+            $result['stock'] = $this->model->getStock($data['id'], $bodegaSalida);
+            $array['datos']['cantidad'] = $result['stock']['cantidad'];
         }
         echo json_encode($array, JSON_UNESCAPED_UNICODE);
         die();

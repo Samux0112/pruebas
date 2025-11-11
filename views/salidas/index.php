@@ -13,7 +13,7 @@
                 <h5 class="card-title text-center"><i class="fas fa-list-alt"></i> Nueva Salida</h5>
                 <hr>
                 <div class="row mb-2">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
 
                     						 <div class="form-group">
                                 <label for="for-bodegas">Bodega de Salida <span class="text-danger">*</span></label>

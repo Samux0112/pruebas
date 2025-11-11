@@ -136,8 +136,8 @@ return $this->selectAll($sql);
  public function buscarPorNombreTraslado($valor)
 {
 //$sql = "SELECT id, descripcion, cantidad, precio_venta2, precio_venta FROM productos WHERE descripcion LIKE '%".$valor."%' AND estado = 1 LIMIT 10";
-$sql = "SELECT p.id, p.descripcion, s.cantidad, p.precio_venta2, p.precio_venta, m.medida,m.nombre_corto
-FROM productos p join medidas m on p.id_medida=m.id join Stock s on p.id = s.idProducto WHERE p.descripcion LIKE '%".$valor."%' AND
+$sql = "SELECT p.id, p.descripcion, p.cantidad, p.precio_venta2, p.precio_venta, m.medida,m.nombre_corto
+FROM productos p join medidas m on p.id_medida=m.id WHERE p.descripcion LIKE '%".$valor."%' AND
 p.estado = 1 LIMIT 10";
 return $this->selectAll($sql);
 }

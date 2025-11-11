@@ -1,5 +1,11 @@
 <?php
 class SalidasModel extends Query{
+    public function getNombreBodega($idBodega)
+    {
+        $sql = "SELECT nombre FROM bodegas WHERE id = $idBodega LIMIT 1";
+        return $this->select($sql);
+
+    }
     public function __construct() {
         parent::__construct();
     }

@@ -44,9 +44,11 @@ class Salidas extends Controller{
             } elseif(empty($fecha_traslado)){
 			$res = array('msg' => 'LA FECHA ES REQUERIDA', 'type' => 'warning');	
 			} else {
+                // Obtener el nombre de la bodega de salida usando el modelo
+                $nombreBodegaSalida = $this->model->getNombreBodega($bodega1);
                 foreach ($datos['productos'] as $producto) {
-                    $result = $this->model->getProducto($producto['id'],$bodega1);
-                    $data['id'] = $result['id'];
+                   // $result = $this->model->getProducto($producto['id'],$bodega1);
+                    //$data['id'] = $result['id'];
                     $data['id'] = $producto['id'];
                         $data['nombre'] = $producto['descripcion'];
                         $data['precio'] = $producto['precio'];
@@ -62,27 +64,42 @@ class Salidas extends Controller{
                 if ($traslado > 0) {
 					foreach ($datos['productos'] as $producto) {
                         $result = $this->model->getProducto($producto['id'],$bodega);
-						$result1 = $this->model->getProducto($producto['id'],$bodega1);
+                        if($nombreBodegaSalida['nombre']!='BODEGA VIRTUAL'){
+                            $result1 = $this->model->getProducto($producto['id'],$bodega1);
+                        }
+						
                         //actualizar stock
                         $dataValidar = $this->model->getProductoBodega($producto['id'],$bodega);
 							if($dataValidar['total']>0){
 								$nuevaCantidad = $result['stock'] + $producto['cantidad'];
 								$totalVentas2 = $result['ventas2'] + $producto['cantidad'];
-								$nuevaCantida1 = $result1['stock'] - $producto['cantidad'];
+                                 if($nombreBodegaSalida['nombre']!='BODEGA VIRTUAL'){
+                                $nuevaCantida1 = $result1['stock'] - $producto['cantidad'];
 								$totalVentas1 = $result1['ventas2'] - $producto['cantidad'];
+                                 }
+								
 							}else{
 								$nuevaCantidad = 0 + $producto['cantidad'];
 								$totalVentas2 = 0 + $producto['cantidad'];
-								$nuevaCantida1 = $result1['stock'] - $producto['cantidad'];
+                                if($nombreBodegaSalida['nombre']!='BODEGA VIRTUAL'){
+                                    $nuevaCantida1 = $result1['stock'] - $producto['cantidad'];
 								$totalVentas1 = $result1['ventas2'] - $producto['cantidad'];
+
+                                }
+								
 							}
                       $dataValidar = $this->model->getProductoBodega($producto['id'],$bodega);
 							if($dataValidar['total']>0){
                             $this->model->actualizarStock($nuevaCantidad, $producto['id'], $bodega);
-							$this->model->actualizarStock($nuevaCantida1, $producto['id'], $bodega1);
+                            if($nombreBodegaSalida['nombre']!='BODEGA VIRTUAL'){
+                                $this->model->actualizarStock($nuevaCantida1, $producto['id'], $bodega1);
+                            }
+							
 							}else{
 							$this->model->registrarStock($nuevaCantidad, $producto['id'], $bodega);	
-							$this->model->actualizarStock($nuevaCantida1, $producto['id'], $bodega1);
+							 if($nombreBodegaSalida['nombre']!='BODEGA VIRTUAL'){
+                                $this->model->actualizarStock($nuevaCantida1, $producto['id'], $bodega1);
+                            }
 							}                       
                         //movimientos
                         $movimiento = 'Apartado N°: ';

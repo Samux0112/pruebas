@@ -118,7 +118,7 @@ class Salidas extends Controller{
 							}                       
                         //movimientos
                         $movimiento = 'Apartado N°: ';
-                        $this->model->registrarMovimiento($movimiento, 'Salida por traslado', $producto['cantidad'], $nuevaCantidad, $producto['id'], $this->id_usuario);
+                        //$this->model->registrarMovimiento($movimiento, 'Salida por traslado', $producto['cantidad'], $nuevaCantidad, $producto['id'], $this->id_usuario);
                     }
                     $res = array('msg' => 'TRASLADO GENERADO', 'type' => 'success', 'idCotizacion' => $traslado);
                 } else {

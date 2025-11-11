@@ -14,6 +14,27 @@
                 <hr>
                 <div class="row mb-2">
                     <div class="col-md-6">
+
+                    						 <div class="form-group">
+                                <label for="for-bodegas">Bodega de Salida <span class="text-danger">*</span></label>
+                                <select id="bodegaSalida" class="form-control" name="bodegaSalida">
+                                    <?php foreach ($data['bodegas'] as $bodega) { ?>
+                                        <option value="<?php echo $bodega['id']; ?>"><?php echo $bodega['nombre']; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+							
+							                            <div class="form-group">
+                                <label for="for-bodegas">Bodega de Entrada <span class="text-danger">*</span></label>
+                                <select id="bodegaEntrada" class="form-control" name="bodegaEntrada">
+                                    <?php foreach ($data['bodegas'] as $bodega) { ?>
+                                        <option value="<?php echo $bodega['id']; ?>"><?php echo $bodega['nombre']; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+
+                    </div>
+                    <div class="col-md-6">
                         <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
                             <label class="btn btn-primary">
                                 <input type="radio" id="barcode" checked name="buscarProducto"><i class="fas fa-barcode"></i> Barcode
@@ -56,15 +77,6 @@
 
                 <span class="text-danger fw-bold mb-2" id="errorBusqueda"></span>
 
-                <div class="form-group">
-                                <label for="for-bodegas">Bodega de Salida <span class="text-danger">*</span></label>
-                                <select id="bodegaSalida" class="form-control" name="bodegaSalida">
-                                    <?php foreach ($data['bodegas'] as $bodega) { ?>
-                                        <option value="<?php echo $bodega['id']; ?>"><?php echo $bodega['nombre']; ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-
                 <!-- table productos -->
 
                 <div class="table-responsive">
@@ -92,16 +104,7 @@
    
                         </div>
 						
-						 
-							
-							                            <div class="form-group">
-                                <label for="for-bodegas">Bodega de Entrada <span class="text-danger">*</span></label>
-                                <select id="bodegaEntrada" class="form-control" name="bodegaEntrada">
-                                    <?php foreach ($data['bodegas'] as $bodega) { ?>
-                                        <option value="<?php echo $bodega['id']; ?>"><?php echo $bodega['nombre']; ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
+
 						
 
 

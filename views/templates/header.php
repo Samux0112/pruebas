@@ -162,7 +162,7 @@
                     </a>
                 </li> 
 				
-                <?php } if ((verificar('ingresos')) || (verificar('salidas')) ) { ?>
+                <?php } if (verificar('salidas') ) { ?>
                     <li>
                         <a href="javascript:;" class="has-arrow">
                             <div class="parent-icon"><i class="fa-solid fa-screwdriver-wrench"></i>
@@ -170,12 +170,8 @@
                             <div class="menu-title">Traslados</div>
                         </a>
                         <ul>
-                            <?php } if (verificar('ingresos')) { ?>
-                            <li> <a href="<?php echo BASE_URL . 'ingresos'; ?>"><i class="bx bx-right-arrow-alt"></i>Ingresos</a>
-                            </li>
-                           
                             <?php } if (verificar('salidas')) { ?>
-                            <li> <a href="<?php echo BASE_URL . 'salidas'; ?>"><i class="bx bx-right-arrow-alt"></i>Salidas</a>
+                            <li> <a href="<?php echo BASE_URL . 'salidas'; ?>"><i class="bx bx-right-arrow-alt"></i>Movimientos</a>
                             </li>
                         </ul>
                     </li>

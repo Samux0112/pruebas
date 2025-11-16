@@ -6,7 +6,7 @@
 <head><title>Orden de Compra</title></head>
 <body>
 <h2>Orden de Compra</h2>
-<p>Proveedor: <?php echo htmlspecialchars($data['proveedor']); ?></p>
+<p>Proveedor: <?php echo htmlspecialchars($data['nombreProveedor'] ?? $data['proveedor'] ?? ''); ?></p>
 <p>Cotización: <?php echo htmlspecialchars($data['requisicion_id'] ?? $data['cotizacion'] ?? ''); ?></p>
 <?php $productos = json_decode($data['productos'], true); ?>
 <table border="1">

@@ -1,4 +1,5 @@
 <?php
+require 'vendor/autoload.php';
 class OrdenesCompra extends Controller{
             public function crear() {
                 $json = file_get_contents('php://input');
@@ -34,7 +35,6 @@ class OrdenesCompra extends Controller{
             }
         public function generarPDF($idOrden) {
             // Aquí se genera el PDF usando Dompdf
-            require_once 'vendor/autoload.php';
             $dompdf = new Dompdf\Dompdf();
             $data = $this->model->getOrden($idOrden);
             $productos = json_decode($data['productos'], true);

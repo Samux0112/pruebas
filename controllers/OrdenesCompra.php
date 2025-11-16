@@ -1,5 +1,37 @@
 <?php
 class OrdenesCompra extends Controller{
+            public function crear() {
+                $json = file_get_contents('php://input');
+                $datos = json_decode($json, true);
+                $productos = $datos['productos'];
+                $proveedor = $datos['proveedor'];
+                $cotizacion = $datos['cotizacion'];
+                $id_usuario = $this->id_usuario;
+                $array['productos'] = array();
+                $total = 0;
+                if (!empty($productos)) {
+                    foreach ($productos as $idProd) {
+                        $result = $this->model->getProducto($idProd);
+                        $data['id'] = $result['id'];
+                        $data['nombre'] = $result['descripcion'];
+                        $data['precio'] = $result['precio'];
+                        $data['cantidad'] = $result['cantidad'];
+                        $subTotal = $result['precio'] * $result['cantidad'];
+                        array_push($array['productos'], $data);
+                        $total += $subTotal;
+                    }
+                    $datosProductos = json_encode($array['productos']);
+                    $orden = $this->model->registrarOrden($datosProductos, $total, date('Y-m-d'), date('H:i:s'), $id_usuario, $proveedor, $cotizacion, null);
+                    if ($orden > 0) {
+                        echo json_encode(['success' => true, 'idOrden' => $orden]);
+                    } else {
+                        echo json_encode(['success' => false]);
+                    }
+                } else {
+                    echo json_encode(['success' => false]);
+                }
+                die();
+            }
         public function generarPDF($idOrden) {
             // Aquí se genera el PDF usando Dompdf
             require_once 'vendor/autoload.php';

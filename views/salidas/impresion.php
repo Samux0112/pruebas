@@ -23,7 +23,7 @@
             </td>
             <td class="info-compra">
                 <div class="container-impresion">
-                    <span class="impresion">Salida por traslado</span>
+                    <span class="impresion">Movimiento entre bodegas</span>
                     <p>N°: <strong><?php echo $data['cotizacion']['id']; ?></strong></p>
                     <p>Fecha: <?php echo $data['cotizacion']['fecha_create']; ?></p>
                 </div>

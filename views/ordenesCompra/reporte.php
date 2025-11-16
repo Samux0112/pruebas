@@ -7,12 +7,27 @@
 <body>
 <h2>Orden de Compra</h2>
 <p>Proveedor: <?php echo htmlspecialchars($data['proveedor']); ?></p>
-<p>Cotización: <?php echo htmlspecialchars($data['cotizacion']); ?></p>
+<p>Cotización: <?php echo htmlspecialchars($data['requisicion_id'] ?? $data['cotizacion'] ?? ''); ?></p>
+<?php $productos = json_decode($data['productos'], true); ?>
 <table border="1">
-<tr><th>Producto</th></tr>
-<?php foreach ($data['productos'] as $prod): ?>
-<tr><td><?php echo htmlspecialchars($prod['nombre']); ?></td></tr>
-<?php endforeach; ?>
+	<tr>
+		<th>Nombre</th>
+		<th>Cantidad</th>
+		<th>Descripción</th>
+		<th>Precio Unitario</th>
+		<th>Descuento</th>
+		<th>Subtotal</th>
+	</tr>
+	<?php foreach ($productos as $prod): ?>
+	<tr>
+		<td><?php echo htmlspecialchars($prod['nombre']); ?></td>
+		<td><?php echo htmlspecialchars($prod['cantidad']); ?></td>
+		<td><?php echo htmlspecialchars($prod['descripcion']); ?></td>
+		<td><?php echo htmlspecialchars($prod['precio']); ?></td>
+		<td><?php echo htmlspecialchars($prod['descuento']); ?></td>
+		<td><?php echo htmlspecialchars($prod['subtotal']); ?></td>
+	</tr>
+	<?php endforeach; ?>
 </table>
 </body>
 </html>

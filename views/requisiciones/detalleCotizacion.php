@@ -28,6 +28,7 @@ require 'views/templates/header.php';
                                         <th>Precio Unitario</th>
                                         <th>Descuento</th>
                                         <th>Subtotal</th>
+                                        <th>Adjudicar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -44,6 +45,9 @@ require 'views/templates/header.php';
                                             <td><?php echo htmlspecialchars($prod['precio']); ?></td>
                                             <td><?php echo htmlspecialchars($prod['descuento']); ?></td>
                                             <td><?php echo htmlspecialchars($prod['subtotal']); ?></td>
+                                            <td class="text-center">
+                                                <input type="checkbox" name="adjudicar[]" value="<?php echo htmlspecialchars($prod['id']); ?>">
+                                            </td>
                                         </tr>
                                     <?php endforeach; ?>
                                     <!-- Fila de total -->

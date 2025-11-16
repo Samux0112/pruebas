@@ -65,40 +65,6 @@ require 'views/templates/header.php';
                             <button type="button" class="btn btn-success mt-3" id="btnOrdenCompra">Realizar orden de compra</button>
                         </form>
                         <a href="javascript:history.back()" class="btn btn-secondary mt-3">Volver</a>
-                    <script>
-                    document.getElementById('btnOrdenCompra').addEventListener('click', function() {
-                        const form = document.getElementById('formOrdenCompra');
-                        // Obtener productos adjudicados (selecciona desde todo el documento)
-                        const adjudicados = Array.from(document.querySelectorAll('input[name="adjudicar[]"]:checked')).map(cb => cb.value);
-                        if (adjudicados.length === 0) {
-                            alert('Seleccione al menos un producto para adjudicar.');
-                            return;
-                        }
-                        // Preparar datos para enviar
-                        const proveedor = form.querySelector('input[name="proveedor"]').value;
-                        // Aquí puedes hacer el envío por AJAX o redirigir a una URL para crear la orden
-                        fetch('ordenesCompra/crear', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                productos: adjudicados,
-                                proveedor: proveedor,
-                                cotizacion: <?php echo json_encode($data['cotizacion']['id']); ?>
-                            })
-                        })
-                        .then(res => res.json())
-                        .then(data => {
-                            if (data.success && data.idOrden) {
-                                window.open('ordenesCompra/generarPDF/' + data.idOrden, '_blank');
-                            } else {
-                                alert('Error al generar la orden de compra.');
-                            }
-                        })
-                        .catch(() => alert('Error de conexión.'));
-                    });
-                    </script>
                     </div>
                 </div>
             </div>

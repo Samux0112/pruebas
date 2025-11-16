@@ -62,6 +62,7 @@ require 'views/templates/header.php';
                         <form id="formOrdenCompra" method="post">
                             <input type="hidden" name="proveedor" value="<?php echo htmlspecialchars($data['cotizacion']['proveedor']); ?>">
                             <input type="hidden" name="cotizacion_id" value="<?php echo htmlspecialchars($data['cotizacion']['id']); ?>">
+                            <input type="hidden" name="requisicion_id" value="<?php echo htmlspecialchars($data['requisicion']['id']); ?>">
                             <button type="button" class="btn btn-success mt-3" id="btnOrdenCompra">Realizar orden de compra</button>
                         </form>
                         <a href="javascript:history.back()" class="btn btn-secondary mt-3">Volver</a>

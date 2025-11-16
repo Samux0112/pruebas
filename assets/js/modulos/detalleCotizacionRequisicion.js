@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             var proveedor = document.querySelector('input[name="proveedor"]').value;
             var cotizacion = document.querySelector('input[name="cotizacion_id"]') ? document.querySelector('input[name="cotizacion_id"]').value : null;
+            var requisicion_id = document.querySelector('input[name="requisicion_id"]') ? document.querySelector('input[name="requisicion_id"]').value : null;
             var url = base_url + 'ordenesCompra/crear';
             var http = new XMLHttpRequest();
             http.open('POST', url, true);
@@ -31,7 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
             http.send(JSON.stringify({
                 productos: adjudicados,
                 proveedor: proveedor,
-                cotizacion: cotizacion
+                cotizacion: cotizacion,
+                requisicion_id: requisicion_id
             }));
             http.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {

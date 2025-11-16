@@ -1,5 +1,10 @@
 <?php
 class RequisicionesModel extends Query{
+        public function getOrdenesCompraRequisicion($idRequisicion)
+        {
+            $sql = "SELECT o.*, p.nombre as proveedor, u.nombre as usuario FROM ordenes_compra o LEFT JOIN proveedor p ON o.id_proveedor = p.id LEFT JOIN usuarios u ON o.id_usuario = u.id WHERE o.requisicion_id = $idRequisicion ORDER BY o.fecha DESC";
+            return $this->selectAll($sql);
+        }
     public function getCotizacionesRequisicion($idRequisicion)
     {
         $sql = "SELECT * FROM cotizaciones_requisicion WHERE id_requisicion = $idRequisicion ORDER BY fecha DESC";

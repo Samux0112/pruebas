@@ -1,5 +1,10 @@
 <?php
 class OrdenesCompraModel extends Query{
+        public function getEmpresa()
+        {
+            $sql = "SELECT * FROM configuracion LIMIT 1";
+            return $this->select($sql);
+        }
     public function __construct() {
         parent::__construct();
     }

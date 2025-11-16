@@ -36,18 +36,24 @@ class OrdenesCompra extends Controller{
                 die();
             }
         public function generarPDF($idOrden) {
-            // Aquí se genera el PDF usando Dompdf
-            $dompdf = new Dompdf\Dompdf();
-            $data = $this->model->getOrden($idOrden);
-            $productos = json_decode($data['productos'], true);
-            ob_start();
-            include 'views/ordenesCompra/reporte.php';
-            $html = ob_get_clean();
-            $dompdf->loadHtml($html);
-            $dompdf->setPaper('A4', 'portrait');
-            $dompdf->render();
-            $dompdf->stream('orden_compra_' . $idOrden . '.pdf', ['Attachment' => false]);
-            exit;
+        // Generar PDF con formato profesional
+        ob_start();
+        $data['title'] = 'Orden de Compra';
+        $data['empresa'] = $this->model->getEmpresa(); // Debes tener este método en el modelo
+        $orden = $this->model->getOrden($idOrden);
+        $data = array_merge($data, $orden);
+        $this->views->getView('ordenesCompra', 'reporte', $data);
+        $html = ob_get_clean();
+        $dompdf = new Dompdf\Dompdf();
+        $options = $dompdf->getOptions();
+        $options->set('isJavascriptEnabled', true);
+        $options->set('isRemoteEnabled', true);
+        $dompdf->setOptions($options);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'vertical');
+        $dompdf->render();
+        $dompdf->stream('orden_compra_' . $idOrden . '.pdf', array('Attachment' => false));
+        exit;
         }
     private $id_usuario;
     public function __construct(){

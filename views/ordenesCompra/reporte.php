@@ -1,8 +1,3 @@
-<?php
-// ...existing code...
-// Aquí se arma el HTML del PDF con los datos de la orden de compra
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

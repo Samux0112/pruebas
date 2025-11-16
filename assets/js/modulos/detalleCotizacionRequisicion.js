@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         alertaPersonalizada('success', 'Orden de compra generada correctamente.');
                         setTimeout(function () {
                             window.open(base_url + 'ordenesCompra/generarPDF/' + res.idOrden, '_blank');
+                            window.history.back();
                         }, 1000);
                     } else {
                         alertaPersonalizada('error', 'Error al generar la orden de compra.');

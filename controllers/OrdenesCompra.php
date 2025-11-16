@@ -1,5 +1,20 @@
 <?php
 class OrdenesCompra extends Controller{
+        public function generarPDF($idOrden) {
+            // Aquí se genera el PDF usando Dompdf
+            require_once 'vendor/autoload.php';
+            $dompdf = new Dompdf\Dompdf();
+            $data = $this->model->getOrden($idOrden);
+            $productos = json_decode($data['productos'], true);
+            ob_start();
+            include 'views/ordenesCompra/reporte.php';
+            $html = ob_get_clean();
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('A4', 'portrait');
+            $dompdf->render();
+            $dompdf->stream('orden_compra_' . $idOrden . '.pdf', ['Attachment' => false]);
+            exit;
+        }
     private $id_usuario;
     public function __construct(){
         parent::__construct();

@@ -7,6 +7,8 @@ class OrdenesCompra extends Controller{
                 $productos = $datos['productos'];
                 $proveedor = $datos['proveedor'];
                 $cotizacion = $datos['cotizacion'];
+                $cotizacion = $datos['cotizacion'];
+                $requisicion_id = $datos['requisicion_id'];
                 $id_usuario = $this->id_usuario;
                 $array['productos'] = array();
                 $total = 0;
@@ -24,7 +26,7 @@ class OrdenesCompra extends Controller{
                         $total += $subTotal;
                     }
                     $datosProductos = json_encode($array['productos']);
-                    $orden = $this->model->registrarOrden($datosProductos, $total, date('Y-m-d'), date('H:i:s'), $id_usuario, $proveedor,$proveedor, $cotizacion, null);
+                    $orden = $this->model->registrarOrden($datosProductos, $total, date('Y-m-d'), date('H:i:s'), $id_usuario, $proveedor,$proveedor, $cotizacion, null, $requisicion_id);
                     if ($orden > 0) {
                         echo json_encode(['success' => true, 'idOrden' => $orden]);
                     } else {

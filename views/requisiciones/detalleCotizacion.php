@@ -67,8 +67,8 @@ require 'views/templates/header.php';
                     <script>
                     document.getElementById('btnOrdenCompra').addEventListener('click', function() {
                         const form = document.getElementById('formOrdenCompra');
-                        // Obtener productos adjudicados
-                        const adjudicados = Array.from(form.querySelectorAll('input[name="adjudicar[]"]:checked')).map(cb => cb.value);
+                        // Obtener productos adjudicados (selecciona desde todo el documento)
+                        const adjudicados = Array.from(document.querySelectorAll('input[name="adjudicar[]"]:checked')).map(cb => cb.value);
                         if (adjudicados.length === 0) {
                             alert('Seleccione al menos un producto para adjudicar.');
                             return;

@@ -11,13 +11,15 @@ class OrdenesCompra extends Controller{
                 $array['productos'] = array();
                 $total = 0;
                 if (!empty($productos)) {
-                    foreach ($productos as $idProd) {
-                        $result = $this->model->getProducto($idProd);
-                        $data['id'] = $result['id'];
-                        $data['nombre'] = $result['descripcion'];
-                        $data['precio'] = $result['precio'];
-                        $data['cantidad'] = $result['cantidad'];
-                        $subTotal = $result['precio'] * $result['cantidad'];
+                    foreach ($productos as $prod) {
+                        $data['id'] = $prod['id'];
+                        $data['nombre'] = $prod['nombre'];
+                        $data['cantidad'] = $prod['cantidad'];
+                        $data['descripcion'] = $prod['descripcion'];
+                        $data['precio'] = $prod['precio'];
+                        $data['descuento'] = $prod['descuento'];
+                        $data['subtotal'] = $prod['subtotal'];
+                        $subTotal = floatval($prod['subtotal']);
                         array_push($array['productos'], $data);
                         $total += $subTotal;
                     }

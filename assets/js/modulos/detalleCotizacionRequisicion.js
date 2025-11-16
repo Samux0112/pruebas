@@ -5,7 +5,19 @@ document.addEventListener('DOMContentLoaded', function() {
     var btnOrdenCompra = document.getElementById('btnOrdenCompra');
     if (btnOrdenCompra) {
         btnOrdenCompra.addEventListener('click', function () {
-            var adjudicados = Array.from(document.querySelectorAll('input[name="adjudicar[]"]:checked')).map(function(cb) { return cb.value; });
+            var adjudicados = [];
+            document.querySelectorAll('input[name="adjudicar[]"]:checked').forEach(function(cb) {
+                var row = cb.closest('tr');
+                adjudicados.push({
+                    id: cb.value,
+                    nombre: row.children[0].textContent.trim(),
+                    cantidad: row.children[1].textContent.trim(),
+                    descripcion: row.children[2].textContent.trim(),
+                    precio: row.children[3].textContent.trim(),
+                    descuento: row.children[4].textContent.trim(),
+                    subtotal: row.children[5].textContent.trim()
+                });
+            });
             if (adjudicados.length === 0) {
                 alertaPersonalizada('warning', 'Seleccione al menos un producto para adjudicar.');
                 return;

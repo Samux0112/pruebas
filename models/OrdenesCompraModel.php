@@ -8,10 +8,10 @@ class OrdenesCompraModel extends Query{
         $sql = "SELECT * FROM productos WHERE id = $idProducto";
         return $this->select($sql);
     }
-    public function registrarOrden($productos, $total, $fecha, $hora, $idUsuario, $idProveedor = null, $requisicion_id = null, $observaciones = null)
+    public function registrarOrden($productos, $total, $fecha, $hora, $idUsuario, $idProveedor = null, $proveedor, $requisicion_id = null, $observaciones = null)
     {
-        $sql = "INSERT INTO ordenes_compra (productos, total, fecha, hora, id_proveedor, id_usuario, requisicion_id, observaciones) VALUES (?,?,?,?,?,?,?,?)";
-        $array = array($productos, $total, $fecha, $hora, $idProveedor, $idUsuario, $requisicion_id, $observaciones);
+        $sql = "INSERT INTO ordenes_compra (productos, total, fecha, hora, id_proveedor, nombreProveedor, id_usuario, requisicion_id, observaciones) VALUES (?,?,?,?,?,?,?,?,?)";
+        $array = array($productos, $total, $fecha, $hora, $idProveedor, $proveedor, $idUsuario, $requisicion_id, $observaciones);
         return $this->insertar($sql, $array);
     }
     public function getOrden($idOrden)

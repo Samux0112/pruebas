@@ -90,6 +90,7 @@ class Requisiciones extends Controller{
         $data = [
             'cotizacion' => $cotizacion,
             'productos' => $productos,
+            'requisicion' => ['id' => $cotizacion['id_requisicion']],
             'script' => 'detalleCotizacionRequisicion.js'
         ];
         $this->views->getView('requisiciones', 'detalleCotizacion', $data);

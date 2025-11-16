@@ -135,7 +135,7 @@ $msg = $data['msg'];
                                 <?php foreach ($data['ordenesCompra'] as $orden): ?>
                                 <tr>
                                     <td><?php echo htmlspecialchars($orden['id']); ?></td>
-                                    <td><?php echo htmlspecialchars($orden['proveedor']); ?></td>
+                                    <td><?php echo htmlspecialchars($orden['nombreProveedor']); ?></td>
                                     <td><?php echo htmlspecialchars($orden['total']); ?></td>
                                     <td><?php echo htmlspecialchars($orden['fecha']); ?></td>
                                     <td><?php echo htmlspecialchars($orden['usuario']); ?></td>

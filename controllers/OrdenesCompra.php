@@ -136,4 +136,3 @@ class OrdenesCompra extends Controller{
         die();
     }
 }
-?>

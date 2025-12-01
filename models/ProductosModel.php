@@ -148,6 +148,9 @@ return $this->selectAll($sql);
     }
     public function getStock($id, $bodega)
 {
+    if($bodega == "" || $bodega == null){ 
+        $bodega = 1;
+    }
 //$sql = "SELECT id, descripcion, cantidad, precio_venta2, precio_venta FROM productos WHERE codigo ='$valor'AND estado = 1";
 $sql = "SELECT cantidad from Stock WHERE idProducto = $id AND idBodega = $bodega";
 return $this->select($sql);

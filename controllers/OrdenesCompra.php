@@ -76,6 +76,25 @@ class OrdenesCompra extends Controller{
         $this->views->getView('ordenesCompra', 'index', $data);
     }
 
+        public function completar($id) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $observaciones = isset($_POST['observaciones']) ? trim($_POST['observaciones']) : '';
+            // Aquí puedes actualizar el estado de la orden y guardar las observaciones
+            // Ejemplo: $this->model->completarOrden($id, $observaciones);
+            // Redirigir al listado tras completar
+            header('Location: ' . BASE_URL . 'ordenesCompra/listado');
+            exit;
+        }
+        $orden = $this->model->getOrden($id);
+        $productos = json_decode($orden['productos'], true);
+        $data = [
+            'orden' => $orden,
+            'productos' => $productos,
+            'title' => 'Completar Compra'
+        ];
+        $this->views->getView('ordenesCompra', 'completar', $data);
+    }
+
     public function registrarOrden(){
         $json = file_get_contents('php://input');
         $datos = json_decode($json, true);

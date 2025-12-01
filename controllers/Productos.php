@@ -315,7 +315,7 @@ class Productos extends Controller
             $array['estado'] = true;
             $array['datos'] = $data;
             $result = $this->model->getStock($data['id'], $bodegaSalida);
-            $array['datos']['cantidad'] = $result['stock']['cantidad'];
+            $array['datos']['cantidad'] = $result['cantidad'];
         }
         echo json_encode($array, JSON_UNESCAPED_UNICODE);
         die();

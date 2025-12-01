@@ -79,6 +79,7 @@ class OrdenesCompra extends Controller{
 
         public function listado() {
         $data['title'] = 'Listado de Órdenes de Compra';
+        $data['script'] = 'listadoOrdenesCompra.js';
         $data['ordenes'] = $this->model->getOrdenes();
         $this->views->getView('ordenesCompra', 'listado', $data);
     }

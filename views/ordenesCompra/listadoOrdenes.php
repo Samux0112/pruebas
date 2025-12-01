@@ -1,5 +1,5 @@
 <?php
-require 'views/templates/header.php';
+require 'views/header.php';
 ?>
 <div class="page-content">
     <div class="container-fluid">
@@ -49,5 +49,5 @@ require 'views/templates/header.php';
 </div>
 <script src="<?php echo BASE_URL; ?>assets/js/modulos/listadoOrdenesCompra.js"></script>
 <?php
-require 'views/templates/footer.php';
+require 'views/footer.php';
 ?>

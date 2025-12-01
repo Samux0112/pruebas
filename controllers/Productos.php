@@ -315,7 +315,7 @@ class Productos extends Controller
             $array['estado'] = true;
             $array['datos'] = $data;
             $result = $this->model->getStock($data['id'], $bodegaSalida);
-            $array['datos']['cantidad'] = $result['cantidad'];
+            $array['datos']['cantidad'] = $result['stock']['cantidad'];
         }
         echo json_encode($array, JSON_UNESCAPED_UNICODE);
         die();
@@ -329,7 +329,9 @@ public function buscarPorNombre()
         foreach ($data as $row) {
             $result['id'] = $row['id'];
             $result['label'] = $row['descripcion'];
-            $result['stock'] = $row['cantidad'];
+            $result['stock'] = $this->model->getStock($row['id'], "");
+            $result['stock'] = $result['stock']['cantidad'];
+            
             $result['precio_venta'] = $row['precio_venta'];
             $result['precio_venta2'] = $row['precio_venta2'];
 			$result['medida'] = $row['medida'];

@@ -20,24 +20,6 @@ require 'views/header.php';
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <?php if (!empty($data['ordenes'])): ?>
-                                        <?php foreach ($data['ordenes'] as $orden): ?>
-                                            <tr>
-                                                <td><?php echo htmlspecialchars($orden['id']); ?></td>
-                                                <td><?php echo htmlspecialchars($orden['proveedor']); ?></td>
-                                                <td><?php echo htmlspecialchars($orden['total']); ?></td>
-                                                <td><?php echo htmlspecialchars($orden['fecha']); ?></td>
-                                                <td><?php echo htmlspecialchars($orden['usuario']); ?></td>
-                                                <td>
-                                                    <a href="<?php echo BASE_URL . 'ordenesCompra/generarPDF/' . $orden['id']; ?>" target="_blank" class="btn btn-primary btn-sm">Ver PDF</a>
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    <?php else: ?>
-                                        <tr><td colspan="6" class="text-center">No hay órdenes de compra registradas.</td></tr>
-                                    <?php endif; ?>
-                                </tbody>
                             </table>
                         </div>
                     </div>

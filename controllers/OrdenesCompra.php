@@ -1,3 +1,4 @@
+
 <?php
 require 'vendor/autoload.php';
 class OrdenesCompra extends Controller{
@@ -74,6 +75,12 @@ class OrdenesCompra extends Controller{
         $data['busqueda'] = 'busqueda.js';
         $data['carrito'] = 'posOrdenCompra';
         $this->views->getView('ordenesCompra', 'index', $data);
+    }
+
+        public function listado() {
+        $data['title'] = 'Listado de Órdenes de Compra';
+        $data['ordenes'] = $this->model->getOrdenes();
+        $this->views->getView('ordenesCompra', 'listado', $data);
     }
 
     public function registrarOrden(){

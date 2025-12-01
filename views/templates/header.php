@@ -228,6 +228,14 @@
                         <div class="menu-title">Requisiciones</div>
                     </a>
                 </li>
+                <?php }  if (verificar('OrdenesCompras')) { ?>
+                <li>
+                    <a href="<?php echo BASE_URL . 'ordenesCompra/listado'; ?>">
+                        <div class="parent-icon"><i class="fa-solid fa-cash-register"></i>
+                        </div>
+                        <div class="menu-title">Órdenes de Compra</div>
+                    </a>
+                </li>
 				
 				<?php }if (verificar('Nota de credito')) { ?>
                 <li>

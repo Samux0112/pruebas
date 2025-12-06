@@ -84,16 +84,17 @@
                             <li> <a href="<?php echo BASE_URL . 'admin/logs'; ?>"><i class="bx bx-right-arrow-alt"></i>Log de Acceso</a>
                             </li>
 							
-                            <?php } if (verificar('contingencias')) { ?>
-                        <li> <a href="<?php echo BASE_URL . 'contingencias'; ?>"><i class="bx bx-right-arrow-alt"></i>Contingencias</a>
+                            <?php } if (verificar('puntoVentas')) { ?>
+                        <li> <a href="<?php echo BASE_URL . 'puntoVentas'; ?>"><i class="bx bx-right-arrow-alt"></i>Punto de Ventas</a>
                         </li>
-						<?php } if ( verificar('contingencias') || verificar('tasaMora') || verificar('medidas') || verificar('categorias' ) || verificar('productos' ) || verificar('bodegas')) { ?>
+						<?php } if (verificar('configuracion') || verificar('usuario') || verificar('roles') || verificar('log de acceso') || verificar('puntoVentas')) { ?>
                     </ul>
                 </li>
+                <?php } ?>
                 
                 
                 <!--DESDE AQUI PUSE EL CODIGO DE NUEVO SI ES NECESARIO QUITARLO LO QUITAS PARA NO INTERFERIR CON TU PROGRAMACION SI ESTA BIEN DEJARLO-->
-                
+                <?php if (verificar('tasaMora') || verificar('medidas') || verificar('categorias') || verificar('productos') || verificar('bodegas')|| verificar('contingencias')) { ?>
                  <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class="fa-solid fa-clipboard-list"></i>
@@ -119,13 +120,15 @@
 						<?php } if (verificar('contingencias')) { ?>
                         <li> <a href="<?php echo BASE_URL . 'contingencias'; ?>"><i class="bx bx-right-arrow-alt"></i>Contingencias</a>
                         </li>
+                        <?php }if (verificar('tasaMora') || verificar('medidas') || verificar('categorias') || verificar('productos') || verificar('bodegas')|| verificar('contingencias')) { ?>
                     </ul>
                 </li>
+                <?php } ?>
                 
                 <!--FIN DESDE AQUI PUSE EL CODIGO DE NUEVO SI ES NECESARIO QUITARLO LO QUITAS PARA NO INTERFERIR CON TU PROGRAMACION SI ESTA BIEN DEJARLO-->
                 
                 
-                <?php }  if (verificar('tipoProducto')) { ?>
+                <?php  if (verificar('tipoProducto')) { ?>
                 <li>
                     <a href="<?php echo BASE_URL . 'tipoProducto'; ?>">
                         <div class="parent-icon"><i class="fa-solid fa-boxes-stacked"></i>

@@ -157,7 +157,10 @@ class OrdenesCompra extends Controller{
         die();
     }
     public function detalle($id) {
+         $data['title'] = 'Listado de Órdenes de Compra';
+        $data['script'] = 'listadoOrdenesCompra.js';
         $orden = $this->model->getOrden($id);
+        
         $data = [
             'orden' => $orden
         ];

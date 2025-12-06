@@ -4,7 +4,11 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Inicializar DataTable si está disponible en la plantilla
     if (window.jQuery && $.fn.DataTable) {
-        $('.table').DataTable({
+        var $tabla = $('.table');
+        if ( $.fn.DataTable.isDataTable($tabla) ) {
+            $tabla.DataTable().destroy();
+        }
+        $tabla.DataTable({
             pageLength: 10,
             lengthMenu: [5, 10, 25, 50, 100],
             language: {

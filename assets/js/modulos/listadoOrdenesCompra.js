@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 localStorage.setItem('posVenta2', JSON.stringify(listaCarrito));
                 if (listaCarrito.length > 0) {
-                    window.location.href = base_url + 'compras';
+                    window.location.href = base_url + 'ventas2';
                 }
             }
         }

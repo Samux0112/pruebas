@@ -11,27 +11,15 @@ document.addEventListener('DOMContentLoaded', function() {
         row.querySelector('.input-subtotal').value = subtotal.toFixed(2);
     }
 
-    function calcularTotalCotizacion() {
-        let total = 0;
-        document.querySelectorAll('.input-subtotal').forEach(function(input) {
-            total += parseFloat(input.value) || 0;
-        });
-        // Sumar IVA al total
-        var ivaInput = document.getElementById('iva');
-        let iva = ivaInput ? parseFloat(ivaInput.value) || 0 : 0;
-        let totalConIva = total + iva;
-        document.getElementById('monto').value = totalConIva.toFixed(2);
-    }
-
-    function calcularIVA() {
+    function calcularIVAyMonto() {
         let suma = 0;
         document.querySelectorAll('.input-subtotal').forEach(function(input) {
             suma += parseFloat(input.value) || 0;
         });
+        let iva = suma * 0.13;
         var ivaInput = document.getElementById('iva');
-        if (ivaInput) {
-            ivaInput.value = (suma * 0.13).toFixed(2);
-        }
+        if (ivaInput) ivaInput.value = iva.toFixed(2);
+        document.getElementById('monto').value = (suma + iva).toFixed(2);
     }
 
     function actualizarTotales() {
@@ -40,22 +28,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 calcularSubtotal(row);
             }
         });
-        calcularTotalCotizacion();
-        calcularIVA();
+        calcularIVAyMonto();
     }
 
     document.querySelectorAll('.input-precio, .input-descuento').forEach(function(input) {
         input.addEventListener('input', function() {
             const row = input.closest('tr');
             calcularSubtotal(row);
-            calcularTotalCotizacion();
-            calcularIVA();
+            calcularIVAyMonto();
         });
     });
 
-    // Inicializar totales e IVA al cargar
-    actualizarTotales();
-    calcularIVA();
+    // Inicializar totales, IVA y monto al cargar
+    document.addEventListener('DOMContentLoaded', function() {
+        actualizarTotales();
+        calcularIVAyMonto();
+    });
 
     // Guardar cotización por AJAX
     const btnGuardar = document.getElementById('btnGuardarCotizacion');

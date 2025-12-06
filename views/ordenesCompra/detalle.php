@@ -10,6 +10,7 @@ require 'views/templates/header.php';
                         <h4 class="mb-0">Detalle de Orden de Compra</h4>
                     </div>
                     <div class="card-body">
+                        <div id="mensaje-orden-compra"></div>
                         <?php if (!empty($data['orden'])): ?>
                         <div class="mb-3">
                             <strong>ID Orden:</strong> <?php echo htmlspecialchars($data['orden']['id']); ?><br>

@@ -16,13 +16,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     try {
                         var res = JSON.parse(this.responseText);
                         if (res.success) {
-                            alert('Orden autorizada correctamente.');
-                            window.location.reload();
+                            mostrarMensajeOrdenCompra('Orden autorizada correctamente.', 'success');
+                            setTimeout(function(){ window.location.reload(); }, 1500);
                         } else {
-                            alert('Error al autorizar la orden.');
+                            mostrarMensajeOrdenCompra('Error al autorizar la orden.', 'danger');
                         }
                     } catch (e) {
-                        alert('Error en la respuesta del servidor.');
+                        mostrarMensajeOrdenCompra('Error en la respuesta del servidor.', 'danger');
                     }
                 }
             };
@@ -45,17 +45,26 @@ document.addEventListener('DOMContentLoaded', function() {
                     try {
                         var res = JSON.parse(this.responseText);
                         if (res.success) {
-                            alert('Orden rechazada correctamente.');
-                            window.location.reload();
+                            mostrarMensajeOrdenCompra('Orden rechazada correctamente.', 'success');
+                            setTimeout(function(){ window.location.reload(); }, 1500);
                         } else {
-                            alert('Error al rechazar la orden.');
+                            mostrarMensajeOrdenCompra('Error al rechazar la orden.', 'danger');
                         }
                     } catch (e) {
-                        alert('Error en la respuesta del servidor.');
+                        mostrarMensajeOrdenCompra('Error en la respuesta del servidor.', 'danger');
                     }
                 }
             };
             http.send('id=' + encodeURIComponent(id) + '&estado=rechazado');
         });
+    }
+    // Función para mostrar mensajes visuales en la plantilla
+    function mostrarMensajeOrdenCompra(mensaje, tipo) {
+        var contenedor = document.getElementById('mensaje-orden-compra');
+        if (!contenedor) return;
+        contenedor.innerHTML = '<div class="alert alert-' + tipo + ' alert-dismissible fade show" role="alert">'
+            + mensaje +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
+            '</div>';
     }
 });

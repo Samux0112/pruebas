@@ -22,6 +22,7 @@ $id = isset($data['id']) ? intval($data['id']) : '';
                                     <table class="table table-bordered table-striped">
                                         <thead class="table-dark">
                                             <tr>
+                                                <th>Id Producto</th>
                                                 <th>Nombre</th>
                                                 <th>Cantidad</th>
                                                 <th>Descripción</th>
@@ -34,6 +35,7 @@ $id = isset($data['id']) ? intval($data['id']) : '';
                                             <?php if (!empty($data['productos'])): ?>
                                                 <?php foreach ($data['productos'] as $prod): ?>
                                                 <tr>
+                                                    <td><?php echo htmlspecialchars($prod['id']); ?></td>
                                                     <td><?php echo htmlspecialchars($prod['nombre']); ?></td>
                                                     <td><input type="number" class="form-control input-cantidad" value="<?php echo htmlspecialchars($prod['cantidad']); ?>" readonly></td>
                                                     <td><?php echo htmlspecialchars($prod['descripcion'] ?? ''); ?></td>

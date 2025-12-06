@@ -32,11 +32,16 @@ document.addEventListener('DOMContentLoaded', function() {
             if (cabecera) {
                 var idProvLabel = cabecera.querySelector('strong:nth-child(2)');
                 if (idProvLabel && idProvLabel.nextSibling && idProvLabel.nextSibling.nodeType === 3) {
-                    proveedor_id = idProvLabel.nextSibling.textContent.trim();
+                    var idProvText = idProvLabel.nextSibling.textContent.trim();
+                    if (idProvText && !isNaN(idProvText)) {
+                        proveedor_id = parseInt(idProvText, 10);
+                    }
                 } else {
                     // Alternativamente, buscar el valor en un input hidden si lo agregas
                     var inputProvId = document.querySelector('input[name="id_proveedor"]');
-                    if (inputProvId) proveedor_id = inputProvId.value;
+                    if (inputProvId && inputProvId.value && !isNaN(inputProvId.value)) {
+                        proveedor_id = parseInt(inputProvId.value, 10);
+                    }
                 }
             }
             var cotizacion = document.querySelector('input[name="cotizacion_id"]') ? document.querySelector('input[name="cotizacion_id"]').value : null;

@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         text: 'Orden autorizada correctamente.',
                                         timer: 1500,
                                         showConfirmButton: false
-                                    }).then(() => { window.location.reload(); });
+                                    }).then(() => { window.location.href = base_url + 'ordenesCompra/listado'; });
                                 } else {
                                     Swal.fire('Error', 'Error al autorizar la orden.', 'error');
                                 }

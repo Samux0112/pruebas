@@ -2,6 +2,17 @@
 // Puedes agregar aquí funciones para filtros, búsqueda, acciones, etc.
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar DataTable si está disponible en la plantilla
+    if (window.jQuery && $.fn.DataTable) {
+        $('.table').DataTable({
+            pageLength: 10,
+            lengthMenu: [5, 10, 25, 50, 100],
+            language: {
+                url: base_url + 'assets/js/espanol.json'
+            }
+        });
+    }
+
     // Código JS futuro para la vista listado
     function compra(idOrden) {
         localStorage.removeItem('posVenta2');

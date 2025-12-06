@@ -12,6 +12,7 @@ require 'views/templates/header.php';
                     <div class="card-body">
                         <div class="mb-3">
                             <strong>ID Cotización:</strong> <?php echo htmlspecialchars($data['cotizacion']['id']); ?><br>
+                            <strong>ID Proveedor:</strong> <?php echo isset($data['cotizacion']['id_proveedor']) ? htmlspecialchars($data['cotizacion']['id_proveedor']) : ''; ?><br>
                             <strong>Proveedor:</strong> <?php echo htmlspecialchars($data['cotizacion']['proveedor']); ?><br>
                             <strong>Monto:</strong> <?php echo htmlspecialchars($data['cotizacion']['monto']); ?><br>
                             <strong>Detalle:</strong> <?php echo htmlspecialchars($data['cotizacion']['detalle']); ?><br>

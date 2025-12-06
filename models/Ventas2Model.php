@@ -22,6 +22,12 @@ return $this->select($sql);
         return $this->select($sql);
     }
 	
+        public function actualizarEstadoOrdenCompra($idOrden, $estado)
+    {
+        $sql = "UPDATE ordenes_compra SET estado = ? WHERE id = ?";
+        $array = array($estado, $idOrden);
+        return $this->save($sql, $array);
+    }
 	
 	public function getMaxCorrelativo($tipoFactura, $codPuntoVentaMH)
     {

@@ -91,6 +91,12 @@ class Ventas2 extends Controller
         $array['productos'] = array();
         $total = 0;
         if (!empty($datos['productos'])) {
+            // Si la compra proviene de una orden de compra, actualizar el estado
+            if (isset($datos['idPedido']) && intval($datos['idPedido']) > 0) {
+                $idPedido = intval($datos['idPedido']);
+                // Actualizar estado en la tabla ordenes_compra
+                $this->model->actualizarEstadoOrdenCompra($idPedido, 'completado');
+            }
             $fecha =$datos['fechaC']; 
             $hora = date('H:i:s');
             $metodo = $datos['metodo'];

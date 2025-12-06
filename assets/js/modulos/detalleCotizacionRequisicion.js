@@ -27,22 +27,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             var proveedor = document.querySelector('input[name="proveedor"]').value;
             var proveedor_id = null;
-            // Buscar el id_proveedor en la cabecera si existe
-            var cabecera = document.querySelector('.mb-3');
-            if (cabecera) {
-                var idProvLabel = cabecera.querySelector('strong:nth-child(2)');
-                if (idProvLabel && idProvLabel.nextSibling && idProvLabel.nextSibling.nodeType === 3) {
-                    var idProvText = idProvLabel.nextSibling.textContent.trim();
-                    if (idProvText && !isNaN(idProvText)) {
-                        proveedor_id = parseInt(idProvText, 10);
-                    }
-                } else {
-                    // Alternativamente, buscar el valor en un input hidden si lo agregas
-                    var inputProvId = document.querySelector('input[name="id_proveedor"]');
-                    if (inputProvId && inputProvId.value && !isNaN(inputProvId.value)) {
-                        proveedor_id = parseInt(inputProvId.value, 10);
-                    }
-                }
+            // Tomar el id_proveedor directamente del input hidden
+            var inputProvId = document.getElementById('id_proveedor_hidden');
+            if (inputProvId && inputProvId.value && !isNaN(inputProvId.value)) {
+                proveedor_id = parseInt(inputProvId.value, 10);
             }
             var cotizacion = document.querySelector('input[name="cotizacion_id"]') ? document.querySelector('input[name="cotizacion_id"]').value : null;
             var requisicion_id = document.querySelector('input[name="requisicion_id"]') ? document.querySelector('input[name="requisicion_id"]').value : null;

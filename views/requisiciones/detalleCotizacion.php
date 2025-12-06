@@ -64,6 +64,7 @@ require 'views/templates/header.php';
                         </div>
                         <form id="formOrdenCompra" method="post">
                             <input type="hidden" name="proveedor" value="<?php echo htmlspecialchars($data['cotizacion']['proveedor']); ?>">
+                            <input type="hidden" id="id_proveedor_hidden" name="id_proveedor" value="<?php echo isset($data['cotizacion']['id_proveedor']) ? htmlspecialchars($data['cotizacion']['id_proveedor']) : ''; ?>">
                             <input type="hidden" name="cotizacion_id" value="<?php echo htmlspecialchars($data['cotizacion']['id']); ?>">
                             <input type="hidden" name="requisicion_id" value="<?php echo htmlspecialchars($data['requisicion']['id']); ?>">
                             <button type="button" class="btn btn-success mt-3" id="btnOrdenCompra">Realizar orden de compra</button>

@@ -31,10 +31,11 @@ class Requisiciones extends Controller{
             $data = json_decode($json, true);
             $idRequisicion = isset($data['requisicion_id']) ? intval($data['requisicion_id']) : 0;
             $proveedor = isset($data['proveedor']) ? trim($data['proveedor']) : '';
+            $proveedor_id = isset($data['proveedor_id']) ? trim($data['proveedor_id']) : null;
             $monto = isset($data['monto']) ? floatval($data['monto']) : 0;
             $detalle = isset($data['detalle']) ? trim($data['detalle']) : '';
             $productos = isset($data['productos']) && is_array($data['productos']) ? $data['productos'] : [];
-            $res = $this->model->guardarCotizacion($idRequisicion, $proveedor, $monto, $detalle, $productos);
+            $res = $this->model->guardarCotizacion($idRequisicion, $proveedor, $proveedor_id, $monto, $detalle, $productos);
             if ($res) {
                 $msg = 'Cotización guardada correctamente.';
                 echo json_encode(['success' => true, 'msg' => $msg], JSON_UNESCAPED_UNICODE);

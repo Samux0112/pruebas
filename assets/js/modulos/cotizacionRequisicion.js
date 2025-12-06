@@ -44,8 +44,13 @@ document.addEventListener('DOMContentLoaded', function() {
         btnGuardar.addEventListener('click', function () {
             let valid = true;
             let msg = '';
-            // Validar proveedor
-            const proveedor = document.getElementById('proveedor').value.trim();
+            // Validar proveedor y capturar id
+            const proveedorSelect = document.getElementById('proveedor');
+            const proveedor = proveedorSelect.value.trim();
+            let proveedor_id = '';
+            if (proveedorSelect.selectedIndex >= 0) {
+                proveedor_id = proveedorSelect.options[proveedorSelect.selectedIndex].getAttribute('data-id') || proveedorSelect.value;
+            }
             if (!proveedor) {
                 valid = false;
                 msg += 'El proveedor es obligatorio.\n';
@@ -87,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = {
                 requisicion_id: document.getElementById('requisicion_id').value,
                 proveedor,
+                proveedor_id,
                 monto,
                 detalle: document.getElementById('detalle').value,
                 productos

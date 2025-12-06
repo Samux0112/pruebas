@@ -22,11 +22,11 @@ class RequisicionesModel extends Query{
         $sql = "SELECT * FROM cotizaciones_productos WHERE id_cotizacion = $idCotizacion";
         return $this->selectAll($sql);
     }
-    public function guardarCotizacion($idRequisicion, $proveedor, $monto, $detalle, $productos)
+    public function guardarCotizacion($idRequisicion, $proveedor, $proveedor_id, $monto, $detalle, $productos)
     {
-        // Guardar cotización principal
-        $sql = "INSERT INTO cotizaciones_requisicion (id_requisicion, proveedor, monto, detalle) VALUES (?,?,?,?)";
-        $array = array($idRequisicion, $proveedor, $monto, $detalle);
+        // Guardar cotización principal (agrega id_proveedor si existe en la tabla)
+        $sql = "INSERT INTO cotizaciones_requisicion (id_requisicion, proveedor, id_proveedor, monto, detalle) VALUES (?,?,?,?,?)";
+        $array = array($idRequisicion, $proveedor, $proveedor_id, $monto, $detalle);
         $idCotizacion = $this->insertar($sql, $array);
         if ($idCotizacion > 0) {
             // Guardar productos/ofertas asociadas

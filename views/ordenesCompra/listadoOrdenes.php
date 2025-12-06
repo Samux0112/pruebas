@@ -17,6 +17,7 @@ require 'views/templates/header.php';
                                         <th>Monto</th>
                                         <th>Fecha</th>
                                         <th>Usuario</th>
+                                        <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -30,8 +31,17 @@ require 'views/templates/header.php';
                                                 <td><?php echo htmlspecialchars($orden['fecha']); ?></td>
                                                 <td><?php echo htmlspecialchars($orden['usuario']); ?></td>
                                                 <td>
+                                                    <?php if ($orden['estado'] === 'generada'): ?>
+                                                        <span style="color:green;font-weight:bold;">Generada</span>
+                                                    <?php elseif ($orden['estado'] === 'completado'): ?>
+                                                        <span style="color:red;font-weight:bold;">Completado</span>
+                                                    <?php else: ?>
+                                                        <span><?php echo htmlspecialchars($orden['estado']); ?></span>
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td>
                                                     <a href="<?php echo BASE_URL . 'ordenesCompra/generarPDF/' . $orden['id']; ?>" target="_blank" class="btn btn-primary btn-sm">Ver PDF</a>
-                                                    <button type="button" class="btn btn-success btn-sm ms-1 btnCompletarCompra" data-id="<?php echo htmlspecialchars($orden['id']); ?>">Completar compra</button>
+                                                    <button type="button" class="btn btn-success btn-sm ms-1 btnCompletarCompra" data-id="<?php echo htmlspecialchars($orden['id']); ?>" <?php echo ($orden['estado'] === 'completado') ? 'disabled' : ''; ?>>Completar compra</button>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>

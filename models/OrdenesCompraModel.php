@@ -15,8 +15,9 @@ class OrdenesCompraModel extends Query{
     }
     public function registrarOrden($productos, $total, $fecha, $hora, $idUsuario, $idProveedor = null, $proveedor, $cotizacion = null, $observaciones = null, $requisicion_id = null)
     {
-        $sql = "INSERT INTO ordenes_compra (productos, total, fecha, hora, id_proveedor, nombreProveedor, id_usuario, cotizacion, observaciones, requisicion_id) VALUES (?,?,?,?,?,?,?,?,?,?)";
-        $array = array($productos, $total, $fecha, $hora, $idProveedor, $proveedor, $idUsuario, $cotizacion, $observaciones, $requisicion_id);
+        // Agregar campo estado con valor 'generada' por defecto
+        $sql = "INSERT INTO ordenes_compra (productos, total, fecha, hora, id_proveedor, nombreProveedor, id_usuario, cotizacion, observaciones, requisicion_id, estado) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        $array = array($productos, $total, $fecha, $hora, $idProveedor, $proveedor, $idUsuario, $cotizacion, $observaciones, $requisicion_id, 'generada');
         return $this->insertar($sql, $array);
     }
     public function getOrden($idOrden)

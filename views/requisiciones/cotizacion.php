@@ -65,6 +65,10 @@ $id = isset($data['id']) ? intval($data['id']) : '';
                                 <input type="number" class="form-control" id="monto" name="monto" readonly>
                             </div>
                             <div class="mb-3">
+                                <label for="iva" class="form-label">IVA (13%)</label>
+                                <input type="number" class="form-control" id="iva" name="iva" readonly>
+                            </div>
+                            <div class="mb-3">
                                 <label for="detalle" class="form-label">Detalle</label>
                                 <textarea class="form-control" id="detalle" name="detalle" rows="3"></textarea>
                             </div>
@@ -88,4 +92,23 @@ window.proveedoresData = [
 <?php endforeach; ?>
 <?php endif; ?>
 ];
+
+// Calcular IVA dinámicamente cuando cambian los subtotales
+function calcularIVA() {
+    let suma = 0;
+    document.querySelectorAll('.input-subtotal').forEach(function(input) {
+        suma += parseFloat(input.value) || 0;
+    });
+    document.getElementById('iva').value = (suma * 0.13).toFixed(2);
+}
+
+document.querySelectorAll('.input-precio, .input-descuento').forEach(function(input) {
+    input.addEventListener('input', function() {
+        // Aquí debe ir la lógica de cálculo de subtotal si no existe
+        // y luego recalcular IVA
+        calcularIVA();
+    });
+});
+// También recalcular al cargar la página
+window.addEventListener('DOMContentLoaded', calcularIVA);
 </script>

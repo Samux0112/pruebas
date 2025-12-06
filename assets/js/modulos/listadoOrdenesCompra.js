@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (this.readyState == 4 && this.status == 200) {
                 const res = JSON.parse(this.responseText);
                 const productos = JSON.parse(res.productos);
+                const id_proveedor = res.id_proveedor;
                 // Aquí puedes setear datos de proveedor, etc. si lo necesitas
                 for (let i = 0; i < productos.length; i++) {
                     listaCarrito.push({
@@ -26,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 localStorage.setItem('posVenta2', JSON.stringify(listaCarrito));
                 if (listaCarrito.length > 0) {
-                    window.location.href = base_url + 'ventas2';
+                    window.location.href = base_url + 'ventas2/'+idOrden+'/'+id_proveedor;
                 }
             }
         }

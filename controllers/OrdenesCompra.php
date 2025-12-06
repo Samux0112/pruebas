@@ -160,10 +160,9 @@ class OrdenesCompra extends Controller{
          $data['title'] = 'Listado de Órdenes de Compra';
         $data['script'] = 'detalleOrdenCompra.js';
         $orden = $this->model->getOrden($id);
+         $data['orden'] = $orden;
         
-        $data = [
-            'orden' => $orden
-        ];
+        
         $this->views->getView('ordenesCompra', 'detalle', $data);
     }
     public function autorizar() {

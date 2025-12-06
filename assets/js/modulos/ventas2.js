@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     const ruta = base_url + 'ventas2/reporte/impresion/' + res.idVenta2;
                                     window.open(ruta, '_blank');
                                 }
-                                window.location.reload();
+                                window.location.href = base_url + 'ventas2'; 
                             })
 
                         }, 2000);

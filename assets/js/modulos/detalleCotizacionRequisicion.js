@@ -26,6 +26,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             var proveedor = document.querySelector('input[name="proveedor"]').value;
+            var proveedor_id = null;
+            // Buscar el id_proveedor en la cabecera si existe
+            var cabecera = document.querySelector('.mb-3');
+            if (cabecera) {
+                var idProvLabel = cabecera.querySelector('strong:nth-child(2)');
+                if (idProvLabel && idProvLabel.nextSibling && idProvLabel.nextSibling.nodeType === 3) {
+                    proveedor_id = idProvLabel.nextSibling.textContent.trim();
+                } else {
+                    // Alternativamente, buscar el valor en un input hidden si lo agregas
+                    var inputProvId = document.querySelector('input[name="id_proveedor"]');
+                    if (inputProvId) proveedor_id = inputProvId.value;
+                }
+            }
             var cotizacion = document.querySelector('input[name="cotizacion_id"]') ? document.querySelector('input[name="cotizacion_id"]').value : null;
             var requisicion_id = document.querySelector('input[name="requisicion_id"]') ? document.querySelector('input[name="requisicion_id"]').value : null;
             var url = base_url + 'ordenesCompra/crear';
@@ -35,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             http.send(JSON.stringify({
                 productos: adjudicados,
                 proveedor: proveedor,
+                proveedor_id: proveedor_id,
                 cotizacion: cotizacion,
                 requisicion_id: requisicion_id
             }));

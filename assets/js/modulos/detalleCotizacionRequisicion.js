@@ -8,14 +8,17 @@ document.addEventListener('DOMContentLoaded', function() {
             var adjudicados = [];
             document.querySelectorAll('input[name="adjudicar[]"]:checked').forEach(function(cb) {
                 var row = cb.closest('tr');
+                // Ajustar índices según la nueva estructura de la tabla
+                // Si el primer td (id) está oculto, sigue siendo children[0]
                 adjudicados.push({
-                    id: cb.value,
-                    nombre: row.children[0].textContent.trim(),
-                    cantidad: row.children[1].textContent.trim(),
-                    descripcion: row.children[2].textContent.trim(),
-                    precio: row.children[3].textContent.trim(),
-                    descuento: row.children[4].textContent.trim(),
-                    subtotal: row.children[5].textContent.trim()
+                   // id: cb.value,
+                    id: row.children[0].textContent.trim(),
+                    nombre: row.children[1].textContent.trim(),
+                    cantidad: row.children[2].textContent.trim(),
+                    descripcion: row.children[3].textContent.trim(),
+                    precio: row.children[4].textContent.trim(),
+                    descuento: row.children[5].textContent.trim(),
+                    subtotal: row.children[6].textContent.trim()
                 });
             });
             if (adjudicados.length === 0) {

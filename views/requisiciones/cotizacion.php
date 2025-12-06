@@ -22,7 +22,7 @@ $id = isset($data['id']) ? intval($data['id']) : '';
                                     <table class="table table-bordered table-striped">
                                         <thead class="table-dark">
                                             <tr>
-                                                <th>Id Producto</th>
+                                                <th hidden>Id Producto</th>
                                                 <th>Nombre</th>
                                                 <th>Cantidad</th>
                                                 <th>Descripción</th>

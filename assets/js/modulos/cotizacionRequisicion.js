@@ -54,9 +54,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const productos = [];
             document.querySelectorAll('tbody tr').forEach(function(row, idx) {
                 if (row.querySelector('.input-precio')) {
-                    const nombre = row.cells[0].textContent.trim();
+                    // Captura el id del producto desde la celda correspondiente (asumiendo que la primera celda es el id)
+                    let id = null;
+                    if (row.cells[0]) {
+                        id = row.cells[0].textContent.trim();
+                    }
+                    const nombre = row.cells[1].textContent.trim();
                     const cantidad = parseFloat(row.querySelector('.input-cantidad').value) || 0;
-                    const descripcion = row.cells[2].textContent.trim();
+                    const descripcion = row.cells[3].textContent.trim();
                     const precio = parseFloat(row.querySelector('.input-precio').value) || 0;
                     const descuento = parseFloat(row.querySelector('.input-descuento').value) || 0;
                     const subtotal = parseFloat(row.querySelector('.input-subtotal').value) || 0;
@@ -64,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         valid = false;
                         msg += `El precio unitario del producto ${idx+1} debe ser mayor a 0.\n`;
                     }
-                    productos.push({nombre, cantidad, descripcion, precio, descuento, subtotal});
+                    productos.push({id, nombre, cantidad, descripcion, precio, descuento, subtotal});
                 }
             });
             // Validar monto

@@ -31,8 +31,17 @@ class RequisicionesModel extends Query{
         if ($idCotizacion > 0) {
             // Guardar productos/ofertas asociadas
             foreach ($productos as $prod) {
-                $sqlProd = "INSERT INTO cotizaciones_productos (id_cotizacion, nombre, cantidad, descripcion, precio, descuento, subtotal) VALUES (?,?,?,?,?,?,?)";
-                $arrProd = array($idCotizacion, $prod['nombre'], $prod['cantidad'], $prod['descripcion'], $prod['precio'], $prod['descuento'], $prod['subtotal']);
+                $sqlProd = "INSERT INTO cotizaciones_productos (id_cotizacion, id_producto, nombre, cantidad, descripcion, precio, descuento, subtotal) VALUES (?,?,?,?,?,?,?,?)";
+                $arrProd = array(
+                    $idCotizacion,
+                    isset($prod['id']) ? $prod['id'] : null,
+                    $prod['nombre'],
+                    $prod['cantidad'],
+                    $prod['descripcion'],
+                    $prod['precio'],
+                    $prod['descuento'],
+                    $prod['subtotal']
+                );
                 $this->insertar($sqlProd, $arrProd);
             }
             return true;

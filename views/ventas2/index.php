@@ -112,6 +112,13 @@
                             </div>
                             <span id="errorMedida" class="text-danger"></span>
                         </div>
+                        				                    <div class="col-md-3">
+                        <br>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">N. Orden de compra</span>
+                            <input class="form-control" id="idPedido" name="idPedido" type="text" value="<?php echo $data['cotizacion']; ?>" disabled>
+                        </div>
+                    </div>
 					
 				 </div>
 				 <hr>
@@ -210,9 +217,9 @@
                     <div class="col-md-4">
                         <label>Buscar Proveedor</label>
                         <div class="input-group mb-2">
-                            <input type="hidden" id="idCliente2" value="">
+                            <input type="hidden" id="idCliente2" value="<?php echo $data['cliente']['id']; ?>">
                             <span class="input-group-text"><i class="fas fa-search"></i></span>
-                            <input class="form-control" type="text" id="buscarCliente2" placeholder="Buscar Proveedor">
+                            <input class="form-control" type="text" id="buscarCliente2" placeholder="Buscar Proveedor" value="<?php echo $data['cliente']['nombre']; ?>">
                         </div>
 
                         <span class="text-danger fw-bold mb-2" id="errorCliente2"></span>
@@ -220,12 +227,12 @@
                         <label>Telefono</label>
                         <div class="input-group mb-2">
                             <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                            <input class="form-control" type="text" id="telefonoCliente2" placeholder="Telefono" disabled>
+                            <input class="form-control" type="text" id="telefonoCliente2" placeholder="Telefono" value="<?php echo $data['cliente']['telefono']; ?>" disabled>
                         </div>
 
                         <label>Direccion</label>
                         <ul class="list-group">
-                            <li class="list-group-item" id="direccionCliente2"><i class="fas fa-home"></i></li>
+                            <li class="list-group-item" id="direccionCliente2"><i class="fas fa-home"></i><?php echo $data['cliente']['direccion']; ?></li>
                         </ul>
                     </div>
                     

@@ -94,7 +94,7 @@ class Ventas2 extends Controller
             // Si la compra proviene de una orden de compra, actualizar el estado
             if (isset($datos['idPedido']) && intval($datos['idPedido']) > 0) {
                 $idPedido = intval($datos['idPedido']);
-                // Actualizar estado en la tabla ordenes_compra
+                // Actualizar estado en la tabla ordenes_compra usando el método del modelo Ventas2Model
                 $this->model->actualizarEstadoOrdenCompra($idPedido, 'completado');
             }
             $fecha =$datos['fechaC']; 

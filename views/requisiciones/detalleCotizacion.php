@@ -55,8 +55,16 @@ require 'views/templates/header.php';
                                     <?php endforeach; ?>
                                     <!-- Fila de total -->
                                     <tr class="table-info">
-                                        <td colspan="5" class="text-end"><strong>Total</strong></td>
-                                        <td><strong><?php echo number_format($total, 2); ?></strong></td>
+                                        <td colspan="5" class="text-end"><strong>Subtotal</strong></td>
+                                        <td colspan="2"><strong><?php echo number_format($total, 2); ?></strong></td>
+                                    </tr>
+                                    <tr class="table-warning">
+                                        <td colspan="5" class="text-end"><strong>IVA (13%)</strong></td>
+                                        <td colspan="2"><strong><?php $iva = $total * 0.13; echo number_format($iva, 2); ?></strong></td>
+                                    </tr>
+                                    <tr class="table-success">
+                                        <td colspan="5" class="text-end"><strong>Total con IVA</strong></td>
+                                        <td colspan="2"><strong><?php echo number_format($total + $iva, 2); ?></strong></td>
                                     </tr>
                                     <?php endif; ?>
                                 </tbody>

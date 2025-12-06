@@ -67,11 +67,24 @@
 				<td><?php echo htmlspecialchars($prod['subtotal']); ?></td>
 			</tr>
 			<?php endforeach; ?>
+			<?php 
+				$subtotal = 0;
+				foreach ($productos as $prod) {
+					$subtotal += floatval($prod['subtotal']);
+				}
+				$iva = $subtotal * 0.13;
+			?>
 			<tr class="total">
-				<td class="text-right" colspan="5">Total</td>
-				<td class="text-right">
-					<?php echo isset($data['total']) ? number_format($data['total'], 2) : ''; ?>
-				</td>
+				<td class="text-right" colspan="5">Subtotal</td>
+				<td class="text-right"><?php echo number_format($subtotal, 2); ?></td>
+			</tr>
+			<tr class="total">
+				<td class="text-right" colspan="5">IVA (13%)</td>
+				<td class="text-right"><?php echo number_format($iva, 2); ?></td>
+			</tr>
+			<tr class="total">
+				<td class="text-right" colspan="5"><strong>Total con IVA</strong></td>
+				<td class="text-right"><strong><?php echo number_format($subtotal + $iva, 2); ?></strong></td>
 			</tr>
 		</tbody>
 	</table>

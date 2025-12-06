@@ -26,7 +26,7 @@ require 'views/templates/header.php';
                                         <?php foreach ($data['ordenes'] as $orden): ?>
                                             <tr>
                                                 <td><?php echo htmlspecialchars($orden['id']); ?></td>
-                                                <td><?php echo htmlspecialchars($orden['proveedor']); ?></td>
+                                                <td><?php echo htmlspecialchars(isset($orden['nombreProveedor']) ? $orden['nombreProveedor'] : (isset($orden['proveedor']) ? $orden['proveedor'] : '')); ?></td>
                                                 <td><?php echo htmlspecialchars($orden['total']); ?></td>
                                                 <td><?php echo htmlspecialchars($orden['fecha']); ?></td>
                                                 <td><?php echo htmlspecialchars($orden['usuario']); ?></td>

@@ -55,4 +55,11 @@ document.addEventListener('DOMContentLoaded', function() {
             compra(idOrden);
         });
     });
+
+    document.querySelectorAll('.btnAutorizarOrden').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var id = btn.getAttribute('data-id');
+            window.location.href = base_url + 'ordenesCompra/detalle/' + id;
+        });
+    });
 });

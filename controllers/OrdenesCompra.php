@@ -156,4 +156,11 @@ class OrdenesCompra extends Controller{
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
+    public function detalle($id) {
+        $orden = $this->model->getOrden($id);
+        $data = [
+            'orden' => $orden
+        ];
+        $this->views->getView('ordenesCompra', 'detalle', $data);
+    }
 }

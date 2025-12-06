@@ -42,7 +42,7 @@ require 'views/templates/header.php';
                                                 <td>
                                                     <a href="<?php echo BASE_URL . 'ordenesCompra/generarPDF/' . $orden['id']; ?>" target="_blank" class="btn btn-primary btn-sm">Ver PDF</a>
                                                     <button type="button" class="btn btn-success btn-sm ms-1 btnCompletarCompra" data-id="<?php echo htmlspecialchars($orden['id']); ?>" <?php echo ($orden['estado'] === 'completado') ? 'disabled' : ''; ?>>Completar compra</button>
-                                                    <?php if (isset($_SESSION['rol']) && in_array($_SESSION['rol'], ['ADMINISTRADOR', 'SUPERVISOR'])): ?>
+                                                    <?php if (isset($_SESSION['rol_usuario']) && in_array($_SESSION['rol_usuario'], ['ADMINISTRADOR', 'SUPERVISOR'])): ?>
                                                         <button type="button" class="btn btn-warning btn-sm ms-1 btnAutorizarOrden" data-id="<?php echo htmlspecialchars($orden['id']); ?>">Autorizar</button>
                                                     <?php endif; ?>
                                                 </td>

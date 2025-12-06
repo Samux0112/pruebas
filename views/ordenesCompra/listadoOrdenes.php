@@ -31,17 +31,19 @@ require 'views/templates/header.php';
                                                 <td><?php echo htmlspecialchars($orden['fecha']); ?></td>
                                                 <td><?php echo htmlspecialchars($orden['usuario']); ?></td>
                                                 <td>
-                                                    <?php if ($orden['estado'] === 'generada'): ?>
-                                                        <span style="color:green;font-weight:bold;">Generada</span>
+                                                    <?php if ($orden['estado'] === 'aprobado'): ?>
+                                                        <span style="color:green;font-weight:bold;">Aprobado</span>
                                                     <?php elseif ($orden['estado'] === 'completado'): ?>
                                                         <span style="color:red;font-weight:bold;">Completado</span>
+                                                    <?php elseif ($orden['estado'] === 'generado'): ?>
+                                                        <span style="color:orange;font-weight:bold;">Generado</span>
                                                     <?php else: ?>
                                                         <span><?php echo htmlspecialchars($orden['estado']); ?></span>
                                                     <?php endif; ?>
                                                 </td>
                                                 <td>
                                                     <a href="<?php echo BASE_URL . 'ordenesCompra/generarPDF/' . $orden['id']; ?>" target="_blank" class="btn btn-primary btn-sm">Ver PDF</a>
-                                                    <button type="button" class="btn btn-success btn-sm ms-1 btnCompletarCompra" data-id="<?php echo htmlspecialchars($orden['id']); ?>" <?php echo ($orden['estado'] === 'completado') ? 'disabled' : ''; ?>>Completar compra</button>
+                                                    <button type="button" class="btn btn-success btn-sm ms-1 btnCompletarCompra" data-id="<?php echo htmlspecialchars($orden['id']); ?>" <?php echo ($orden['estado'] !== 'aprobado') ? 'disabled' : ''; ?>>Completar compra</button>
                                                     <?php if (isset($_SESSION['rol_usuario']) && in_array($_SESSION['rol_usuario'], ['ADMINISTRADOR', 'SUPERVISOR'])): ?>
                                                         <button type="button" class="btn btn-warning btn-sm ms-1 btnAutorizarOrden" data-id="<?php echo htmlspecialchars($orden['id']); ?>">Autorizar</button>
                                                     <?php endif; ?>

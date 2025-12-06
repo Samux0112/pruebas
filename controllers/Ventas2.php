@@ -37,6 +37,25 @@ class Ventas2 extends Controller
         $this->views->getView('ventas2', 'index', $data);
         
     }
+
+    	public function comprasCotizacion($datos)
+    {
+		ob_start();
+        $array = explode(',', $datos);
+        $idCotizacion = $array[0];
+		$idCliente = $array[1];
+		$data['cliente'] = $this->model->getCliente($idCliente);
+		$data['cotizacion'] = $idCotizacion;
+        $data['title'] = 'Ventas2';
+        $data['script'] = 'ventas2.js';
+        $data['busqueda'] = 'busquedaVentas2.js';
+        $data['carrito'] = 'posVenta2';
+		$data['bodegas'] = $this->model->getDatos('bodegas');
+        $resultSerie = $this->model->getSerie();
+        $serie = ($resultSerie['total'] == null) ? 1 : $resultSerie['total'] + 1;
+        $data['serie'] = $this->generate_numbers($serie, 1, 8);
+        $this->views->getView('ventas2', 'index', $data);
+    }
 	
 	public function maxCorrelativo()
     {

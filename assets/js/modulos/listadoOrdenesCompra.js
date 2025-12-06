@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 localStorage.setItem('posVenta2', JSON.stringify(listaCarrito));
                 if (listaCarrito.length > 0) {
-                    window.location.href = base_url + 'ventas2/'+idOrden+'/'+id_proveedor;
+                    window.location.href = base_url + 'ventas2/comprasCotizacion/'+idOrden+'/'+id_proveedor;
                 }
             }
         }

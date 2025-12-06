@@ -15,6 +15,12 @@ return $this->select($sql);
         $sql = "SELECT count(id) as total FROM Stock WHERE idProducto = $idProducto and idBodega = $bodega";
         return $this->select($sql);
     }
+
+    	public function getCliente($idCliente)
+    {
+        $sql = "select * from clientes2 where id=$idCliente";
+        return $this->select($sql);
+    }
 	
 	
 	public function getMaxCorrelativo($tipoFactura, $codPuntoVentaMH)

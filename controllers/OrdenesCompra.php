@@ -163,4 +163,21 @@ class OrdenesCompra extends Controller{
         ];
         $this->views->getView('ordenesCompra', 'detalle', $data);
     }
+    public function autorizar() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+            $estado = isset($_POST['estado']) ? trim($_POST['estado']) : '';
+            if ($id > 0 && $estado === 'aprobado') {
+                $ok = $this->model->actualizarEstadoOrden($id, $estado);
+                if ($ok) {
+                    echo json_encode(['success' => true]);
+                } else {
+                    echo json_encode(['success' => false]);
+                }
+            } else {
+                echo json_encode(['success' => false]);
+            }
+            die();
+        }
+    }
 }

@@ -66,6 +66,10 @@ require 'views/templates/header.php';
                         <?php else: ?>
                         <div class="alert alert-danger">No se encontró la orden de compra.</div>
                         <?php endif; ?>
+                        <?php if (!empty($data['orden'])): ?>
+                        <button type="button" class="btn btn-warning mt-3" id="btnAutorizarDetalleOrden" data-id="<?php echo htmlspecialchars($data['orden']['id']); ?>">Autorizar</button>
+                        <button type="button" class="btn btn-danger mt-3 ms-2" id="btnRechazarDetalleOrden" data-id="<?php echo htmlspecialchars($data['orden']['id']); ?>">Rechazar</button>
+                        <?php endif; ?>
                         <a href="javascript:history.back()" class="btn btn-secondary mt-3">Volver</a>
                     </div>
                 </div>

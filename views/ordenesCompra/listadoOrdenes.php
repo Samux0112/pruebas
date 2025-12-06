@@ -31,7 +31,7 @@ require 'views/templates/header.php';
                                                 <td><?php echo htmlspecialchars($orden['usuario']); ?></td>
                                                 <td>
                                                     <a href="<?php echo BASE_URL . 'ordenesCompra/generarPDF/' . $orden['id']; ?>" target="_blank" class="btn btn-primary btn-sm">Ver PDF</a>
-                                                    <a href="<?php echo BASE_URL . 'ordenesCompra/completar/' . $orden['id']; ?>" class="btn btn-success btn-sm ms-1">Completar compra</a>
+                                                    <button type="button" class="btn btn-success btn-sm ms-1 btnCompletarCompra" data-id="<?php echo htmlspecialchars($orden['id']); ?>">Completar compra</button>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>

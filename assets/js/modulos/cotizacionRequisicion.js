@@ -44,16 +44,26 @@ document.addEventListener('DOMContentLoaded', function() {
         btnGuardar.addEventListener('click', function () {
             let valid = true;
             let msg = '';
-            // Validar proveedor y capturar id
-            const proveedorSelect = document.getElementById('proveedor');
-            const proveedor = proveedorSelect.value.trim();
+            // Validar proveedor y capturar id usando datalist
+            const proveedorInput = document.getElementById('proveedor');
+            const proveedor = proveedorInput.value.trim();
             let proveedor_id = '';
-            if (proveedorSelect.selectedIndex >= 0) {
-                proveedor_id = proveedorSelect.options[proveedorSelect.selectedIndex].getAttribute('data-id') || proveedorSelect.value;
+            if (window.proveedoresData && proveedor) {
+                const found = window.proveedoresData.find(function(p) {
+                    return p.nombre.toLowerCase() === proveedor.toLowerCase();
+                });
+                if (found) {
+                    proveedor_id = found.id;
+                } else {
+                    proveedor_id = '';
+                }
             }
             if (!proveedor) {
                 valid = false;
                 msg += 'El proveedor es obligatorio.\n';
+            } else if (!proveedor_id) {
+                valid = false;
+                msg += 'Debe seleccionar un proveedor válido de la lista.\n';
             }
             // Validar productos
             const productos = [];

@@ -78,3 +78,14 @@ $id = isset($data['id']) ? intval($data['id']) : '';
     </div>
 </div>
 <?php require 'views/templates/footer.php'; ?>
+
+<script>
+// Array de proveedores para búsqueda por nombre
+window.proveedoresData = [
+<?php if (!empty($data['proveedores'])): ?>
+<?php foreach ($data['proveedores'] as $prov): ?>
+    { id: '<?php echo addslashes($prov['id']); ?>', nombre: '<?php echo addslashes($prov['nombre']); ?>' },
+<?php endforeach; ?>
+<?php endif; ?>
+];
+</script>

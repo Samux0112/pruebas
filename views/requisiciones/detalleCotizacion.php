@@ -22,6 +22,7 @@ require 'views/templates/header.php';
                             <table class="table table-bordered table-striped">
                                 <thead class="table-dark">
                                     <tr>
+                                        <th>ID</th>
                                         <th>Nombre</th>
                                         <th>Cantidad</th>
                                         <th>Descripción</th>
@@ -39,6 +40,7 @@ require 'views/templates/header.php';
                                             $total += floatval($prod['subtotal']);
                                     ?>
                                         <tr>
+                                            <td><?php echo htmlspecialchars($prod['id_producto']); ?></td>
                                             <td><?php echo htmlspecialchars($prod['nombre']); ?></td>
                                             <td><?php echo htmlspecialchars($prod['cantidad']); ?></td>
                                             <td><?php echo htmlspecialchars($prod['descripcion']); ?></td>

@@ -31,8 +31,8 @@ require 'views/templates/header.php';
                                                 <td><?php echo htmlspecialchars($orden['fecha']); ?></td>
                                                 <td><?php echo htmlspecialchars($orden['usuario']); ?></td>
                                                 <td>
-                                                    <?php if ($orden['estado'] === 'generado'): ?>
-                                                        <span class="badge bg-warning text-dark" style="font-size:1em;">Generado</span>
+                                                    <?php if ($orden['estado'] === 'generada'): ?>
+                                                        <span class="badge bg-warning text-dark" style="font-size:1em;">Generada</span>
                                                     <?php elseif ($orden['estado'] === 'aprobado'): ?>
                                                         <span class="badge bg-success" style="font-size:1em;">Aprobado</span>
                                                     <?php elseif ($orden['estado'] === 'rechazado'): ?>

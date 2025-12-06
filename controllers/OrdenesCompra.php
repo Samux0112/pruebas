@@ -25,8 +25,10 @@ class OrdenesCompra extends Controller{
                         array_push($array['productos'], $data);
                         $total += $subTotal;
                     }
+                    $iva = $total * 0.13;
+                    $totalConIva = $total + $iva;
                     $datosProductos = json_encode($array['productos']);
-                    $orden = $this->model->registrarOrden($datosProductos, $total, date('Y-m-d'), date('H:i:s'), $id_usuario, $proveedor_id, $proveedor, $cotizacion, null, $requisicion_id);
+                    $orden = $this->model->registrarOrden($datosProductos, $totalConIva, date('Y-m-d'), date('H:i:s'), $id_usuario, $proveedor_id, $proveedor, $cotizacion, null, $requisicion_id);
                     if ($orden > 0) {
                         echo json_encode(['success' => true, 'idOrden' => $orden]);
                     } else {

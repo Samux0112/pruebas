@@ -31,14 +31,16 @@ require 'views/templates/header.php';
                                                 <td><?php echo htmlspecialchars($orden['fecha']); ?></td>
                                                 <td><?php echo htmlspecialchars($orden['usuario']); ?></td>
                                                 <td>
-                                                    <?php if ($orden['estado'] === 'aprobado'): ?>
-                                                        <span style="color:green;font-weight:bold;">Aprobado</span>
+                                                    <?php if ($orden['estado'] === 'generado'): ?>
+                                                        <span class="badge bg-warning text-dark" style="font-size:1em;">Generado</span>
+                                                    <?php elseif ($orden['estado'] === 'aprobado'): ?>
+                                                        <span class="badge bg-success" style="font-size:1em;">Aprobado</span>
+                                                    <?php elseif ($orden['estado'] === 'rechazado'): ?>
+                                                        <span class="badge bg-secondary" style="font-size:1em;">Rechazado</span>
                                                     <?php elseif ($orden['estado'] === 'completado'): ?>
-                                                        <span style="color:red;font-weight:bold;">Completado</span>
-                                                    <?php elseif ($orden['estado'] === 'generado'): ?>
-                                                        <span style="color:orange;font-weight:bold;">Generado</span>
+                                                        <span class="badge bg-primary" style="font-size:1em;">Completado</span>
                                                     <?php else: ?>
-                                                        <span><?php echo htmlspecialchars($orden['estado']); ?></span>
+                                                        <span class="badge bg-light text-dark" style="font-size:1em;"> <?php echo htmlspecialchars($orden['estado']); ?> </span>
                                                     <?php endif; ?>
                                                 </td>
                                                 <td>

@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         text: 'Orden rechazada correctamente.',
                                         timer: 1500,
                                         showConfirmButton: false
-                                    }).then(() => { window.location.reload(); });
+                                    }).then(() => {  window.location.href = base_url + 'ordenesCompra/listado'; });
                                 } else {
                                     Swal.fire('Error', 'Error al rechazar la orden.', 'error');
                                 }

@@ -81,7 +81,7 @@
                             </div>
                             <span id="errorVenta2" class="text-danger"></span>
                         </div>
-                        <div class="col-md-3 mb-3">
+                        <div class="col-md-4 mb-4">
                             <label for="precio_venta">Precio Venta <span class="text-danger">*</span></label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
@@ -101,7 +101,7 @@
                             </div>
                             <span id="errorMedida" class="text-danger"></span>
                         </div>
-                        <div class="col-md-5 mb-3">
+                        <div class="col-md-4 mb-4">
                             <div class="form-group">
                                 <label for="id_categoria">Categoria <span class="text-danger">*</span></label>
                                 <select id="id_categoria" class="form-control" name="id_categoria">
@@ -128,7 +128,7 @@
                             </div>
                             <span id="errorTipoProducto" class="text-danger"></span>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-5 mb-3">
                             <div class="form-group">
                                 <label for="foto">Foto (Opcional)</label>
                                 <input id="foto" class="form-control" type="file" name="foto">

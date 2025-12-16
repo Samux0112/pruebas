@@ -28,7 +28,7 @@
         <p><strong>Correo: </strong> <?php echo $data['venta']['correo']; ?></p>
     </div>
     
-    <?php if($data['venta']['docuemi'] != 'RECIBO DE VENTA'){  ?>
+    <?php if($data['venta']['docuemi'] == 'RECIBO DE VENTA'){  ?>
     <h5 class="title">RECIBO DE VENTA</h5>
      <div class="datos-factu"> 
      <p><strong>Fecha: </strong> <?php echo $data['venta']['fecha']; ?></p>
@@ -40,8 +40,6 @@
 
     <?php } else {?>
     
-    
-    ?>
     <h5 class="title">Factura electronica</h5>
      <div class="datos-factu"> 
      <p><strong>Fecha: </strong> <?php echo $data['venta']['fecha']; ?></p>

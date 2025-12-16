@@ -148,15 +148,10 @@ function editarProducto(idProducto) {
             id_categoria.value = res.id_categoria;
             foto_actual.value = res.foto;
             ubi.value = res.ubi;
-            // Limpiar campos de cuentas
-            if (cuentaVenta) cuentaVenta.value = '';
-            if (cuentaInventario) cuentaInventario.value = '';
-            if (cuentaCosto) cuentaCosto.value = '';
-            // Si el backend retorna las cuentas, aquí deberías asignarlas
-            // Ejemplo:
-            // if (res.cuentaVenta) cuentaVenta.value = res.cuentaVenta;
-            // if (res.cuentaInventario) cuentaInventario.value = res.cuentaInventario;
-            // if (res.cuentaCosto) cuentaCosto.value = res.cuentaCosto;
+            // Precargar cuentas contables si existen
+            if (cuentaVenta) cuentaVenta.value = res.cuentaVenta ? res.cuentaVenta : '';
+            if (cuentaInventario) cuentaInventario.value = res.cuentaInventario ? res.cuentaInventario : '';
+            if (cuentaCosto) cuentaCosto.value = res.cuentaCosto ? res.cuentaCosto : '';
             containerPreview.innerHTML = `<img class="img-thumbnail" src="${base_url + res.foto}" width="200">
             <button class="btn btn-danger" type="button" onclick="deleteImg()"><i class="fas fa-trash"></i></button>`;
             btnAccion.textContent = 'Actualizar';

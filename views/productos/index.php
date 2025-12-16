@@ -236,7 +236,6 @@
                             <span id="errorUbi" class="text-danger"></span>
                         </div>
                     </div>
-                    // ...existing code...
                     
                     <div class="text-end">
                         <button class="btn btn-danger" type="button" id="btnNuevo">Nuevo</button>

@@ -101,10 +101,28 @@ return $this->selectAll($sql);
         return $this->save($sql, $array);
     }
 
-    public function editar($idProducto)
+    public function editar($idProducto, $cuentas = 0)
     {
         $sql = "SELECT * FROM productos WHERE id = $idProducto";
-        return $this->select($sql);
+        $producto = $this->select($sql);
+        // Traer cuentas contables asociadas
+        $sqlCuentas = "SELECT cc.codigo, cc.nombre_cuenta, dcp.tipo_cuenta FROM detalle_cuentas_productos dcp INNER JOIN cuentas_contables cc ON dcp.id_cuenta = cc.id WHERE dcp.id_producto = $idProducto";
+        $cuentasContables = $this->selectAll($sqlCuentas);
+        // Inicializar campos
+        $producto['cuentaVenta'] = '';
+        $producto['cuentaInventario'] = '';
+        $producto['cuentaCosto'] = '';
+        foreach ($cuentasContables as $cuenta) {
+            $valor = $cuenta['codigo'] . ' | ' . $cuenta['nombre_cuenta'];
+            if ($cuenta['tipo_cuenta'] == 'venta') {
+                $producto['cuentaVenta'] = $valor;
+            } elseif ($cuenta['tipo_cuenta'] == 'inventario') {
+                $producto['cuentaInventario'] = $valor;
+            } elseif ($cuenta['tipo_cuenta'] == 'costo') {
+                $producto['cuentaCosto'] = $valor;
+            }
+        }
+        return $producto;
     }
 
     public function actualizar($codigo, $nombre, $precio_venta2, $precio_venta, 

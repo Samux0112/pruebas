@@ -28,6 +28,20 @@
         <p><strong>Correo: </strong> <?php echo $data['venta']['correo']; ?></p>
     </div>
     
+    <?php if($data['venta']['docuemi'] != 'RECIBO DE VENTA'){  ?>
+    <h5 class="title">RECIBO DE VENTA</h5>
+     <div class="datos-factu"> 
+     <p><strong>Fecha: </strong> <?php echo $data['venta']['fecha']; ?></p>
+     <p><strong>Hora: </strong> <?php echo $data['venta']['hora']; ?></p>
+     <p><strong><?php echo $data['venta']['forma']; ?>: </strong> <?php echo $data['venta']['metodo']; ?></p>
+     <p><strong>Numero de control: </strong> <?php echo $data['venta']['numeroControlDte']; ?></p>
+
+    </div>
+
+    <?php } else {?>
+    
+    
+    ?>
     <h5 class="title">Factura electronica</h5>
      <div class="datos-factu"> 
      <p><strong>Fecha: </strong> <?php echo $data['venta']['fecha']; ?></p>
@@ -42,6 +56,7 @@
      
         
     </div>
+    <?php } ?>
     <h5 class="title">Detalle de los Productos</h5>
     <table>
         <thead>

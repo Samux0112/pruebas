@@ -91,74 +91,7 @@
                         </div>
                     </div>
 
-                    <!-- Cuentas contables en una fila, después de los campos principales -->
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <label for="cuentaVenta">Cuenta Contable de Venta</label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-cash-register"></i></span>
-                                <input class="form-control" list="listaCuentasVenta" name="cuentaVenta" id="cuentaVenta" placeholder="Cuenta de Venta">
-                                <datalist id="listaCuentasVenta">
-                                    <?php
-                                    $conn = new mysqli(HOST, USER, PASS, DBNAME);
-                                    if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
-                                    $sql = "select * from cuentas_contables order by codigo_cuenta;";
-                                    $result = $conn->query($sql);
-                                    if ($result->num_rows > 0) {
-                                        while($row = $result->fetch_assoc()) {
-                                            echo "<option value='".$row["codigo"]." | ".$row["nombre_cuenta"]."'>";
-                                        }
-                                    }
-                                    $conn->close();
-                                    ?>
-                                </datalist>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="cuentaInventario">Cuenta Contable de Inventario/Gasto</label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-warehouse"></i></span>
-                                <input class="form-control" list="listaCuentasInventario" name="cuentaInventario" id="cuentaInventario" placeholder="Cuenta de Inventario o Gasto">
-                                <datalist id="listaCuentasInventario">
-                                    <?php
-                                    $conn = new mysqli(HOST, USER, PASS, DBNAME);
-                                    if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
-                                    $sql = "select * from cuentas_contables order by codigo_cuenta;";
-                                    $result = $conn->query($sql);
-                                    if ($result->num_rows > 0) {
-                                        while($row = $result->fetch_assoc()) {
-                                            echo "<option value='".$row["codigo"]." | ".$row["nombre_cuenta"]."'>";
-                                        }
-                                    }
-                                    $conn->close();
-                                    ?>
-                                </datalist>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="cuentaCosto">Cuenta Contable de Costo</label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-coins"></i></span>
-                                <input class="form-control" list="listaCuentasCosto" name="cuentaCosto" id="cuentaCosto" placeholder="Cuenta de Costo">
-                                <datalist id="listaCuentasCosto">
-                                    <?php
-                                    $conn = new mysqli(HOST, USER, PASS, DBNAME);
-                                    if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
-                                    $sql = "select * from cuentas_contables order by codigo_cuenta;";
-                                    $result = $conn->query($sql);
-                                    if ($result->num_rows > 0) {
-                                        while($row = $result->fetch_assoc()) {
-                                            echo "<option value='".$row["codigo"]." | ".$row["nombre_cuenta"]."'>";
-                                        }
-                                    }
-                                    $conn->close();
-                                    ?>
-                                </datalist>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
+                                        <div class="row">
                         <div class="col-md-5 mb-3">
                             <div class="form-group">
                                 <label for="id_medida">Medida <span class="text-danger">*</span></label>
@@ -236,6 +169,75 @@
                             <span id="errorUbi" class="text-danger"></span>
                         </div>
                     </div>
+
+                    <!-- Cuentas contables en una fila, después de los campos principales -->
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="cuentaVenta">Cuenta Contable de Venta</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-cash-register"></i></span>
+                                <input class="form-control" list="listaCuentasVenta" name="cuentaVenta" id="cuentaVenta" placeholder="Cuenta de Venta">
+                                <datalist id="listaCuentasVenta">
+                                    <?php
+                                    $conn = new mysqli(HOST, USER, PASS, DBNAME);
+                                    if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
+                                    $sql = "select * from cuentas_contables order by codigo_cuenta;";
+                                    $result = $conn->query($sql);
+                                    if ($result->num_rows > 0) {
+                                        while($row = $result->fetch_assoc()) {
+                                            echo "<option value='".$row["codigo"]." | ".$row["nombre_cuenta"]."'>";
+                                        }
+                                    }
+                                    $conn->close();
+                                    ?>
+                                </datalist>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="cuentaInventario">Cuenta Contable de Inventario/Gasto</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-warehouse"></i></span>
+                                <input class="form-control" list="listaCuentasInventario" name="cuentaInventario" id="cuentaInventario" placeholder="Cuenta de Inventario o Gasto">
+                                <datalist id="listaCuentasInventario">
+                                    <?php
+                                    $conn = new mysqli(HOST, USER, PASS, DBNAME);
+                                    if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
+                                    $sql = "select * from cuentas_contables order by codigo_cuenta;";
+                                    $result = $conn->query($sql);
+                                    if ($result->num_rows > 0) {
+                                        while($row = $result->fetch_assoc()) {
+                                            echo "<option value='".$row["codigo"]." | ".$row["nombre_cuenta"]."'>";
+                                        }
+                                    }
+                                    $conn->close();
+                                    ?>
+                                </datalist>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="cuentaCosto">Cuenta Contable de Costo</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-coins"></i></span>
+                                <input class="form-control" list="listaCuentasCosto" name="cuentaCosto" id="cuentaCosto" placeholder="Cuenta de Costo">
+                                <datalist id="listaCuentasCosto">
+                                    <?php
+                                    $conn = new mysqli(HOST, USER, PASS, DBNAME);
+                                    if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
+                                    $sql = "select * from cuentas_contables order by codigo_cuenta;";
+                                    $result = $conn->query($sql);
+                                    if ($result->num_rows > 0) {
+                                        while($row = $result->fetch_assoc()) {
+                                            echo "<option value='".$row["codigo"]." | ".$row["nombre_cuenta"]."'>";
+                                        }
+                                    }
+                                    $conn->close();
+                                    ?>
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+
+
                     
                     <div class="text-end">
                         <button class="btn btn-danger" type="button" id="btnNuevo">Nuevo</button>

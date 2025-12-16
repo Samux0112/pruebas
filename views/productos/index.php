@@ -89,7 +89,7 @@
                             </div>
                             <span id="errorVenta" class="text-danger"></span>
                         </div>
-                                                <div class="col-md-5 mb-3">
+                                                <div class="col-md-4 mb-4">
                             <div class="form-group">
                                 <label for="id_medida">Medida <span class="text-danger">*</span></label>
                                 <select id="id_medida" class="form-control" name="id_medida">

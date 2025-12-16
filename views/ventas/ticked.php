@@ -103,10 +103,13 @@ QRcode::png($codeContents, $tempDir.'008_4.png', QR_ECLEVEL_L, 3, 4);
         </tbody>
         
     </table>
+
+    <?php if($data['venta']['docuemi'] != 'RECIBO DE VENTA'){  ?>
     
     <table>
                 <tr class="dan" colspan="3"><img ="dan" src="<?php echo BASE_URL . 'qrimages/008_4.png'; ?>" alt=""></tr>
         </table>
+    <?php }?>
         
         <br><br><br><br><br><br><br>
     <div class="mensaje">

@@ -59,43 +59,72 @@
                     <div class="row mb-3">
                         <div class="col-md-3 mb-3">
                             <label for="codigo">Codigo <span class="text-danger">*</span></label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-barcode"></i></span>
-                                <input class="form-control" type="text" name="codigo" id="codigo" placeholder="Barcode">
-                            </div>
-                            <span id="errorCodigo" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="nombre">Nombre <span class="text-danger">*</span></label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-list"></i></span>
-                                <input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre">
-                            </div>
-                            <span id="errorNombre" class="text-danger"></span>
-                        </div>
-                        
-                        <div class="col-md-3 mb-3">
-                            <label for="precio_venta2">Precio Compra <span class="text-danger">*</span></label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
-                                <input class="form-control" type="number" step="0.01" min="0.01" name="precio_venta2" id="precio_venta2" placeholder="Nombre">
-                            </div>
-                            <span id="errorVenta2" class="text-danger"></span>
-                        </div>
 
-                        <div class="col-md-3 mb-3">
-                            <label for="precio_venta">Precio Venta <span class="text-danger">*</span></label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
-                                <input class="form-control" type="number" step="0.0001" min="0.0001" name="precio_venta" id="precio_venta" placeholder="Nombre">
+                            <div class="col-md-4 mb-3">
+                                <label for="cuentaVenta">Cuenta Contable de Venta</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-cash-register"></i></span>
+                                    <input class="form-control" list="listaCuentasVenta" name="cuentaVenta" id="cuentaVenta" placeholder="Cuenta de Venta">
+                                    <datalist id="listaCuentasVenta">
+                                        <?php
+                                        $conn = new mysqli(HOST, USER, PASS, DBNAME);
+                                        if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
+                                        $sql = "select * from cuentas_contables order by codigo_cuenta;";
+                                        $result = $conn->query($sql);
+                                        if ($result->num_rows > 0) {
+                                            while($row = $result->fetch_assoc()) {
+                                                echo "<option value='".$row["codigo"]." | ".$row["nombre_cuenta"]."'>";
+                                            }
+                                        }
+                                        $conn->close();
+                                        ?>
+                                    </datalist>
+                                </div>
                             </div>
-                            <span id="errorVenta" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <div class="form-group">
-                                <label for="id_medida">Medida <span class="text-danger">*</span></label>
-                                <select id="id_medida" class="form-control" name="id_medida">
-                                    <option value="">Seleccionar</option>
+
+                            <div class="col-md-4 mb-3">
+                                <label for="cuentaInventario">Cuenta Contable de Inventario/Gasto</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-warehouse"></i></span>
+                                    <input class="form-control" list="listaCuentasInventario" name="cuentaInventario" id="cuentaInventario" placeholder="Cuenta de Inventario o Gasto">
+                                    <datalist id="listaCuentasInventario">
+                                        <?php
+                                        $conn = new mysqli(HOST, USER, PASS, DBNAME);
+                                        if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
+                                        $sql = "select * from cuentas_contables order by codigo_cuenta;";
+                                        $result = $conn->query($sql);
+                                        if ($result->num_rows > 0) {
+                                            while($row = $result->fetch_assoc()) {
+                                                echo "<option value='".$row["codigo"]." | ".$row["nombre_cuenta"]."'>";
+                                            }
+                                        }
+                                        $conn->close();
+                                        ?>
+                                    </datalist>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label for="cuentaCosto">Cuenta Contable de Costo</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-coins"></i></span>
+                                    <input class="form-control" list="listaCuentasCosto" name="cuentaCosto" id="cuentaCosto" placeholder="Cuenta de Costo">
+                                    <datalist id="listaCuentasCosto">
+                                        <?php
+                                        $conn = new mysqli(HOST, USER, PASS, DBNAME);
+                                        if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
+                                        $sql = "select * from cuentas_contables order by codigo_cuenta;";
+                                        $result = $conn->query($sql);
+                                        if ($result->num_rows > 0) {
+                                            while($row = $result->fetch_assoc()) {
+                                                echo "<option value='".$row["codigo"]." | ".$row["nombre_cuenta"]."'>";
+                                            }
+                                        }
+                                        $conn->close();
+                                        ?>
+                                    </datalist>
+                                </div>
+                            </div>
                                     <?php foreach ($data['medidas'] as $medida) { ?>
                                         <option value="<?php echo $medida['id']; ?>"><?php echo $medida['nombre_corto']; ?></option>
                                     <?php } ?>

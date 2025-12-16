@@ -111,13 +111,27 @@ class Productos extends Controller
             $name = $foto['name'];
             $tmp = $foto['tmp_name'];
             $id_tipoProducto = strClean($_POST['id_tipoProducto']);
-			$cuentaContable = strClean($_POST['cuentaContable']);
-			if($cuentaContable!=''){
-			$cuentaContable = explode(" | ", $cuentaContable);
-			$nombreCuenta = $cuentaContable[1];
-			$cuentaContable = $cuentaContable[0];
-			$cuentaContable = $this->model->getCuentaContable($cuentaContable); 
-			}
+
+            // Cuentas contables
+            $cuentaVenta = strClean($_POST['cuentaVenta']);
+            $cuentaInventario = strClean($_POST['cuentaInventario']);
+            $cuentaCosto = strClean($_POST['cuentaCosto']);
+
+            $cuentaVentaId = null;
+            $cuentaInventarioId = null;
+            $cuentaCostoId = null;
+            if ($cuentaVenta != '') {
+                $cuentaVenta = explode(" | ", $cuentaVenta);
+                $cuentaVentaId = $this->model->getCuentaContable($cuentaVenta[0]);
+            }
+            if ($cuentaInventario != '') {
+                $cuentaInventario = explode(" | ", $cuentaInventario);
+                $cuentaInventarioId = $this->model->getCuentaContable($cuentaInventario[0]);
+            }
+            if ($cuentaCosto != '') {
+                $cuentaCosto = explode(" | ", $cuentaCosto);
+                $cuentaCostoId = $this->model->getCuentaContable($cuentaCosto[0]);
+            }
            
 
             $destino = null;
@@ -158,10 +172,17 @@ class Productos extends Controller
                             $id_tipoProducto
                         );
                         if ($data > 0) {
-						$dataBodega = $this->model->registrarBodega_producto($data);
-						if($cuentaContable!=''){
-								$dataDetalle = $this->model->registrarCuenta_producto($cuentaContable['id'],$data);
-								}
+                            $dataBodega = $this->model->registrarBodega_producto($data);
+                            // Registrar cuentas contables asociadas
+                            if ($cuentaVentaId && isset($cuentaVentaId['id'])) {
+                                $this->model->registrarCuenta_producto($cuentaVentaId['id'], $data, 'venta');
+                            }
+                            if ($cuentaInventarioId && isset($cuentaInventarioId['id'])) {
+                                $this->model->registrarCuenta_producto($cuentaInventarioId['id'], $data, 'inventario');
+                            }
+                            if ($cuentaCostoId && isset($cuentaCostoId['id'])) {
+                                $this->model->registrarCuenta_producto($cuentaCostoId['id'], $data, 'costo');
+                            }
                             if (!empty($name)) {
                                 move_uploaded_file($tmp, $destino);
                             }

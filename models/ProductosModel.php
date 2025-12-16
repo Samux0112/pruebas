@@ -57,10 +57,10 @@ return $this->selectAll($sql);
         return $this->insertar($sql, $array);
     }
 	
-	public function registrarCuenta_producto($cuentaContable, $id_producto)
+    public function registrarCuenta_producto($cuentaContable, $id_producto, $tipo_cuenta)
     {
-        $sql = "INSERT INTO detalle_cuentas_productos  (id_cuenta, id_producto) VALUES (?,?)";
-        $array = array($cuentaContable, $id_producto);
+        $sql = "INSERT INTO detalle_cuentas_productos  (id_cuenta, id_producto, tipo_cuenta) VALUES (?,?,?)";
+        $array = array($cuentaContable, $id_producto, $tipo_cuenta);
         return $this->insertar($sql, $array);
     }
 	

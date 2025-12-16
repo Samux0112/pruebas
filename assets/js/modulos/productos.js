@@ -22,7 +22,9 @@ const errorVenta2 = document.querySelector('#errorVenta2');
 const errorVenta = document.querySelector('#errorVenta');
 const errorMedida = document.querySelector('#errorMedida');
 const errorCategoria = document.querySelector('#errorCategoria');
-const cuentaContable = document.querySelector('#cuentaContable');
+const cuentaVenta = document.querySelector('#cuentaVenta');
+const cuentaInventario = document.querySelector('#cuentaInventario');
+const cuentaCosto = document.querySelector('#cuentaCosto');
 const id_tipoProducto = document.querySelector('#id_tipoProducto');
 
 document.addEventListener('DOMContentLoaded', function(){
@@ -75,6 +77,9 @@ document.addEventListener('DOMContentLoaded', function(){
         formulario.reset();
         deleteImg();
         limpiarCampos();
+        if (cuentaVenta) cuentaVenta.value = '';
+        if (cuentaInventario) cuentaInventario.value = '';
+        if (cuentaCosto) cuentaCosto.value = '';
     })
     //registrar Productos
     formulario.addEventListener('submit', function(e){
@@ -101,7 +106,10 @@ document.addEventListener('DOMContentLoaded', function(){
         }else{
             const url = base_url + 'productos/registrar';
             insertarRegistros(url, this, tblProductos, btnAccion, false);
-            limpiarCampos()
+            limpiarCampos();
+            if (cuentaVenta) cuentaVenta.value = '';
+            if (cuentaInventario) cuentaInventario.value = '';
+            if (cuentaCosto) cuentaCosto.value = '';
         }        
     })
 })
@@ -136,20 +144,23 @@ function editarProducto(idProducto) {
             precio_venta2.value = res.precio_venta2;
             precio_venta.value = res.precio_venta;
             id_medida.value = res.id_medida;
-             id_tipoProducto.value = res.tipoProducto;
+            id_tipoProducto.value = res.tipoProducto;
             id_categoria.value = res.id_categoria;
             foto_actual.value = res.foto;
-            ubi.value = res.ubi
-			if(res.codigoCuenta != undefined ){ 
-				cuentaContable.value = res.codigoCuenta+' | '+res.nombre_cuenta
-			}else{
-			cuentaContable.value = "";	
-			}
-           
+            ubi.value = res.ubi;
+            // Limpiar campos de cuentas
+            if (cuentaVenta) cuentaVenta.value = '';
+            if (cuentaInventario) cuentaInventario.value = '';
+            if (cuentaCosto) cuentaCosto.value = '';
+            // Si el backend retorna las cuentas, aquí deberías asignarlas
+            // Ejemplo:
+            // if (res.cuentaVenta) cuentaVenta.value = res.cuentaVenta;
+            // if (res.cuentaInventario) cuentaInventario.value = res.cuentaInventario;
+            // if (res.cuentaCosto) cuentaCosto.value = res.cuentaCosto;
             containerPreview.innerHTML = `<img class="img-thumbnail" src="${base_url + res.foto}" width="200">
             <button class="btn btn-danger" type="button" onclick="deleteImg()"><i class="fas fa-trash"></i></button>`;
             btnAccion.textContent = 'Actualizar';
-            firstTab.show()
+            firstTab.show();
         }
     }
 }

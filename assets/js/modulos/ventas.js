@@ -1752,7 +1752,7 @@ function guardarDte(objdte,correlativo){
                 pago: pagar_con.value,
                 impresion: impresion_directa.checked,
 				correlativo: correlativo[0].correlativo != "" && correlativo[0].correlativo != null ?  parseInt(correlativo[0].correlativo) +1 : 1,
-				numeroControlDte : docuemi.value=="RECIBO DE VENTA" ? "" : objdte.dteJson.identificacion.numeroControl,
+				numeroControlDte : docuemi.value=="RECIBO DE VENTA" ? objdte.dteJson.identificacion.numeroControl.substring(16) : objdte.dteJson.identificacion.numeroControl,
 				dte: JSON.stringify(objdte),
 				uuid: docuemi.value=="RECIBO DE VENTA" ? "" : objdte.dteJson.identificacion.codigoGeneracion,
 				tipoTransmision : transmision,

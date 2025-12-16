@@ -59,6 +59,36 @@
                     <div class="row mb-3">
                         <div class="col-md-3 mb-3">
                             <label for="codigo">Codigo <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-barcode"></i></span>
+                                <input class="form-control" type="text" name="codigo" id="codigo" placeholder="Barcode">
+                            </div>
+                            <span id="errorCodigo" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="nombre">Nombre <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-list"></i></span>
+                                <input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre">
+                            </div>
+                            <span id="errorNombre" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="precio_venta2">Precio Compra <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                                <input class="form-control" type="number" step="0.01" min="0.01" name="precio_venta2" id="precio_venta2" placeholder="Precio Compra">
+                            </div>
+                            <span id="errorVenta2" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="precio_venta">Precio Venta <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                                <input class="form-control" type="number" step="0.0001" min="0.0001" name="precio_venta" id="precio_venta" placeholder="Precio Venta">
+                            </div>
+                            <span id="errorVenta" class="text-danger"></span>
+                        </div>
 
                         <!-- Cuentas contables en una fila -->
                         <div class="row">
@@ -199,45 +229,7 @@
                          </select>
                        
                     </div> 
-                    <span id="errorUbi" class="text-danger"></span>
-					
-											<div class="col-md-6 mb-3">
-                            <label for="departamento">Cuentas contables</label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-list"></i></span>
-                                <input class="form-control" list="listaCuentas" name="cuentaContable" id="cuentaContable" placeholder = "Cuentas">
-									<datalist id="listaCuentas">
-
-									<?php
-									$servername = HOST;
-									$username = USER;
-									$password = PASS;
-									$dbname = DBNAME;
-
-									// Create connection
-									$conn = new mysqli($servername, $username, $password, $dbname);
-									// Check connection
-									if ($conn->connect_error) {
-									  die("Connection failed: " . $conn->connect_error);
-									}
-									$sql = "select * from cuentas_contables order by codigo_cuenta;";
-									$result = $conn->query($sql);
-
-									if ($result->num_rows > 0) {
-									  // output data of each row
-									  while($row = $result->fetch_assoc()) {
-										echo "<option value='".$row["codigo"]." | ".$row["nombre_cuenta"]."'>";
-									  }
-									} else {
-									  echo "0";
-									}
-									$conn->close();
-
-									?>
-									 
-									</datalist>
-                            </div>
-                            <span id="errorCorreo" class="text-danger"></span>
+                                        <span id="errorUbi" class="text-danger"></span>
                         </div>
                     
                     <div class="text-end">

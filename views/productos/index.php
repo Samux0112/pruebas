@@ -57,7 +57,7 @@
                     <input type="hidden" id="id" name="id">
                     <input type="hidden" id="foto_actual" name="foto_actual">
                     <div class="row mb-3">
-                        <div class="col-md-3 mb-3">
+                        <div class="col-md-4 mb-4">
                             <label for="codigo">Codigo <span class="text-danger">*</span></label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="fas fa-barcode"></i></span>
@@ -65,7 +65,7 @@
                             </div>
                             <span id="errorCodigo" class="text-danger"></span>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-4 mb-4">
                             <label for="nombre">Nombre <span class="text-danger">*</span></label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="fas fa-list"></i></span>
@@ -73,7 +73,7 @@
                             </div>
                             <span id="errorNombre" class="text-danger"></span>
                         </div>
-                        <div class="col-md-3 mb-3">
+                        <div class="col-md-4 mb-4">
                             <label for="precio_venta2">Precio Compra <span class="text-danger">*</span></label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
@@ -116,7 +116,7 @@
                     </div>
 
                                         <div class="row">
-                        <div class="col-md-5 mb-3">
+                        <div class="col-md-4 mb-4">
                             <div class="form-group">
                                 <label for="id_tipoProducto">Tipo de Producto <span class="text-danger">*</span></label>
                                 <select id="id_tipoProducto" class="form-control" name="id_tipoProducto">
@@ -128,7 +128,7 @@
                             </div>
                             <span id="errorTipoProducto" class="text-danger"></span>
                         </div>
-                        <div class="col-md-5 mb-3">
+                        <div class="col-md-4 mb-4">
                             <div class="form-group">
                                 <label for="foto">Foto (Opcional)</label>
                                 <input id="foto" class="form-control" type="file" name="foto">
@@ -136,7 +136,7 @@
                             <div id="containerPreview">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4 mb-4">
                             <label for="ubi">ubicacion de producto</label>
                             <select id="ubi" name = "ubi" class="form-control">
                                 <option value=""></option>

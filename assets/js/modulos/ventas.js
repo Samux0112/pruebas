@@ -750,6 +750,29 @@ function verReporte(idVenta) {
 		
     })
 }
+function verRecibo(idVenta) {
+    Swal.fire({
+        title: 'Desea Generar Reporte?',
+        showDenyButton: false,
+		showCloseButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'Ticked',
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            const ruta = base_url + 'ventas/reporte/ticked/' + idVenta;
+            window.open(ruta, '_blank');
+        } else if (result.isDenied) {
+            const ruta = base_url + 'ventas/reporte/impresion/' + idVenta;
+            window.open(ruta, '_blank');
+        }else if (result.isDismissed && result.dismiss !="close" ) {
+            const ruta = base_url + 'ventas/reporte/pdf/' + idVenta;
+            window.open(ruta, '_blank');
+        }
+		
+    })
+}
+
 
 function cuotas(idVenta,idPlan,idCredito) {
 window.location.href = base_url + 'ventas/cuotas/' + idVenta + '/'+ puntoVenta+'/'+idPlan+'/'+idCredito;

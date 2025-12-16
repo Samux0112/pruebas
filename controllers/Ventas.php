@@ -490,6 +490,11 @@ $this->views->getView('ventas', 'exportacion', $data);
                 <button class="btn btn-warning" href="#" onclick="anularVenta(' . $data[$i]['id'] . ')" disabled><i class="fas fa-trash"></i></button>
                 <a class="btn btn-danger" href="#" onclick="verReporte(' . $data[$i]['id'] . ')"><i class="fas fa-file-pdf"></i></a>
                 </div>';
+                }elseif($data[$i]['docuemi']=="RECIBO DE VENTA"){
+                    $data[$i]['acciones'] = '<div>
+                <a class="btn btn-warning" href="#" onclick="anularVenta(' . $data[$i]['id'] . ')"><i class="fas fa-trash"></i></a>
+                <a class="btn btn-danger" href="#" onclick="verRecibo(' . $data[$i]['id'] . ')"><i class="fas fa-file-pdf"></i></a>
+                </div>';
 				}else{
 				 $data[$i]['acciones'] = '<div>
                 <a class="btn btn-warning" href="#" onclick="anularVenta(' . $data[$i]['id'] . ')"><i class="fas fa-trash"></i></a>

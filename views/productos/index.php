@@ -157,6 +157,85 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <div class="form-group">
+                                <label for="id_medida">Medida <span class="text-danger">*</span></label>
+                                <select id="id_medida" class="form-control" name="id_medida">
+                                    <option value="">Seleccionar</option>
+                                    <?php foreach ($data['medidas'] as $medida) { ?>
+                                        <option value="<?php echo $medida['id']; ?>"><?php echo $medida['nombre_corto']; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <span id="errorMedida" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-5 mb-3">
+                            <div class="form-group">
+                                <label for="id_categoria">Categoria <span class="text-danger">*</span></label>
+                                <select id="id_categoria" class="form-control" name="id_categoria">
+                                    <option value="">Seleccionar</option>
+                                    <?php foreach ($data['categorias'] as $categoria) { ?>
+                                        <option value="<?php echo $categoria['id']; ?>"><?php echo $categoria['categoria']; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <span id="errorCategoria" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-5 mb-3">
+                            <div class="form-group">
+                                <label for="id_tipoProducto">Tipo de Producto <span class="text-danger">*</span></label>
+                                <select id="id_tipoProducto" class="form-control" name="id_tipoProducto">
+                                    <option value="">Seleccionar</option>
+                                    <?php if(isset($data['tipoProducto'])) { foreach ($data['tipoProducto'] as $tipo) { ?>
+                                        <option value="<?php echo $tipo['descripcion']; ?>"><?php echo $tipo['descripcion']; ?></option>
+                                    <?php } } ?>
+                                </select>
+                            </div>
+                            <span id="errorTipoProducto" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label for="foto">Foto (Opcional)</label>
+                                <input id="foto" class="form-control" type="file" name="foto">
+                            </div>
+                            <div id="containerPreview">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="ubi">ubicacion de producto</label>
+                            <select id="ubi" name = "ubi" class="form-control">
+                                <option value=""></option>
+                                <option value="Estante 1">Estante 1</option>
+                                <option value="Estante 2">Estante 2</option>
+                                <option value="Estante 3">Estante 3</option>
+                                <option value="Estante 4">Estante 4</option>
+                                <option value="Estante 5">Estante 5</option>
+                                <option value="Estante 6">Estante 6</option>
+                                <option value="Estante 7">Estante 7</option>
+                                <option value="Estante 8">Estante 8</option>
+                                <option value="Estante 9">Estante 9</option>
+                                <option value="Estante 10">Estante 10</option>
+                                <option value="Estante 11">Estante 11</option>
+                                <option value="Estante 12">Estante 12</option>
+                                <option value="Estante 13">Estante 13</option>
+                                <option value="Estante 14">Estante 14</option>
+                                <option value="Estante 15">Estante 15</option>
+                                <option value="Estante 16">Estante 16</option>
+                                <option value="Estante 17">Estante 17</option>
+                                <option value="Estante 18">Estante 18</option>
+                                <option value="Estante 19">Estante 19</option>
+                                <option value="Estante 20">Estante 20</option>
+                                <option value="Estante 21">Estante 21</option>
+                                <option value="Estante 22">Estante 22</option>
+                                <option value="Estante 23">Estante 23</option>
+                                <option value="Estante 24">Estante 24</option>
+                                <option value="Estante 25">Estante 25</option>
+                            </select>
+                            <span id="errorUbi" class="text-danger"></span>
+                        </div>
+                    </div>
                                     <?php foreach ($data['medidas'] as $medida) { ?>
                                         <option value="<?php echo $medida['id']; ?>"><?php echo $medida['nombre_corto']; ?></option>
                                     <?php } ?>

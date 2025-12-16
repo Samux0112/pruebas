@@ -218,16 +218,18 @@ class Productos extends Controller
                             if (!empty($name)) {
                                 move_uploaded_file($tmp, $destino);
                             }
-							if($cuentaContable!=''){
-								$validar = $this->model->validarCuentaContable($id);
-								if($validar['total']>0){
-								$dataDetalle = $this->model->actualizar_Cuenta_Productos($cuentaContable['id'],$id);	
-								}else{
-								$dataDetalle = $this->model->registrarCuenta_producto($cuentaContable['id'],$id);		
-								}
-								}else{
-								$dataDetalle = $this->model->eliminar_Cuenta_Producto($id);	
-								}
+                            // Eliminar todas las cuentas contables asociadas
+                            $this->model->eliminar_Cuenta_Producto($id);
+                            // Registrar cuentas contables nuevas si existen
+                            if ($cuentaVentaId && isset($cuentaVentaId['id'])) {
+                                $this->model->registrarCuenta_producto($cuentaVentaId['id'], $id, 'venta');
+                            }
+                            if ($cuentaInventarioId && isset($cuentaInventarioId['id'])) {
+                                $this->model->registrarCuenta_producto($cuentaInventarioId['id'], $id, 'inventario');
+                            }
+                            if ($cuentaCostoId && isset($cuentaCostoId['id'])) {
+                                $this->model->registrarCuenta_producto($cuentaCostoId['id'], $id, 'costo');
+                            }
                             $res = array('msg' => 'PRODUCTO MODIFICADO', 'type' => 'success');
                         } else {
                             $res = array('msg' => 'ERROR AL MODIFICAR', 'type' => 'error');

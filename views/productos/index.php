@@ -60,6 +60,8 @@
                         <div class="col-md-3 mb-3">
                             <label for="codigo">Codigo <span class="text-danger">*</span></label>
 
+                        <!-- Cuentas contables en una fila -->
+                        <div class="row">
                             <div class="col-md-4 mb-3">
                                 <label for="cuentaVenta">Cuenta Contable de Venta</label>
                                 <div class="input-group">
@@ -81,7 +83,6 @@
                                     </datalist>
                                 </div>
                             </div>
-
                             <div class="col-md-4 mb-3">
                                 <label for="cuentaInventario">Cuenta Contable de Inventario/Gasto</label>
                                 <div class="input-group">
@@ -103,7 +104,6 @@
                                     </datalist>
                                 </div>
                             </div>
-
                             <div class="col-md-4 mb-3">
                                 <label for="cuentaCosto">Cuenta Contable de Costo</label>
                                 <div class="input-group">
@@ -125,6 +125,7 @@
                                     </datalist>
                                 </div>
                             </div>
+                        </div>
                                     <?php foreach ($data['medidas'] as $medida) { ?>
                                         <option value="<?php echo $medida['id']; ?>"><?php echo $medida['nombre_corto']; ?></option>
                                     <?php } ?>

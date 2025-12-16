@@ -1604,11 +1604,20 @@ xhttp.onreadystatechange = function() {
     console.log(jsonResponse);
 	 console.log(jsonResponse.body);
 	 
-	 if(transmision=="Normal"){
+	 if(transmision=="Normal" && docuemi.value!="RECIBO DE VENTA"){
 	 dte = JSON.parse(dte);
 	 dte.passwordPri = null;
 	autorizador(JSON.stringify(dte),jsonResponse.body,correlativo);
-	 } else if(transmision=="Contingencia" || docuemi.value=="RECIBO DE VENTA"){
+	 } else if(transmision=="Contingencia"){
+		 
+	var objdte = JSON.parse(dte);
+	objdte.firmaElectronica = jsonResponse.body;
+	objdte.selloRecibido = "";
+	objdte.fhProcesamiento = objdte.dteJson.identificacion.fecEmi;
+	objdte.passwordPri ="";
+	guardarDte(objdte,correlativo);
+	
+	 }else if(docuemi.value=="RECIBO DE VENTA"){
 		 
 	var objdte = JSON.parse(dte);
 	objdte.firmaElectronica = jsonResponse.body;

@@ -89,10 +89,7 @@
                             </div>
                             <span id="errorVenta" class="text-danger"></span>
                         </div>
-                    </div>
-
-                                        <div class="row">
-                        <div class="col-md-5 mb-3">
+                                                <div class="col-md-5 mb-3">
                             <div class="form-group">
                                 <label for="id_medida">Medida <span class="text-danger">*</span></label>
                                 <select id="id_medida" class="form-control" name="id_medida">
@@ -116,6 +113,9 @@
                             </div>
                             <span id="errorCategoria" class="text-danger"></span>
                         </div>
+                    </div>
+
+                                        <div class="row">
                         <div class="col-md-5 mb-3">
                             <div class="form-group">
                                 <label for="id_tipoProducto">Tipo de Producto <span class="text-danger">*</span></label>

@@ -862,7 +862,7 @@ function maxCorrelativo(cliente){
                 success: function (data) {
 					if(docuemi.value=="CREDITO FISCAL"){
 					crearDte(cliente,data);
-					} else if(docuemi.value=="FACTURA"){
+					} else if(docuemi.value=="FACTURA" || docuemi.value=="RECIBO DE VENTA"){
 						crearDteFactura(cliente,data);
 						
 					}else if(docuemi.value=="EXPORTACION"){
@@ -1207,6 +1207,8 @@ totalIva =  Math.round(((totalIva)+ Number.EPSILON) * 100) / 100;
 	 };
 	 
 	 firmador(JSON.stringify(jsondteObj),correlativo);
+	 
+	 
 	 
 		
 	}
@@ -1606,7 +1608,7 @@ xhttp.onreadystatechange = function() {
 	 dte = JSON.parse(dte);
 	 dte.passwordPri = null;
 	autorizador(JSON.stringify(dte),jsonResponse.body,correlativo);
-	 } else if(transmision=="Contingencia"){
+	 } else if(transmision=="Contingencia" || docuemi.value=="RECIBO DE VENTA"){
 		 
 	var objdte = JSON.parse(dte);
 	objdte.firmaElectronica = jsonResponse.body;
@@ -1741,13 +1743,13 @@ function guardarDte(objdte,correlativo){
                 pago: pagar_con.value,
                 impresion: impresion_directa.checked,
 				correlativo: correlativo[0].correlativo != "" && correlativo[0].correlativo != null ?  parseInt(correlativo[0].correlativo) +1 : 1,
-				numeroControlDte : objdte.dteJson.identificacion.numeroControl,
+				numeroControlDte : docuemi.value=="RECIBO DE VENTA" ? "" : objdte.dteJson.identificacion.numeroControl,
 				dte: JSON.stringify(objdte),
-				uuid: objdte.dteJson.identificacion.codigoGeneracion,
+				uuid: docuemi.value=="RECIBO DE VENTA" ? "" : objdte.dteJson.identificacion.codigoGeneracion,
 				tipoTransmision : transmision,
 				codPuntoVentaMH : puntoVenta,
 				total : objdte.dteJson.resumen.totalPagar,
-				sello: objdte.selloRecibido,
+				sello: docuemi.value=="RECIBO DE VENTA" ? "" : objdte.selloRecibido,
 				vExentas:objdte.dteJson.resumen.totalExenta,
 				vIva : docuemi.value=="CREDITO FISCAL" ? objdte.dteJson.resumen.totalExenta > 0 ? 0 : objdte.dteJson.resumen.tributos[0].valor : 0 ,
 				vGravadas : objdte.dteJson.resumen.totalGravada,

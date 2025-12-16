@@ -22,10 +22,11 @@
 				       <div class="col-md-2">
                         <label for="docuemi">Documentos</label>
                         <select id="docuemi" class="form-control">
-						<option value="<?php echo $data['pedido']['docuemi']; ?>"><?php echo $data['pedido']['docuemi']; ?></option>
+                            <option value="<?php echo $data['pedido']['docuemi']; ?>"><?php echo $data['pedido']['docuemi']; ?></option>
                             <option value="CREDITO FISCAL">CREDITO FISCAL</option>
                             <option value="FACTURA">FACTURA</option>
-							 <option value="EXPORTACION">EXPORTACION</option>
+                            <option value="EXPORTACION">EXPORTACION</option>
+                            <option value="RECIBO DE VENTA">RECIBO DE VENTA</option>
                         </select>
                     </div>
 					
@@ -36,7 +37,8 @@
                         <select id="docuemi" class="form-control">
                             <option value="CREDITO FISCAL">CREDITO FISCAL</option>
                             <option value="FACTURA">FACTURA</option>
-							 <option value="EXPORTACION">EXPORTACION</option>
+                            <option value="EXPORTACION">EXPORTACION</option>
+                            <option value="RECIBO DE VENTA">RECIBO DE VENTA</option>
                         </select>
                     </div>
 				<?php

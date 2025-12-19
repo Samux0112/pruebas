@@ -266,7 +266,7 @@ class Ventas extends Controller
             } else {
 					
                     foreach ($datos['productos'] as $producto) {
-                        $result = $this->model->getProducto($producto['id']);
+                        $result = $this->model->getProducto($producto['id'],1);
                         $data['id'] = $result['id'];
                         $data['nombre'] = $producto['descripcion'];
                         $data['precio'] = $producto['precio'];

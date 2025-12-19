@@ -24,7 +24,7 @@ define('apiFirmador','https://pnn1jei9yi.execute-api.us-east-1.amazonaws.com/dev
 define('apiRecepcionDTE','https://apitest.dtes.mh.gob.sv/fesv/recepciondte');
 define('apiAnularMH','https://apitest.dtes.mh.gob.sv/fesv/anulardte');
 define('apiSolicitudContingencia','https://apitest.dtes.mh.gob.sv/fesv/contingencia');
-define('passwordPri','Garrufo13$$');
+define('passwordPri','Garrufo12$$');
 
 define('nrc','1188714');
 define('nombre','MAQUINARIA AGRICOLA S.A. DE C.V.');

@@ -11,12 +11,12 @@ define('HOST_SMTP', 'mail.maquinariaagricola.top');
 define('USER_SMTP', 'prueba@maquinariaagricola.top');
 define('CLAVE_SMTP', 'Gatoperro12$$');
 define('PUERTO_SMTP', '465');
-define('nit','02100903931053');
+define('nit','06141602001010');
 
 // Configuraciones Facturacion Electronica
 
 define('apiAutorizador','https://apitest.dtes.mh.gob.sv/seguridad/auth');
-define('pasApiMH','Julio0903$$$$');
+define('pasApiMH','MaquinariaA1$');
 //define('apiFirmador','http://54.88.184.145:8113/firmardocumento/');
 define('apiFirmador','https://pnn1jei9yi.execute-api.us-east-1.amazonaws.com/dev/firmador');
 //define('apiFirmador','https://zssljx0x3g.execute-api.us-east-1.amazonaws.com/dev/prdfirmador/');
@@ -24,23 +24,23 @@ define('apiFirmador','https://pnn1jei9yi.execute-api.us-east-1.amazonaws.com/dev
 define('apiRecepcionDTE','https://apitest.dtes.mh.gob.sv/fesv/recepciondte');
 define('apiAnularMH','https://apitest.dtes.mh.gob.sv/fesv/anulardte');
 define('apiSolicitudContingencia','https://apitest.dtes.mh.gob.sv/fesv/contingencia');
-define('passwordPri','Belen0809$$$$');
+define('passwordPri','Garrufo13$$');
 
-define('nrc','2926189');
-define('nombre','INTERACTIVEMENUSV');
-define('codActividad','62010');
-define('descActividad','Programacion informatica');
+define('nrc','1188714');
+define('nombre','MAQUINARIA AGRICOLA S.A. DE C.V.');
+define('codActividad','46530');
+define('descActividad','Venta al por mayor de maquinaria y equipo agropecuario, accesorios, partes y suministros');
 define('tipoEstablecimiento','02');
 define('nomEstablecimiento','Casa Matriz');
 //define('tipoEstablecimiento','01');
 //define('nomEstablecimiento','Sucursal');
 define('departamento','06');
-define('municipio','14');
-define('complemento','AV. ALVARADO DIAG. CENTROAMERICA, #4,');
-define('telefonoEmisor','79213508');
+define('municipio','23');
+define('complemento','27 CLLE PTE 17 AV. NORTE COL. LAYCO 101 SAN SALVADOR, SAN SALVADOR');
+define('telefonoEmisor','00000000');
 define('correo','jmarroquin@interactivemenusv.com');
 define('correoEmisor','jmarroquin@interactivemenusv.com');
-define('nombreCorreo','Software Informaticos');
+define('nombreCorreo','MAQUINARIA AGRICOLA');
 
 //CreditoFiscal
 define('creditoBase','DTE-03-00000000-110000000000000');

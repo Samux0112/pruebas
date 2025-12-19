@@ -289,16 +289,17 @@ class Ventas extends Controller
 						}
 
                         foreach ($datos['productos'] as $producto) {
-                            $result = $this->model->getProducto($producto['id']);
+                            $result = $this->model->getProducto($producto['id'],1);
                             //actualizar stock
-                            $nuevaCantidad = $result['cantidad'] - $producto['cantidad'];
+                            $nuevaCantidad = $result['stock'] - $producto['cantidad'];
                             $totalVentas = $result['ventas'] + $producto['cantidad'];
                             if($producto['id']=="0"){
 							$nuevaCantidad =1;
 							$cantidad =1;
 							}
 							if($producto['id']!="0"){
-                            $this->model->actualizarStock($nuevaCantidad, $totalVentas, $result['id']);
+                            //$this->model->actualizarStock($nuevaCantidad, $totalVentas, $result['id']);
+                            $this->model->actualizarStock($nuevaCantidad, $producto['id'], 1);
 							}
 
                             $movimiento = 'Venta N°: ' . $venta;

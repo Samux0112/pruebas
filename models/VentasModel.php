@@ -3,11 +3,12 @@ class VentasModel extends Query{
     public function __construct() {
         parent::__construct();
     }
-    public function getProducto($idProducto)
-    {
-        $sql = "SELECT * FROM productos WHERE id = $idProducto";
-        return $this->select($sql);
-    }
+    public function getProducto($id,$bodega)
+{
+		$sql = "SELECT p.*, m.medida,m.nombre_corto, c.categoria,s.cantidad as stock FROM productos p INNER JOIN medidas m
+		ON p.id_medida = m.id INNER JOIN categorias c ON p.id_categoria = c.id join Stock s on p.id = s.idProducto WHERE p.id = $id and s.idBodega=$bodega";
+		return $this->select($sql);
+}
 	
 	public function getProductoTraslado($idProducto)
     {
@@ -137,10 +138,10 @@ return $this->selectAll($sql);
         $array = array($id, $uuid, $totalVenta, $fecha, "false" );
         return $this->insertar($sql, $array);
     }
-    public function actualizarStock($cantidad, $ventas, $idProducto)
+    public function actualizarStock($cantidad, $idProducto, $idBodega)
     {
-        $sql = "UPDATE productos SET cantidad = ?, ventas=? WHERE id = ?";
-        $array = array($cantidad, $ventas, $idProducto);
+        $sql = "UPDATE Stock SET cantidad = ? WHERE idProducto = ? and idBodega = ?"; 
+        $array = array($cantidad, $idProducto, $idBodega);
         return $this->save($sql, $array);
     }
     public function registrarCredito($monto, $fecha, $hora, $idVenta)

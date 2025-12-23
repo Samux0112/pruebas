@@ -1456,9 +1456,7 @@ function crearDteRemision(dataCliente,correlativo){
             ventaNoSuj: 0,
             ventaExenta: listaCarrito[i].cantidad != "" && listaCarrito[i].catalogo =="Exento" ? Math.round(((parseFloat(listaCarrito[i].precio) * listaCarrito[i].cantidad )+ Number.EPSILON) * 100) / 100 :0,
             ventaGravada: listaCarrito[i].cantidad != "" && listaCarrito[i].catalogo =="Normal"? Math.round(((parseFloat(listaCarrito[i].precio/1.13) * listaCarrito[i].cantidad )+ Number.EPSILON) * 100) / 100 :0,
-			tributos : listaCarrito[i].cantidad != "" && listaCarrito[i].catalogo =="Normal"  ?  [ "20"] : null,
-		    psv : 0,
-		    noGravado : 0
+			tributos : listaCarrito[i].cantidad != "" && listaCarrito[i].catalogo =="Normal"  ?  [ "20"] : null
 } 
 cuerpodocumento.push(cuerpo);	
 totalExento = Math.round(((totalExento + cuerpo.ventaExenta)+ Number.EPSILON) * 100) / 100;
@@ -1556,26 +1554,8 @@ var MontoFinal = totalGravada + totalExento - parseFloat(ivaRetenido.value) + to
 			 totalDescu : descuento.value=="0" ? parseFloat(descuento.value) : parseFloat((parseFloat(descuento.value)/1.13).toFixed(2)),
 			 tributos : totalIva > 0 ? [{codigo : "20",descripcion : "Impuesto al Valor Agregado13%",valor : parseFloat(totalIva.toFixed(2))}] : null,
 			 subTotal :Math.round(((totalGravada + totalExento - (parseFloat(descuento.value)/1.13) )+ Number.EPSILON) * 100) / 100,
-			 ivaPerci1 : 0,
-			 ivaRete1 : parseFloat(ivaRetenido.value),
-			 reteRenta : 0,
 			 montoTotalOperacion : Math.round(((parseFloat(totalPagar.value.replaceAll(",","")) + parseFloat(ivaRetenido.value) )+ Number.EPSILON) * 100) / 100,
-			 totalNoGravado : 0,
-			 totalPagar :parseFloat(totalPagar.value.replaceAll(",","")),
-			 totalLetras : NumeroALetras(parseFloat(totalPagar.value.replaceAll(",",""))),
-			 saldoFavor : 0,
-			 condicionOperacion : metodo.value == "CREDITO" ? 2 : 1,
-			 pagos : [
-			 {
-				 codigo : formaPago.value,
-				 montoPago : parseFloat(totalPagar.value.replaceAll(",","")),
-				 plazo :  metodo.value == "CREDITO" ? "02" : null,
-				 referencia : "",
-				 periodo : metodo.value == "CREDITO" ? 1 : null
-				 
-			 }
-			 ],
-			 numPagoElectronico : null	 
+			 totalLetras : NumeroALetras(parseFloat(totalPagar.value.replaceAll(",",""))) 
 		 },
 		 extension : {
 			 nombEntrega : null,

@@ -1226,7 +1226,7 @@ totalIva =  Math.round(((totalIva)+ Number.EPSILON) * 100) / 100;
 			 nombRecibe : null,
 			 docuRecibe : null,
 			 observaciones : metodo.value == "PLAZO" ? "Pago se efectuo en concepto de prima" : null,
-			 placaVehiculo : null			 			 
+			  placaVehiculo : null			 			 
 		 },
 		 apendice : null,
 		}		 
@@ -1408,6 +1408,11 @@ totalIva =  Math.round(((totalIva)+ Number.EPSILON) * 100) / 100;
 
 function crearDteRemision(dataCliente,correlativo){
 	
+	var duiReceptor = dataCliente[0].DUI;
+	var tipoDoc = "13";
+	if(duiReceptor.length>10){
+	var tipoDoc = "36";	
+	}
 	var nitReceptor = dataCliente[0].identidad;
 	var nrcReceptor = dataCliente[0].num_identidad;
 	var nombreReceptor = dataCliente[0].nombre;
@@ -1518,7 +1523,10 @@ var MontoFinal = totalGravada + totalExento - parseFloat(ivaRetenido.value) + to
 			 
 		 },
 		 receptor : {
-			 nit :  nitReceptor,
+			 tipoDocumento: tipoDoc,
+			 numDocumento: duiReceptor,
+             nombre: nombreReceptor,
+			 bienTitulo : null,
 			 nrc :  nrcReceptor,
 			 nombre : nombreReceptor,
 			 codActividad : idActividadReceptor,
@@ -1532,7 +1540,6 @@ var MontoFinal = totalGravada + totalExento - parseFloat(ivaRetenido.value) + to
 			 telefono : telefonoReceptor,
 			 correo : correoReceptor
 		 },
-		 otrosDocumentos : null,
 		 ventaTercero : null,
 		 cuerpoDocumento :  cuerpodocumento,
 		 resumen : {
@@ -1573,8 +1580,7 @@ var MontoFinal = totalGravada + totalExento - parseFloat(ivaRetenido.value) + to
 			 docuEntrega : null,
 			 nombRecibe : null,
 			 docuRecibe : null,
-			 observaciones : metodo.value == "PLAZO" ? "Pago se efectuo en concepto de prima" : null,
-			 placaVehiculo : null			 			 
+			 observaciones : metodo.value == "PLAZO" ? "Pago se efectuo en concepto de prima" : null	 			 
 		 },
 		 apendice : null,
 		}		 

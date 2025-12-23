@@ -432,6 +432,8 @@ $dompdf->render();
 $dompdf->stream('reporte.pdf', array('Attachment' => false));
 if($data['venta']['docuemi']=='CREDITO FISCAL'){
 $this->views->getView('ventas', 'credito', $data);
+}else if($data['venta']['docuemi']=='NOTA DE REMISION'){
+$this->views->getView('ventas', 'remision', $data);
 }else if($data['venta']['docuemi']=='FACTURA'){
 $this->views->getView('ventas', 'factura', $data);
 }else if($data['venta']['docuemi']=='Nota de credito'){
@@ -454,6 +456,8 @@ $this->views->getView('ventas', 'exportacionpdf', $data);
 }else{
 if($data['venta']['docuemi']=='CREDITO FISCAL'){
 $this->views->getView('ventas', 'credito', $data);
+}else if($data['venta']['docuemi']=='NOTA DE REMISION'){
+$this->views->getView('ventas', 'remision', $data);
 }else if($data['venta']['docuemi']=='FACTURA'){
 $this->views->getView('ventas', 'factura', $data);
 }else if($data['venta']['docuemi']=='Nota de credito'){

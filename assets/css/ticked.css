@@ -16,7 +16,7 @@ body{
 
 .datos-factu{
     text-align: left;
-    font-size: 8.5px;
+    font-size: 8px;
 }
 .datos-factu{
     width: 100%;
@@ -27,7 +27,7 @@ img{
     position: absolute;
     width: 130px;
     left: 0px;
-    top: 5px;
+    top: 0px;
 }
 
 .title{
@@ -61,9 +61,18 @@ table td, th{
 .dan{
     
     position: absolute;
-    width: 100%;
+    width: 45%;
+    left: 2px;
+    top: 20px;
+}
+
+
+.qr{
+    
+    position: absolute;
+    width: 140px;
     left: 0px;
-    top: 5px;
+    top: 0px;
 }
 
 .mensaje{

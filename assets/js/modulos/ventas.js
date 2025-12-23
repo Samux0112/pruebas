@@ -9,6 +9,8 @@ const tblPlanes = document.querySelector('#tblPlanes');
 const tipo_operacion = document.querySelector('#tipo_operacion');
 const tipo_ingreso = document.querySelector('#tipo_ingreso');
 const pdv = document.querySelector('#pdv');
+const codigoValores = document.querySelector('#codigoValores');
+
 
 
 var ventasGravadas = 0;
@@ -1526,7 +1528,7 @@ var MontoFinal = totalGravada + totalExento - parseFloat(ivaRetenido.value) + to
 			 tipoDocumento: "36",
 			 numDocumento: nitReceptor,
              nombre: nombreReceptor,
-			 bienTitulo : null,
+			 bienTitulo : codigoValores.value,
 			 nrc :  nrcReceptor,
 			 nombre : nombreReceptor,
 			 codActividad : idActividadReceptor,

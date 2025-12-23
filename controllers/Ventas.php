@@ -442,6 +442,8 @@ $this->views->getView('ventas', 'exportacion', $data);
 }else if($tipo == 'pdf'){
 if($data['venta']['docuemi']=='CREDITO FISCAL'){
 $this->views->getView('ventas', 'creditopdf', $data);
+}else if($data['venta']['docuemi']=='NOTA DE REMISION'){
+$this->views->getView('ventas', 'remisionpdf', $data);
 }else if($data['venta']['docuemi']=='FACTURA'){
 $this->views->getView('ventas', 'facturapdf', $data);
 }else if($data['venta']['docuemi']=='Nota de credito'){

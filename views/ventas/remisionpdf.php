@@ -363,10 +363,7 @@ $html .="<tr><td class='d' colspan='7' align='right'><p class='b'><b>".("Impuest
 $html .= "<tr><td class='d' colspan='7' align='right'><p class='b'><b>Sub-Total :<b></p></td><td class='d'><p class='b'>$".(number_format($dte["dteJson"]["resumen"]["subTotal"],2,'.',''))."</p></td></tr>
 <tr><td class='d' colspan='7' align='right'><p class='b'><b>IVA Percibido :<b></p></td><td class='d'><p class='b'>$0.00</p></td></tr>
 <tr><td class='d' colspan='7' align='right'><p class='b'><b>IVA Retenido :<b></p></td><td class='d'><p class='b'>$".(number_format($dte["dteJson"]["resumen"]["ivaRete1"],2,'.',''))."</p></td></tr>
-<tr><td class='d' colspan='7' align='right'><p class='b'><b>Retención Renta :<b></p></td><td class='d'><p class='b'>$0.00</p></td></tr>
 <tr><td class='d' colspan='7' align='right'><p class='b'><b>Monto Total de la Operación :<b></p></td><td class='d'><p class='b'>$".(number_format($dte["dteJson"]["resumen"]["montoTotalOperacion"],2,'.',''))."</p></td></tr>
-<tr><td class='d' colspan='7' align='right'><p class='b'><b>Total Otros montos no afectos :<b></p></td><td class='d'><p class='b'>$0.00</p></td></tr>
-<tr><td class='d' colspan='7' align='right'><p class='b'><b>Total a Pagar :<b></p></td><td class='d'><p class='b'>$".(number_format($dte["dteJson"]["resumen"]["totalPagar"],2,'.',''))."</p></td></tr>
 </table>
 
 </div>
@@ -374,7 +371,7 @@ $html .= "<tr><td class='d' colspan='7' align='right'><p class='b'><b>Sub-Total 
 <div>
 <table>
 <tr><td align='right'><p class='b'><b>Valor en Letras :</b></p></td><td><p class='b'> ".($dte["dteJson"]["resumen"]["totalLetras"])."</p></td></tr>";
-if($dte["dteJson"]["resumen"]["condicionOperacion"] == 1){
+if(true){
 $html .= "<tr><td align='right'><p class='b'><b>Condición de la Operación: </b></p></td><td><p class='b'>CONTADO</p></td></tr>";
 }else{
 $html .= "<tr><td align='right'><p class='b'><b>Condición de la Operación: </b></p></td><td><p class='b'>CREDITO</p></td></tr>";

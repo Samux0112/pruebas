@@ -137,6 +137,16 @@
                             <input class="form-control" id="idPedido" name="idPedido" type="text" value="<?php echo $data['cotizacion']; ?>" disabled>
                         </div>
                     </div>
+                                           <div class="col-md-2">
+                           <label for="codigoValores">Título a que se remiten los bienes</label>
+                           <select id="codigoValores" class="form-control">
+                               <option value="01">01 Depósito</option>
+                               <option value="02">02 Propiedad</option>
+                               <option value="03">03 Consignación</option>
+                               <option value="04">04 Traslado</option>
+                               <option value="05">05 Otros</option>
+                           </select>
+                       </div>
                         </div>
                  <!-- fin cambios nuevos mh -->
                 
@@ -425,16 +435,6 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                       <div class="col-md-2">
-                           <label for="codigoValores">Título a que se remiten los bienes</label>
-                           <select id="codigoValores" class="form-control">
-                               <option value="01">01 Depósito</option>
-                               <option value="02">02 Propiedad</option>
-                               <option value="03">03 Consignación</option>
-                               <option value="04">04 Traslado</option>
-                               <option value="05">05 Otros</option>
-                           </select>
-                       </div>
                         <thead>
                             <tr>
                                 <th>Fecha</th>

@@ -137,7 +137,7 @@
                             <input class="form-control" id="idPedido" name="idPedido" type="text" value="<?php echo $data['cotizacion']; ?>" disabled>
                         </div>
                     </div>
-                                           <div class="col-md-2">
+                                                               <div class="col-md-2">
                            <label for="codigoValores">Título a que se remiten los bienes</label>
                            <select id="codigoValores" class="form-control">
                                <option value="01">01 Depósito</option>
@@ -435,6 +435,7 @@
                     </div>
                 </div>
                 <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover align-middle nowrap" id="tblHistorial" style="width: 100%;">
                         <thead>
                             <tr>
                                 <th>Fecha</th>

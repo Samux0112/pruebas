@@ -1524,7 +1524,7 @@ var MontoFinal = totalGravada + totalExento - parseFloat(ivaRetenido.value) + to
 		 },
 		 receptor : {
 			 tipoDocumento: "36",
-			 numDocumento: duiReceptor,
+			 numDocumento: nitReceptor,
              nombre: nombreReceptor,
 			 bienTitulo : null,
 			 nrc :  nrcReceptor,

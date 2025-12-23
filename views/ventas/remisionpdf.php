@@ -61,7 +61,7 @@ table.c{
 <td align='center' WIDTH='33%'>
 <h5><p align='center'><b>
 Documento tributario electrónico <br>
-Factura Comprobante crédito fiscal
+Nota de Remision
 <b></p></h5>
 </td>
 <td WIDTH='33%'>

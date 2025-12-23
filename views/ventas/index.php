@@ -40,6 +40,7 @@
                             <option value="FACTURA">FACTURA</option>
                             <option value="EXPORTACION">EXPORTACION</option>
                             <option value="RECIBO DE VENTA">RECIBO DE VENTA</option>
+                            <option value="NOTA DE REMISION">NOTA DE REMISION</option>
                         </select>
                     </div>
 				<?php

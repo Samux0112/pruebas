@@ -616,20 +616,20 @@ function mostrarProducto() {
                         </tr>`;
                     });
 					if(aplicaciones.value=="sinAplicaciones"){
-					ventasGravadas = docuemi.value == "CREDITO FISCAL" ? res.gravadas : (Math.round(((parseFloat(res.gravadas) + parseFloat(res.iva))+ Number.EPSILON) * 100) / 100).toFixed(2);
+					ventasGravadas = docuemi.value == "CREDITO FISCAL" || docuemi.value == "NOTA DE REMISION" ? res.gravadas : (Math.round(((parseFloat(res.gravadas) + parseFloat(res.iva))+ Number.EPSILON) * 100) / 100).toFixed(2);
                     totalPagarSD = res.totalVentaSD;
 					tblNuevaVenta.innerHTML = html;
                     totalPagar.value = res.totalVenta;
                     totalPagarHidden.value = res.totalVentaSD; 
-					gravadas.value = docuemi.value == "CREDITO FISCAL" ? res.gravadas : (Math.round(((parseFloat(res.gravadas) + parseFloat(res.iva))+ Number.EPSILON) * 100) / 100).toFixed(2);
+					gravadas.value = docuemi.value == "CREDITO FISCAL" || docuemi.value == "NOTA DE REMISION" ? res.gravadas : (Math.round(((parseFloat(res.gravadas) + parseFloat(res.iva))+ Number.EPSILON) * 100) / 100).toFixed(2);
 					exentas.value = res.exentos;
 					ivaRetenido.value = 0;
-					iva.value = docuemi.value == "CREDITO FISCAL" ? Math.round(((parseFloat(res.iva))+ Number.EPSILON) * 100) / 100 : 0 ;
+					iva.value = docuemi.value == "CREDITO FISCAL" || docuemi.value == "NOTA DE REMISION" ? Math.round(((parseFloat(res.iva))+ Number.EPSILON) * 100) / 100 : 0 ;
                     btnEliminarProducto();
                     agregarCantidad();
                     agregarPrecioVenta();
 					}else if(aplicaciones.value=="retencion"){
-					ventasGravadas = docuemi.value == "CREDITO FISCAL" ? res.gravadas : (Math.round(((parseFloat(res.gravadas) + parseFloat(res.iva))+ Number.EPSILON) * 100) / 100).toFixed(2);	
+					ventasGravadas = docuemi.value == "CREDITO FISCAL" || docuemi.value == "NOTA DE REMISION" ? res.gravadas : (Math.round(((parseFloat(res.gravadas) + parseFloat(res.iva))+ Number.EPSILON) * 100) / 100).toFixed(2);	
 					tblNuevaVenta.innerHTML = html;
 					totalPagarSD = res.totalVentaSD;
                     totalPagar.value = Math.round(((parseFloat(res.totalVenta.replaceAll(",","")) - (parseFloat(res.gravadas.replaceAll(",","")) *0.01))+ Number.EPSILON) * 100) / 100;

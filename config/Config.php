@@ -78,4 +78,9 @@ define('exportacionBase','DTE-11-00000000-00000000000000');
 define('versionExportacion',1);
 define('tipoDTEExportacion',"11");
 
+//Nota de Remision
+define('remisionBase','DTE-04-00000000-00000000000000');
+define('versionRemision',3);
+define('tipoDTERemision',"04");
+
 ?>

@@ -888,6 +888,9 @@ function maxCorrelativo(cliente){
 					} else if(docuemi.value=="FACTURA" || docuemi.value=="RECIBO DE VENTA"){
 						crearDteFactura(cliente,data);
 						
+					}else if(docuemi.value=="NOTA DE REMISION"){
+						crearDteRemision(cliente,data);
+						
 					}else if(docuemi.value=="EXPORTACION"){
 						crearDteFacturaExp(cliente,data);
 						
@@ -1403,6 +1406,185 @@ totalIva =  Math.round(((totalIva)+ Number.EPSILON) * 100) / 100;
 
 
 
+function crearDteRemision(dataCliente,correlativo){
+	
+	var nitReceptor = dataCliente[0].identidad;
+	var nrcReceptor = dataCliente[0].num_identidad;
+	var nombreReceptor = dataCliente[0].nombre;
+	var telefonoReceptor = dataCliente[0].telefono;
+	var correoReceptor = dataCliente[0].correo;
+	var direccionReceptor = dataCliente[0].direccion;
+	    direccionReceptor = direccionReceptor.replaceAll("<p>","");
+		direccionReceptor = direccionReceptor.replaceAll("</p>","");
+	var actividadReceptor = dataCliente[0].actividad;
+	var idActividadReceptor = actividadReceptor.split("-");
+		actividadReceptor = idActividadReceptor[1];
+		idActividadReceptor =idActividadReceptor[0];
+	var municipioReceptor = dataCliente[0].municipio;
+	var idMunicipioReceptor = municipioReceptor.split("-");
+		municipioReceptor = idMunicipioReceptor[1];
+		idMunicipioReceptor = idMunicipioReceptor[0];
+	var departamentoReceptor = dataCliente[0].departamento;
+	var idDepartamentoReceptor = departamentoReceptor.split("-");
+		departamentoReceptor = idDepartamentoReceptor[1];
+		idDepartamentoReceptor = idDepartamentoReceptor[0];
+    var cuerpodocumento=[];
+	var totalGravada = 0;
+	var subTotal= 0;
+	var totalExento = 0;
+		
+		
+		 for (i = 0; i < listaCarrito.length; i++) {
+	 var cuerpo={
+            numItem: i+1,
+            tipoItem: 1,
+            numeroDocumento: null,
+            codigo: null,
+            codTributo: null,
+            descripcion: listaCarrito[i].descripcion,
+            cantidad:  parseFloat(listaCarrito[i].cantidad),
+             uniMedida: parseInt(listaCarrito[i].mediaMh),
+            precioUni: listaCarrito[i].catalogo =="Normal" ? (Math.round10(parseFloat(listaCarrito[i].precio/1.13),-8)) : (Math.round10(parseFloat(listaCarrito[i].precio),-8)),
+            montoDescu: 0,
+            ventaNoSuj: 0,
+            ventaExenta: listaCarrito[i].cantidad != "" && listaCarrito[i].catalogo =="Exento" ? Math.round(((parseFloat(listaCarrito[i].precio) * listaCarrito[i].cantidad )+ Number.EPSILON) * 100) / 100 :0,
+            ventaGravada: listaCarrito[i].cantidad != "" && listaCarrito[i].catalogo =="Normal"? Math.round(((parseFloat(listaCarrito[i].precio/1.13) * listaCarrito[i].cantidad )+ Number.EPSILON) * 100) / 100 :0,
+			tributos : listaCarrito[i].cantidad != "" && listaCarrito[i].catalogo =="Normal"  ?  [ "20"] : null,
+		    psv : 0,
+		    noGravado : 0
+} 
+cuerpodocumento.push(cuerpo);	
+totalExento = Math.round(((totalExento + cuerpo.ventaExenta)+ Number.EPSILON) * 100) / 100;
+totalGravada = Math.round(((totalGravada + cuerpo.ventaGravada)+ Number.EPSILON) * 100) / 100;
+subTotal = subTotal + (parseFloat(listaCarrito[i].precio) * parseFloat(listaCarrito[i].cantidad));
+totalIva =  parseFloat(iva.value);
+subTotal =  Math.round(((subTotal)+ Number.EPSILON) * 100) / 100;
+}
+
+var MontoFinal = totalGravada + totalExento - parseFloat(ivaRetenido.value) + totalIva ;
+   var fe = new Date();
+   var mes = (fe.getMonth() +1);
+   var dia = fe.getDate();
+   
+  if(mes<10){
+	  mes = "0"+mes;
+  }
+  if(dia<10){
+	  dia = "0"+dia;
+  }
+   var fechaFactura = fe.getFullYear()+"-"+mes+"-"+dia;
+   var now = fe.toLocaleTimeString('it-IT');
+			
+	var jsondteObj ={
+		nit : nit,
+		activo : true,
+		passwordPri : passwordPri,
+		dteJson : {
+		 identificacion : {
+			 version : parseInt(versionRemision),
+			 ambiente : ambiente,
+			 tipoDte  : tipoDTERemision,
+			 numeroControl : crearCorrelativo(correlativo[0].correlativo),
+			 codigoGeneracion : create_UUID(),
+			 tipoModelo : transmision=="Contingencia" ? 2 : 1,
+			 tipoOperacion : transmision=="Contingencia" ? 2 : 1,
+			 tipoContingencia :transmision=="Contingencia" ? 1 : null,
+			 motivoContin : null,
+			 fecEmi : fechaFactura,
+			 horEmi : now,
+			 tipoMoneda : tipoMoneda
+			 
+		 },
+		 documentoRelacionado : null,
+		 emisor : {
+			 nit : nit,
+			 nrc : nrc,
+			 nombre : nombreEmi,
+			 codActividad : codActividad,
+			 descActividad : descActividad,
+			 nombreComercial : null,
+			 tipoEstablecimiento : tipoEstablecimiento,
+			 direccion : {
+				 departamento : departamentoEmisor,
+				 municipio : municipioEmisor,
+				 complemento : complemento
+			 },
+			 telefono : telefonoEmisor,
+			 correo : correoEmisor,
+			 codEstableMH : null,
+			 codEstable : null,
+			 codPuntoVentaMH : null,
+			 codPuntoVenta : null
+			 
+		 },
+		 receptor : {
+			 nit :  nitReceptor,
+			 nrc :  nrcReceptor,
+			 nombre : nombreReceptor,
+			 codActividad : idActividadReceptor,
+			 descActividad : actividadReceptor,
+			 nombreComercial : null,
+			 direccion : {
+				 departamento : idDepartamentoReceptor,
+				 municipio : idMunicipioReceptor,
+				 complemento : direccionReceptor
+			 },
+			 telefono : telefonoReceptor,
+			 correo : correoReceptor
+		 },
+		 otrosDocumentos : null,
+		 ventaTercero : null,
+		 cuerpoDocumento :  cuerpodocumento,
+		 resumen : {
+			 totalNoSuj : 0,
+			 totalExenta : totalExento,
+			 totalGravada :  totalGravada,
+			 subTotalVentas : Math.round(((totalGravada + totalExento)+ Number.EPSILON) * 100) / 100,
+			 descuNoSuj : 0,
+			 descuExenta : 0,
+			 descuGravada : descuento.value=="0" ? parseFloat(descuento.value) :  parseFloat((parseFloat(descuento.value)/1.13).toFixed(2)) ,
+			 porcentajeDescuento : 0,
+			 totalDescu : descuento.value=="0" ? parseFloat(descuento.value) : parseFloat((parseFloat(descuento.value)/1.13).toFixed(2)),
+			 tributos : totalIva > 0 ? [{codigo : "20",descripcion : "Impuesto al Valor Agregado13%",valor : parseFloat(totalIva.toFixed(2))}] : null,
+			 subTotal :Math.round(((totalGravada + totalExento - (parseFloat(descuento.value)/1.13) )+ Number.EPSILON) * 100) / 100,
+			 ivaPerci1 : 0,
+			 ivaRete1 : parseFloat(ivaRetenido.value),
+			 reteRenta : 0,
+			 montoTotalOperacion : Math.round(((parseFloat(totalPagar.value.replaceAll(",","")) + parseFloat(ivaRetenido.value) )+ Number.EPSILON) * 100) / 100,
+			 totalNoGravado : 0,
+			 totalPagar :parseFloat(totalPagar.value.replaceAll(",","")),
+			 totalLetras : NumeroALetras(parseFloat(totalPagar.value.replaceAll(",",""))),
+			 saldoFavor : 0,
+			 condicionOperacion : metodo.value == "CREDITO" ? 2 : 1,
+			 pagos : [
+			 {
+				 codigo : formaPago.value,
+				 montoPago : parseFloat(totalPagar.value.replaceAll(",","")),
+				 plazo :  metodo.value == "CREDITO" ? "02" : null,
+				 referencia : "",
+				 periodo : metodo.value == "CREDITO" ? 1 : null
+				 
+			 }
+			 ],
+			 numPagoElectronico : null	 
+		 },
+		 extension : {
+			 nombEntrega : null,
+			 docuEntrega : null,
+			 nombRecibe : null,
+			 docuRecibe : null,
+			 observaciones : metodo.value == "PLAZO" ? "Pago se efectuo en concepto de prima" : null,
+			 placaVehiculo : null			 			 
+		 },
+		 apendice : null,
+		}		 
+	 };
+	 
+	 firmador(JSON.stringify(jsondteObj),correlativo);
+	
+		
+	}
+
 function crearDte(dataCliente,correlativo){
 	
 	var nitReceptor = dataCliente[0].identidad;
@@ -1587,7 +1769,7 @@ var MontoFinal = totalGravada + totalExento - parseFloat(ivaRetenido.value) + to
 	function crearCorrelativo(correlativo){
 			var correlativo = correlativo != "" && correlativo != null ? correlativo.toString() : "0" ;
 			 var controlDTE="";
-			 var str = docuemi.value =="CREDITO FISCAL" ? creditoBase : docuemi.value =="FACTURA"  ? consumidorBase : exportacionBase;
+			 var str = docuemi.value =="CREDITO FISCAL" ? creditoBase : docuemi.value =="FACTURA"  ? consumidorBase : docuemi.value =="NOTA DE REMISION"  ? remisionBase : exportacionBase;
 			if(correlativo=="9"){
 				controlDTE = str.substring(0, 31-(correlativo.length+1));
 			}else if(correlativo=="99"){

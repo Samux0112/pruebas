@@ -169,6 +169,9 @@
 	const exportacionBase = '<?php echo exportacionBase; ?>';	
 	const versionExportacion = '<?php echo versionExportacion; ?>';
 	const tipoDTEExportacion = '<?php echo tipoDTEExportacion; ?>';
+    	const remisionBase = '<?php echo remisionBase; ?>';	
+	const versionRemision = '<?php echo versionRemision; ?>';
+	const tipoDTERemision = '<?php echo tipoDTERemision; ?>';
 		
 </script>
 <?php if (!empty($data['busqueda'])) { ?>

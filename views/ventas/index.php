@@ -12,7 +12,7 @@
 
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active p-3" id="nav-ventas" role="tabpanel" aria-labelledby="nav-ventas-tab" tabindex="0">
-                <h5 class="card-title text-center"><i class="fas fa-cash-register"></i> Nueva Ventas4</h5>
+                <h5 class="card-title text-center"><i class="fas fa-cash-register"></i> Nueva Ventas</h5>
                 <hr>
 
 

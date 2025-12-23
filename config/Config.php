@@ -10,7 +10,7 @@ define('MONEDA', 'S/$ ');
 define('HOST_SMTP', 'mail.maquinariaagricola.top');
 define('USER_SMTP', 'prueba@maquinariaagricola.top');
 define('CLAVE_SMTP', 'Gatoperro12$$');
-define('PUERTO_SMTP', '466');
+define('PUERTO_SMTP', '465');
 define('nit','06141602001010');
 
 // Configuraciones Facturacion Electronica

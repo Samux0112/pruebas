@@ -697,7 +697,7 @@ $this->views->getView('ventas', 'exportacion', $data);
 
     public function verificarStock($idProducto)
     {
-        $data = $this->model->getProducto($idProducto);
+        $data = $this->model->getProducto($idProducto,1);
         echo json_encode($data);
         die();
     }

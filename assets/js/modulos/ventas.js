@@ -130,6 +130,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			numdocu.value = "03"
 		}else if(docuemi.value == "EXPORTACION"){
 			numdocu.value = "11"
+		}else if(docuemi.value == "NOTA DE REMISION"){
+			numdocu.value = "04"
 		}
 		 mostrarProducto();
 

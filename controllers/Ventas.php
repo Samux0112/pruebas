@@ -698,6 +698,7 @@ $this->views->getView('ventas', 'exportacion', $data);
     public function verificarStock($idProducto)
     {
         $data = $this->model->getProducto($idProducto,1);
+        $data['cantidad'] = $data['stock'];
         echo json_encode($data);
         die();
     }

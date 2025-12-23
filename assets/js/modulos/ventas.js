@@ -1876,6 +1876,15 @@ var req = {
 	tipoDte : "03",
 	documento : Dtefirmado	
 	}
+	}else if(docuemi.value=='NOTA DE REMISION'){
+
+var req = {
+	ambiente : ambiente,
+	idEnvio : 1,
+	version : versionRemision,
+	tipoDte : tipoDTERemision,
+	documento : Dtefirmado	
+}
 	}else if(docuemi.value=='FACTURA'){
 
 var req = {

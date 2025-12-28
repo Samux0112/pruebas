@@ -111,14 +111,20 @@ function cargarHistorial() {
             const res = JSON.parse(this.responseText);
             let html = '';
             if (res.length > 0) {
+                // Obtener el rol del usuario desde el input oculto en la vista
+                var userRol = document.getElementById('rol_usuario') ? document.getElementById('rol_usuario').value : '';
                 res.forEach(r => {
                     html += `<tr>
                         <td>${r.id}</td>
                         <td>${r.fecha}</td>
                         <td>${r.solicitante}</td>
                         <td>${r.estado}</td>
-                        <td><button class=\"btn btn-sm btn-primary\" onclick=\"verRequisicion(${r.id})\">Ver</button></td>
-                    </tr>`;
+                        <td>`;
+                    const rolesPermitidos = ['ADMINISTRADOR', 'SUPERVISOR', 'CONTADOR', 'INVENTARIO', 'VENDEDOR ADMINISTRATIVO'];
+                    if (rolesPermitidos.includes(userRol)) {
+                        html += `<button class="btn btn-sm btn-primary" onclick="verRequisicion(${r.id})">Ver</button>`;
+                    }
+                    html += `</td></tr>`;
                 });
             }
             document.querySelector('#tblHistorialRequisiciones tbody').innerHTML = html;

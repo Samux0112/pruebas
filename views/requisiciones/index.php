@@ -3,6 +3,7 @@ require 'views/templates/header.php';
 ?>
 <div class="page-content">
     <div class="container-fluid">
+        <input type="hidden" id="rol_usuario" value="<?php echo isset($_SESSION['rol_usuario']) ? $_SESSION['rol_usuario'] : ''; ?>">
         <div class="row">
             <div class="col-12">
                 <h2>Requisiciones de Compra</h2>

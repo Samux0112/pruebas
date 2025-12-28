@@ -170,7 +170,7 @@ class OrdenesCompra extends Controller{
             $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
             $estado = isset($_POST['estado']) ? trim($_POST['estado']) : '';
             if ($id > 0 && in_array($estado, ['aprobado', 'rechazado'])) {
-                $ok = $this->model->actualizarEstadoOrden($id, $estado);
+                $ok = $this->model->actualizarEstadoOrden($id, $estado,$this->id_usuario);
                 if ($ok) {
                     echo json_encode(['success' => true]);
                 } else {

@@ -30,10 +30,10 @@ class OrdenesCompraModel extends Query{
         $sql = "SELECT o.*, p.nombre as proveedor, u.nombre as usuario FROM ordenes_compra o LEFT JOIN proveedor p ON o.id_proveedor = p.id LEFT JOIN usuarios u ON o.id_usuario = u.id ORDER BY o.created_at DESC";
         return $this->selectAll($sql);
     }
-    public function actualizarEstadoOrden($id, $estado)
+    public function actualizarEstadoOrden($id, $estado, $usuario_autorizador)
     {
-        $sql = "UPDATE ordenes_compra SET estado = ? WHERE id = ?";
-        $array = array($estado, $id);
+        $sql = "UPDATE ordenes_compra SET estado = ?, usuario_autorizador = ? WHERE id = ?";
+        $array = array($estado, $usuario_autorizador, $id);
         return $this->save($sql, $array);
     }
 }

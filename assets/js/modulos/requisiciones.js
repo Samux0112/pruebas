@@ -119,10 +119,25 @@ function cargarHistorial() {
                         <td>${r.fecha}</td>
                         <td>${r.solicitante}</td>
                         <td>${r.estado}</td>
-                        <td><button class="btn btn-sm btn-primary" onclick="verRequisicion(${r.id})">Ver</button></td>
+                        <td><button class=\"btn btn-sm btn-primary\" onclick=\"verRequisicion(${r.id})\">Ver</button></td>
                     </tr>`;
                 });
-                document.querySelector('#tblHistorialRequisiciones tbody').innerHTML = html;
+            }
+            document.querySelector('#tblHistorialRequisiciones tbody').innerHTML = html;
+            // Inicializar DataTable después de cargar los datos
+            if (window.jQuery && $('#tblHistorialRequisiciones').length) {
+                if ($.fn.DataTable.isDataTable('#tblHistorialRequisiciones')) {
+                    $('#tblHistorialRequisiciones').DataTable().destroy();
+                }
+                $('#tblHistorialRequisiciones').DataTable({
+                    language: {
+                        url: base_url + 'assets/DataTables/es_es.json'
+                    },
+                    responsive: true,
+                    pageLength: 10,
+                    lengthMenu: [5, 10, 25, 50, 100],
+                    order: [[0, 'desc']]
+                });
             }
         }
     }

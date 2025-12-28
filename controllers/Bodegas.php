@@ -12,7 +12,7 @@ class Bodegas extends Controller
             header('Location: ' . BASE_URL);
             exit;
         }
-        if (!verificar('bodegas')) {
+        if (!verificar('bodegas') && !verificar('StockBodegas')) {
             header('Location: ' . BASE_URL . 'admin/permisos');
             exit;
         }

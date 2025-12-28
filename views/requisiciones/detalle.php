@@ -133,7 +133,7 @@ $msg = $data['msg'];
                                     <th>Monto</th>
                                     <th>Fecha</th>
                                     <th>Usuario</th>
-                                    <th>Acciones</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -144,9 +144,6 @@ $msg = $data['msg'];
                                     <td><?php echo htmlspecialchars($orden['total']); ?></td>
                                     <td><?php echo htmlspecialchars($orden['fecha']); ?></td>
                                     <td><?php echo htmlspecialchars($orden['usuario']); ?></td>
-                                    <td>
-                                        <a href="<?php echo BASE_URL . 'ordenesCompra/generarPDF/' . $orden['id']; ?>" target="_blank" class="btn btn-primary btn-sm">Ver PDF</a>
-                                    </td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>

@@ -1,7 +1,5 @@
 const tblNuevaRequisicion = document.querySelector('#tblNuevaRequisicion tbody');
 const observaciones = document.querySelector('#observaciones');
-
-
 document.addEventListener('DOMContentLoaded', function () {
     if (localStorage.getItem(nombreKey) != null) {
         listaCarrito = JSON.parse(localStorage.getItem(nombreKey));

@@ -18,7 +18,9 @@
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <button class="nav-link active" id="nav-clientes-tab" data-bs-toggle="tab" data-bs-target="#nav-clientes" type="button" role="tab" aria-controls="nav-clientes" aria-selected="true">Clientes</button>
+                <?php if (!in_array($_SESSION['rol_usuario'], ['VENDEDOR', 'VENDEDORES ADMINISTRATIVO'])) { ?>
                 <button class="nav-link" id="nav-nuevo-tab" data-bs-toggle="tab" data-bs-target="#nav-nuevo" type="button" role="tab" aria-controls="nav-nuevo" aria-selected="false">Nuevo</button>
+                <?php } ?>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">

@@ -30,10 +30,14 @@ class Clientes extends Controller
         }
         $data = $this->model->getClientes(1);
         for ($i = 0; $i < count($data); $i++) {
+            if(!($_SESSION['rol_usuario']=='VENDEDOR')){
             $data[$i]['acciones'] = '<div>
             <button class="btn btn-danger" type="button" onclick="eliminarCliente(' . $data[$i]['id'] . ')"><i class="fas fa-trash"></i></button>
             <button class="btn btn-info" type="button" onclick="editarCliente(' . $data[$i]['id'] . ')"><i class="fas fa-edit"></i></button>
             </div>';
+            }else{
+            $data[$i]['acciones'] = '<div></div>';
+            }
         }
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();

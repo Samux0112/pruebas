@@ -45,7 +45,7 @@ require 'views/templates/header.php';
                                                 </td>
                                                 <td>
                                                     <?php 
-                                                    $rolesPermitidos = ['ADMINISTRADOR', 'SUPERVISOR', 'CONTADOR', 'INVENTARIO', 'VENDEDOR ADMINISTRATIVO'];
+                                                    $rolesPermitidos = ['ADMINISTRADOR', 'SUPERVISOR', 'CONTADOR', 'INVENTARIO', 'VENDEDOR ADMINISTRATIVO', 'AUXILIAR CONTABLE'];
                                                     if (isset($_SESSION['rol_usuario']) && in_array($_SESSION['rol_usuario'], $rolesPermitidos)) {
                                                     ?>
                                                     <a href="<?php echo ($orden['estado'] === 'aprobado') ? (BASE_URL . 'ordenesCompra/generarPDF/' . $orden['id']) : '#'; ?>" target="_blank" class="btn btn-primary btn-sm<?php echo ($orden['estado'] !== 'aprobado') ? ' disabled' : ''; ?>" tabindex="-1" aria-disabled="<?php echo ($orden['estado'] !== 'aprobado') ? 'true' : 'false'; ?>">Ver PDF</a>

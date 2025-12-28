@@ -44,7 +44,7 @@ require 'views/templates/header.php';
                                                     <?php endif; ?>
                                                 </td>
                                                 <td>
-                                                    <a href="<?php echo BASE_URL . 'ordenesCompra/generarPDF/' . $orden['id']; ?>" target="_blank" class="btn btn-primary btn-sm">Ver PDF</a>
+                                                    <a href="<?php echo ($orden['estado'] === 'aprobado') ? (BASE_URL . 'ordenesCompra/generarPDF/' . $orden['id']) : '#'; ?>" target="_blank" class="btn btn-primary btn-sm<?php echo ($orden['estado'] !== 'aprobado') ? ' disabled' : ''; ?>" tabindex="-1" aria-disabled="<?php echo ($orden['estado'] !== 'aprobado') ? 'true' : 'false'; ?>">Ver PDF</a>
                                                     <button type="button" class="btn btn-success btn-sm ms-1 btnCompletarCompra" data-id="<?php echo htmlspecialchars($orden['id']); ?>" <?php echo ($orden['estado'] !== 'aprobado') ? 'disabled' : ''; ?>>Completar compra</button>
                                                     <?php if (isset($_SESSION['rol_usuario']) && in_array($_SESSION['rol_usuario'], ['ADMINISTRADOR', 'SUPERVISOR','CONTADOR'])): ?>
                                                         <button type="button" class="btn btn-warning btn-sm ms-1 btnAutorizarOrden" data-id="<?php echo htmlspecialchars($orden['id']); ?>">Autorizar</button>

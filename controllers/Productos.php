@@ -40,7 +40,7 @@ class Productos extends Controller
         }
         $data = $this->model->getProductos(1);
         for ($i = 0; $i < count($data); $i++) {
-			if($_SESSION['rol_usuario']=='ADMINISTRADOR' || $_SESSION['rol_usuario']=='SUPERVISOR'|| $_SESSION['rol_usuario']=='INVENTARIOS'){
+			if($_SESSION['rol_usuario']=='ADMINISTRADOR' || $_SESSION['rol_usuario']=='SUPERVISOR'|| $_SESSION['rol_usuario']=='INVENTARIO'){
             $foto = ($data[$i]['foto'] == null) ? 'assets/images/productos/default.png' :  $data[$i]['foto'];
             $data[$i]['imagen'] = '<img class="img-thumbnail" src="'.BASE_URL . $foto . '" width="50">';
             $data[$i]['acciones'] = '<div>

@@ -65,7 +65,7 @@ class Productos extends Controller
 		$array = explode(',', $datos);
         $idBodega = $array[0];
 		
-        if (!verificar('productos') && !verificar('bodegas')) {
+        if (!verificar('productos') && !verificar('StockBodegas')) {
             header('Location: ' . BASE_URL . 'admin/permisos');
             exit;
         }

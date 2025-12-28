@@ -89,7 +89,12 @@ $msg = $data['msg'];
                                     <td><?php echo htmlspecialchars($cot['detalle']); ?></td>
                                     <td><?php echo htmlspecialchars($cot['fecha']); ?></td>
                                     <td>
-                                        <button class="btn btn-info btn-sm btnVerCotizacion" data-id="<?php echo $cot['id']; ?>">Ver</button>
+                                       <?php 
+                                        $rolesPermitidos = ['ADMINISTRADOR', 'SUPERVISOR', 'CONTADOR', 'INVENTARIO', 'VENDEDOR ADMINISTRATIVO'];
+                                        if (isset($_SESSION['rol_usuario']) && in_array($_SESSION['rol_usuario'], $rolesPermitidos)) {
+                                        ?>
+                                            <button class="btn btn-info btn-sm btnVerCotizacion" data-id="<?php echo $cot['id']; ?>">Ver</button>
+                                        <?php } ?>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>

@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (res.success && res.idOrden) {
                         alertaPersonalizada('success', 'Orden de compra generada correctamente.');
                         setTimeout(function () {
-                            window.open(base_url + 'ordenesCompra/generarPDF/' + res.idOrden, '_blank');
+                           // window.open(base_url + 'ordenesCompra/generarPDF/' + res.idOrden, '_blank');
                             window.history.back();
                         }, 1000);
                     } else {

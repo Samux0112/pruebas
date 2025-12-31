@@ -62,6 +62,11 @@
                             </label>
                         </div>
                     </div>
+
+                    <div class="col-md-12 mb-2">
+                                                <label for="observaciones">Observaciones</label>
+                                                <textarea id="observaciones" name="observaciones" class="form-control" rows="2" placeholder="Observaciones para la factura..." ></textarea>
+                                            </div>
 					
 					<hr>
 					

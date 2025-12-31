@@ -97,6 +97,7 @@ class Pedidos extends Controller
 			$retenIva = $datos['retenIva'];
 			$tipo_operacion = $datos['tipoOp'];
 	        $tipo_ingreso = $datos['tipoVen'];
+            $observaciones = $datos['obser'];
 
 			
 
@@ -127,7 +128,7 @@ class Pedidos extends Controller
                     $datosProductos = json_encode($array['productos']);
                     $pago = (!empty($datos['pago'])) ? $datos['pago'] : $totalVenta;
 					$estadoPedido = "GENERADO";
-                    $venta = $this->model->registrarVenta($datosProductos, $totalVenta, $fecha, $hora, $metodo, $descuento, $serie[0], $pago, $docuemi, $numdocu, $vende, $forma, $forma2, $idCliente, $this->id_usuario, $correlativo, $numeroControlDte, $uuid, $codPuntoVentaMH, $sello, $vExentas, $vIva, $vGravadas, $claseDoc, $retenIva, $tipo_operacion, $tipo_ingreso,$estadoPedido);
+                    $venta = $this->model->registrarVenta($datosProductos, $totalVenta, $fecha, $hora, $metodo, $descuento, $serie[0], $pago, $docuemi, $numdocu, $vende, $forma, $forma2, $idCliente, $this->id_usuario, $correlativo, $numeroControlDte, $uuid, $codPuntoVentaMH, $sello, $vExentas, $vIva, $vGravadas, $claseDoc, $retenIva, $tipo_operacion, $tipo_ingreso,$estadoPedido,$observaciones);
 					$res = array('msg' => 'PEDIDO GENERADO', 'type' => 'success', 'idVenta' => $venta);
                     
 				   if ($venta > 0) {

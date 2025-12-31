@@ -152,7 +152,7 @@
                        </div>
                        <div class="col-md-12 mb-2">
                                                 <label for="observaciones">Observaciones</label>
-                                                <textarea id="observaciones" name="observaciones" class="form-control" rows="2" placeholder="Observaciones para la factura..."></textarea>
+                                                <textarea id="observaciones" name="observaciones" class="form-control" rows="2" placeholder="Observaciones para la factura..." ><?php echo $data['pedido']['observaciones']; ?></textarea>
                                             </div>
                         </div>
                  <!-- fin cambios nuevos mh -->

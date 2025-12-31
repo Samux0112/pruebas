@@ -384,7 +384,7 @@ var table = document.getElementById("tblPlan");
 		if(totalPagar.value > 0){
 			
 		}
-	if(plazo.value !="" && monto.value!="" && interes.value!="" && plazoSeguro.value!="" && totalPagar.value > 0){
+	if(plazo.value !="" && monto.value!="" && interes.value!="" && plazoSeguro.value!="" && parseFloat(totalPagar.value) > 0){
 		///////
 		var tasaInteres = parseFloat(interes.value) / 100;
 		

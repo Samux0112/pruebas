@@ -63,6 +63,20 @@
                         </div>
                     </div>
 
+                                                <div class="col-lg-4 col-sm-6 mb-2">
+                           <label for="codigoValores">Título a que se remiten los bienes</label>
+                           <div class="input-group">
+                           <label class="input-group-text" for="codigoValores"><i class="fas fa-id-card"></i></label>
+                           <select id="codigoValores" class="form-control">
+                               <option value="01">01 Depósito</option>
+                               <option value="02">02 Propiedad</option>
+                               <option value="03">03 Consignación</option>
+                               <option value="04">04 Traslado</option>
+                               <option value="05">05 Otros</option>
+                           </select>
+                            </div>
+                       </div>
+
                     <div class="col-md-12 mb-2">
                                                 <label for="observaciones">Observaciones</label>
                                                 <textarea id="observaciones" name="observaciones" class="form-control" rows="2" placeholder="Observaciones para la factura..." ></textarea>

@@ -9,6 +9,8 @@ const formaPago = document.querySelector('#formaPago');
 const tblPlanes = document.querySelector('#tblPlanes');
 const tipo_operacion = document.querySelector('#tipo_operacion');
 const tipo_ingreso = document.querySelector('#tipo_ingreso');
+const codigoValores = document.querySelector('#codigoValores');
+
 
 
 

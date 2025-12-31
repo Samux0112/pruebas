@@ -1,4 +1,5 @@
 const tblNuevaVenta = document.querySelector('#tblNuevaVenta tbody');
+const observaciones = document.querySelector('#observaciones');
 const docuemi = document.querySelector('#docuemi');
 const numdocu = document.querySelector('#numdocu');
 const vende = document.querySelector('#vende');
@@ -1041,7 +1042,7 @@ subTotal =  Math.round(((subTotal)+ Number.EPSILON) * 100) / 100;
 			  codIncoterms: null,
               descIncoterms: null,
               numPagoElectronico: null,
-              observaciones: ""
+			  observaciones: observaciones ? observaciones.value : ""
 		 },
 		      otrosDocumentos: null,
               ventaTercero: null,
@@ -1229,7 +1230,7 @@ totalIva =  Math.round(((totalIva)+ Number.EPSILON) * 100) / 100;
 			 docuEntrega : null,
 			 nombRecibe : null,
 			 docuRecibe : null,
-			 observaciones : metodo.value == "PLAZO" ? "Pago se efectuo en concepto de prima" : null,
+			 observaciones : metodo.value == "PLAZO" ? "Pago se efectuo en concepto de prima" : observaciones ? observaciones.value : "",
 			  placaVehiculo : null			 			 
 		 },
 		 apendice : null,
@@ -1396,7 +1397,7 @@ totalIva =  Math.round(((totalIva)+ Number.EPSILON) * 100) / 100;
 			 docuEntrega : null,
 			 nombRecibe : null,
 			 docuRecibe : null,
-			 observaciones : null,
+			 observaciones : observaciones ? observaciones.value : "",
 			 placaVehiculo : null			 			 
 		 },
 		 apendice : null,
@@ -1564,7 +1565,7 @@ var MontoFinal = totalGravada + totalExento - parseFloat(ivaRetenido.value) + to
 			 docuEntrega : null,
 			 nombRecibe : null,
 			 docuRecibe : null,
-			 observaciones : metodo.value == "PLAZO" ? "Pago se efectuo en concepto de prima" : null	 			 
+			 observaciones : metodo.value == "PLAZO" ? "Pago se efectuo en concepto de prima" : observaciones ? observaciones.value : ""	 			 
 		 },
 		 apendice : null,
 		}		 
@@ -1742,7 +1743,7 @@ var MontoFinal = totalGravada + totalExento - parseFloat(ivaRetenido.value) + to
 			 docuEntrega : null,
 			 nombRecibe : null,
 			 docuRecibe : null,
-			 observaciones : metodo.value == "PLAZO" ? "Pago se efectuo en concepto de prima" : null,
+			 observaciones : metodo.value == "PLAZO" ? "Pago se efectuo en concepto de prima" : observaciones ? observaciones.value : "",
 			 placaVehiculo : null			 			 
 		 },
 		 apendice : null,

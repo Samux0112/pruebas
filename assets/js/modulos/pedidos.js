@@ -609,20 +609,20 @@ function mostrarProducto() {
                         </tr>`;
                     });
 					if(aplicaciones.value=="sinAplicaciones"){
-					ventasGravadas = docuemi.value == "CREDITO FISCAL" ? res.gravadas : (Math.round(((parseFloat(res.gravadas) + parseFloat(res.iva))+ Number.EPSILON) * 100) / 100).toFixed(2);
+					ventasGravadas = docuemi.value == "CREDITO FISCAL" || docuemi.value == "NOTA DE REMISION" ? res.gravadas : (Math.round(((parseFloat(res.gravadas) + parseFloat(res.iva))+ Number.EPSILON) * 100) / 100).toFixed(2);
                     totalPagarSD = res.totalVentaSD;
 					tblNuevaVenta.innerHTML = html;
                     totalPagar.value = res.totalVenta;
                     totalPagarHidden.value = res.totalVentaSD; 
-					gravadas.value = docuemi.value == "CREDITO FISCAL" ? res.gravadas : (Math.round(((parseFloat(res.gravadas) + parseFloat(res.iva))+ Number.EPSILON) * 100) / 100).toFixed(2);
+					gravadas.value = docuemi.value == "CREDITO FISCAL" || docuemi.value == "NOTA DE REMISION" ? res.gravadas : (Math.round(((parseFloat(res.gravadas) + parseFloat(res.iva))+ Number.EPSILON) * 100) / 100).toFixed(2);
 					exentas.value = res.exentos;
 					ivaRetenido.value = 0;
-					iva.value = docuemi.value == "CREDITO FISCAL" ? Math.round(((parseFloat(res.iva))+ Number.EPSILON) * 100) / 100 : 0 ;
+					iva.value = docuemi.value == "CREDITO FISCAL" || docuemi.value == "NOTA DE REMISION" ? Math.round(((parseFloat(res.iva))+ Number.EPSILON) * 100) / 100 : 0 ;
                     btnEliminarProducto();
                     agregarCantidad();
                     agregarPrecioVenta();
 					}else if(aplicaciones.value=="retencion"){
-					ventasGravadas = docuemi.value == "CREDITO FISCAL" ? res.gravadas : (Math.round(((parseFloat(res.gravadas) + parseFloat(res.iva))+ Number.EPSILON) * 100) / 100).toFixed(2);	
+					ventasGravadas = docuemi.value == "CREDITO FISCAL" || docuemi.value == "NOTA DE REMISION" ? res.gravadas : (Math.round(((parseFloat(res.gravadas) + parseFloat(res.iva))+ Number.EPSILON) * 100) / 100).toFixed(2);	
 					tblNuevaVenta.innerHTML = html;
 					totalPagarSD = res.totalVentaSD;
                     totalPagar.value = Math.round(((parseFloat(res.totalVenta.replaceAll(",","")) - (parseFloat(res.gravadas.replaceAll(",","")) *0.01))+ Number.EPSILON) * 100) / 100;
@@ -850,6 +850,9 @@ function maxCorrelativo(cliente){
 					crearDte(cliente,data);
 					} else if(docuemi.value=="FACTURA"){
 						crearDteFactura(cliente,data);
+						
+					}else if(docuemi.value=="NOTA DE REMISION"){
+						crearDteRemision(cliente,data);
 						
 					}else if(docuemi.value=="EXPORTACION"){
 						crearDteFacturaExp(cliente,data);
@@ -1872,12 +1875,12 @@ function guardarDte(objdte,correlativo){
 				uuid: '',
 				tipoTransmision : transmision,
 				codPuntoVentaMH : puntoVenta,
-				total : objdte.dteJson.resumen.totalPagar,
+				total : docuemi.value=="NOTA DE REMISION" ? 0 : objdte.dteJson.resumen.totalPagar,
 				sello: objdte.selloRecibido,
 				vExentas:objdte.dteJson.resumen.totalExenta,
-				vIva : docuemi.value=="CREDITO FISCAL" ? objdte.dteJson.resumen.totalExenta > 0 ? 0 : objdte.dteJson.resumen.tributos[0].valor : 0 ,
+				vIva : docuemi.value=="CREDITO FISCAL" || docuemi.value=="NOTA DE REMISION" ? objdte.dteJson.resumen.totalExenta > 0 ? 0 : objdte.dteJson.resumen.tributos[0].valor : 0 ,
 				vGravadas : objdte.dteJson.resumen.totalGravada,
-				retenIva : docuemi.value=="CREDITO FISCAL" ? objdte.dteJson.resumen.ivaRete1 : objdte.dteJson.resumen.ivaRete1,
+				retenIva : docuemi.value=="CREDITO FISCAL" ?  objdte.dteJson.resumen.ivaRete1 : docuemi.value=="NOTA DE REMISION" ? 0 : objdte.dteJson.resumen.ivaRete1,
 				monto : monto.value,
 				plazo : plazo.value,
 				interes : interes.value,

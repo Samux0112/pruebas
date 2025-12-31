@@ -17,10 +17,6 @@
 
 
                 <div class="row mb-2">
-                                            <div class="col-md-12 mb-2">
-                                                <label for="observaciones">Observaciones</label>
-                                                <textarea id="observaciones" name="observaciones" class="form-control" rows="2" placeholder="Observaciones para la factura..."></textarea>
-                                            </div>
 								<?php 
 				if($data['cotizacion']>0){ ?>
 				       <div class="col-md-2">
@@ -154,6 +150,10 @@
                            </select>
                             </div>
                        </div>
+                       <div class="col-md-12 mb-2">
+                                                <label for="observaciones">Observaciones</label>
+                                                <textarea id="observaciones" name="observaciones" class="form-control" rows="2" placeholder="Observaciones para la factura..."></textarea>
+                                            </div>
                         </div>
                  <!-- fin cambios nuevos mh -->
                 

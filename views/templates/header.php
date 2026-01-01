@@ -168,7 +168,7 @@
                 <?php } if (verificar('salidas') ) { ?>
                     <li>
                         <a href="javascript:;" class="has-arrow">
-                            <div class="parent-icon"><i class="fa-solid fa-screwdriver-wrench"></i>
+                            <div class="parent-icon"><i class="fa-solid fa-arrow-right-arrow-left"></i>
                             </div>
                             <div class="menu-title">Traslados</div>
                         </a>
@@ -184,7 +184,7 @@
 					<?php } if ((verificar('pedidos')) || (verificar('FacturarPedidos')) || (verificar('despacho')) ) { ?>
                     <li>
                         <a href="javascript:;" class="has-arrow">
-                            <div class="parent-icon"><i class="fa-solid fa-screwdriver-wrench"></i>
+                            <div class="parent-icon"><i class="fa-regular fa-id-badge"></i>
                             </div>
                             <div class="menu-title">Pedidos</div>
                         </a>
@@ -226,7 +226,7 @@
                  <?php }  if (verificar('requisiciones')) { ?>
                 <li>
                     <a href="<?php echo BASE_URL . 'requisiciones'; ?>">
-                        <div class="parent-icon"><i class="fa-solid fa-cash-register"></i>
+                        <div class="parent-icon"><i class="fa-solid fa-cart-shopping"></i>
                         </div>
                         <div class="menu-title">Requisiciones</div>
                     </a>
@@ -234,7 +234,7 @@
                 <?php }  if (verificar('OrdenesCompras')) { ?>
                 <li>
                     <a href="<?php echo BASE_URL . 'ordenesCompra/listado'; ?>">
-                        <div class="parent-icon"><i class="fa-solid fa-cash-register"></i>
+                        <div class="parent-icon"><i class="fa-solid fa-file-invoice-dollar"></i>
                         </div>
                         <div class="menu-title">Órdenes de Compra</div>
                     </a>
@@ -243,7 +243,7 @@
 				<?php }if (verificar('Nota de credito')) { ?>
                 <li>
                     <a href="<?php echo BASE_URL . 'notaCredito'; ?>">
-                        <div class="parent-icon"><i class="fa-solid fa-cash-register"></i>
+                        <div class="parent-icon"><i class="fa-solid fa-bars-staggered"></i>
                         </div>
                         <div class="menu-title">Nota de crédito</div>
                     </a>
@@ -266,7 +266,7 @@
                 <?php }  if (verificar('cuentas por pagar')) { ?>
                 <li>
                     <a href="<?php echo BASE_URL . 'creditos2'; ?>">
-                        <div class="parent-icon"><i class="fa-solid fa-money-bill"></i>
+                        <div class="parent-icon"><i class="fa-solid fa-money-bill-wave"></i>
                         </div>
                         <div class="menu-title">Cuentas por pagar</div>
                     </a>
@@ -287,7 +287,7 @@
                 <?php }  if (verificar('cotizaciones')) { ?>
                 <li>
                     <a href="<?php echo BASE_URL . 'cotizaciones'; ?>">
-                        <div class="parent-icon"><i class="fa-solid fa-rectangle-list"></i>
+                        <div class="parent-icon"><i class="fa-solid fa-book-open-reader"></i>
                         </div>
                         <div class="menu-title">Cotizaciones</div>
                     </a>
@@ -299,7 +299,7 @@
                     <a href="<?php echo BASE_URL . 'apartados'; ?>">
                         <div class="parent-icon"><i class="fa-solid fa-people-arrows"></i>
                         </div>
-                        <div class="menu-title">Renovaciones</div>
+                        <div class="menu-title">Apartados</div>
                     </a>
                 </li>
 				
@@ -315,7 +315,7 @@
                 <?php }  if (verificar('inventario y kardex')) { ?>
                 <li>
                     <a href="<?php echo BASE_URL . 'inventarios'; ?>">
-                        <div class="parent-icon"><i class="fa-solid fa-file-lines"></i>
+                        <div class="parent-icon"><i class="fa-solid fa-list-check"></i>
                         </div>
                         <div class="menu-title">Inventario & Kardex</div>
                     </a>
@@ -323,7 +323,7 @@
                 <?php }  if (verificar('Cortez')) { ?> 
 				<li>
                     <a href="<?php echo BASE_URL . 'cortez'; ?>">
-                        <div class="parent-icon"><i class="fa-solid fa-file-lines"></i>
+                        <div class="parent-icon"><i class="fa-solid fa-circle-dollar-to-slot"></i>
                         </div>
                         <div class="menu-title">Corte Z</div>
                     </a>
@@ -331,7 +331,7 @@
                  <?php } if (verificar('catalogoCuentas')) { ?> 
 				<li>
                     <a href="<?php echo BASE_URL . 'catalogoCuentas'; ?>">
-                        <div class="parent-icon"><i class="fa-solid fa-file-lines"></i>
+                        <div class="parent-icon"><i class="fa-solid fa-chalkboard-user"></i>
                         </div>
                         <div class="menu-title">Catalogo de Cuentas</div>
                     </a>

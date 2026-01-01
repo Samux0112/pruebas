@@ -54,7 +54,7 @@ $tempDir = "qrimages/";
 $dte = json_decode($dte,true);
 $fecha = substr($dte["fhProcesamiento"],0,10);
 $fecha = substr($dte["fhProcesamiento"],6,4)."-".substr($dte["fhProcesamiento"],3,2)."-".substr($dte["fhProcesamiento"],0,2);
-$codeContents = 'https://admin.factura.gob.sv/consultaPublica?ambiente=00&codGen='.$dte["dteJson"]["identificacion"]["codigoGeneracion"].'&fechaEmi='.$fecha;
+$codeContents = 'https://admin.factura.gob.sv/consultaPublica?ambiente=01&codGen='.$dte["dteJson"]["identificacion"]["codigoGeneracion"].'&fechaEmi='.$fecha;
 QRcode::png($codeContents, $tempDir.'008_4.png', QR_ECLEVEL_L, 3, 4); 
 
 

@@ -547,11 +547,12 @@ $this->views->getView('ventas', 'exportacion', $data);
                 $resultVenta = $this->model->getVenta($idVenta);
                 $ventaProducto = json_decode($resultVenta['productos'], true);
                 foreach ($ventaProducto as $producto) {
-                    $result = $this->model->getProducto($producto['id']);
-                    $nuevaCantidad = $result['cantidad'] + $producto['cantidad'];
+                    $result = $this->model->getProducto($producto['id'],1);
+                    $nuevaCantidad = $result['stock'] + $producto['cantidad'];
                     $totalVentas = $result['ventas'] - $producto['cantidad'];
 					if($producto['id']!=0){
-					$this->model->actualizarStock($nuevaCantidad, $totalVentas, $producto['id']);	
+					//$this->model->actualizarStock($nuevaCantidad, $totalVentas, $producto['id']);	
+                    $this->model->actualizarStock($nuevaCantidad, $producto['id'], 1);
 					//movimientos
                     $movimiento = 'Devolución Venta N°: ' . $idVenta;
                     $this->model->registrarMovimiento($movimiento, 'entrada', $producto['cantidad'], $nuevaCantidad, $producto['id'], $this->id_usuario);

@@ -10,13 +10,15 @@
 </head>
 
 <body>
-<img src="<?php echo BASE_URL . 'assets/images/logo.png'; ?>" alt="">
+<img src="<?php echo BASE_URL . 'assets/images/logo2.png'; ?>" alt="" class = "dan">
   
     <div class="datos-empresa">
         <p><?php echo $data['empresa']['nombre']; ?></p>
+        <p>Nit: <?php echo $data['empresa']['ruc']; ?></p>
         <p>Reg: <?php echo $data['empresa']['registro']; ?></p>
-        <p>Tel:<?php echo $data['empresa']['telefono']; ?></p>
-<br><br>
+        <p>Tel: <?php echo $data['empresa']['telefono']; ?></p>
+        
+<br><br><br><br>
         
     </div>
     <h5 class="title">Datos del Cliente</h5>
@@ -27,18 +29,6 @@
         <p><strong>Direccion: </strong> <?php echo $data['venta']['direccion']; ?></p>
         <p><strong>Correo: </strong> <?php echo $data['venta']['correo']; ?></p>
     </div>
-    
-    <?php if($data['venta']['docuemi'] == 'RECIBO DE VENTA'){  ?>
-    <h5 class="title">RECIBO DE VENTA</h5>
-     <div class="datos-factu"> 
-     <p><strong>Fecha: </strong> <?php echo $data['venta']['fecha']; ?></p>
-     <p><strong>Hora: </strong> <?php echo $data['venta']['hora']; ?></p>
-     <p><strong><?php echo $data['venta']['forma']; ?>: </strong> <?php echo $data['venta']['metodo']; ?></p>
-     <p><strong>Numero de control: </strong> <?php echo $data['venta']['numeroControlDte']; ?></p>
-
-    </div>
-
-    <?php } else {?>
     
     <h5 class="title">Factura electronica</h5>
      <div class="datos-factu"> 
@@ -54,7 +44,6 @@
      
         
     </div>
-    <?php } ?>
     <h5 class="title">Detalle de los Productos</h5>
     <table>
         <thead>
@@ -66,13 +55,14 @@
             </tr>
         </thead>
         <tbody>
-            <?php
+            
+            <img src="<?php
             require_once __DIR__ .'../../../phpqrcode/qrlib.php';
             $tempDir = "qrimages/";
             $productos = json_decode($data['venta']['productos'], true);
-            $codeContents = 'https://admin.factura.gob.sv/consultaPublica?ambiente=00&codGen='.$data['venta']['uuid'].'&fechaEmi='.$data['venta']['fecha'];
+            $codeContents = 'https://admin.factura.gob.sv/consultaPublica?ambiente=01&codGen='.$data['venta']['uuid'].'&fechaEmi='.$data['venta']['fecha'];
 QRcode::png($codeContents, $tempDir.'008_4.png', QR_ECLEVEL_L, 3, 4);
-            foreach ($productos as $producto) { ?>
+            foreach ($productos as $producto) { ?>" alt="">
                 <tr>
                     <td><?php echo $producto['cantidad']; ?></td>
                     <td><?php echo ($data['venta']['metodo'] == "PLAZO") ? 'Prima de : '.$producto['nombre'] : $producto['nombre'] ; ?></td>
@@ -80,6 +70,7 @@ QRcode::png($codeContents, $tempDir.'008_4.png', QR_ECLEVEL_L, 3, 4);
                     <td><?php echo number_format($producto['cantidad'] * $producto['precio'], 2); ?></td>
                 </tr>
             <?php } ?>
+            
             
             <tr>
                 <td class="text-right" colspan="3">Pago Con</td>
@@ -103,15 +94,11 @@ QRcode::png($codeContents, $tempDir.'008_4.png', QR_ECLEVEL_L, 3, 4);
         </tbody>
         
     </table>
-
-    <?php if($data['venta']['docuemi'] != 'RECIBO DE VENTA'){  ?>
     
     <table>
-                <tr class="dan" colspan="3"><img ="dan" src="<?php echo BASE_URL . 'qrimages/008_4.png'; ?>" alt=""></tr>
+                <tr class="qr" colspan="3"><img ="qr" src="<?php echo BASE_URL . 'qrimages/008_4.png'; ?>" alt=""></tr>
         </table>
-        <br><br><br><br><br><br><br>
-    <?php }?>
-        
+        <br><br><br><br><br><br>
         
     <div class="mensaje">
         <h4><?php echo $data['venta']['metodo'] ?></h4>

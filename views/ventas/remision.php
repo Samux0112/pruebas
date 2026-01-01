@@ -427,9 +427,8 @@ fclose($jsonFile);
                 $mail->Password   = CLAVE_SMTP;                               //SMTP password
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
                 $mail->Port       = PUERTO_SMTP; 
-                $mail->From = 'pruebas@fabianscorp.top'; //Sets the From email address for the message
-$mail->FromName = "Carlos Fabian"; //Sets the From name of the message
-$mail->AddAddress('pruebas@fabianscorp.top', 'Carlos Fabian'); //Adds a
+                $mail->setFrom(USER_SMTP, NOMBREEMISOR); //Sets the From email address for the message
+$mail->AddAddress($dte["dteJson"]["receptor"]["correo"], "Cliente"); //Adds a"To" address
 $mail->AddAddress($dte["dteJson"]["receptor"]["correo"], $dte["dteJson"]["receptor"]["nombre"]); //Adds a"To" address
 $mail->WordWrap = 50; 
 $mail->IsHTML(true); //Sets message type to HTML

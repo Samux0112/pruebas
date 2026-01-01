@@ -158,7 +158,7 @@ $iva = $value['valor'];
   var motivoDescripcion = combo.options[combo.selectedIndex].text;
    var documentoR =  document.getElementById("documento").value;
     var numdocumento = 0;
- var numdocumento = "<?php if($dteStr["dteJson"]["identificacion"]["tipoDte"]=="01" || $dteStr["dteJson"]["identificacion"]["tipoDte"]=="11" || $dteStr["dteJson"]["identificacion"]["tipoDte"]=="14")  {echo ($dteStr["dteJson"]["receptor"]["numDocumento"]);}else{ echo $dteStr["dteJson"]["receptor"]["nit"];} ?>";
+ var numdocumento = "<?php if($dteStr["dteJson"]["identificacion"]["tipoDte"]=="01" || $dteStr["dteJson"]["identificacion"]["tipoDte"]=="11" || $dteStr["dteJson"]["identificacion"]["tipoDte"]=="04")  {echo ($dteStr["dteJson"]["receptor"]["numDocumento"]);}else{ echo $dteStr["dteJson"]["receptor"]["nit"];} ?>";
 
    
   if(nombreR!="" && duiR !="" && nombreS != "" && duiS!="" && motivo != ""  ){

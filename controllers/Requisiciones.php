@@ -129,7 +129,7 @@ class Requisiciones extends Controller{
             foreach ($datos['productos'] as $producto) {
                 $result = $this->model->getProducto($producto['id']);
                 $data['id'] = $result['id'];
-                $data['nombre'] = $result['descripcion'];
+                $data['nombre'] = $producto['descripcion'];
                 $data['precio'] = $producto['precio'];
                 $data['cantidad'] = $producto['cantidad'];
                 $subTotal = $producto['precio'] * $producto['cantidad'];

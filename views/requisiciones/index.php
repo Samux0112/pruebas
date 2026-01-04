@@ -49,7 +49,7 @@ require 'views/templates/header.php';
                             <input class="form-control" type="text" id="buscarProductoNombre" placeholder="Buscar Producto" autocomplete="off">
                         </div>
 
-                        <div class="input-group d-none mb-2" id="containerGasto" hidden>
+                        <div class="input-group d-none mb-2" id="containerGasto" >
                             <span class="input-group-text"><i class="fas fa-search"></i></span>
                             <input class="form-control" type="text" id="buscarGasto" placeholder="Ingresar gasto" autocomplete="off">
                         </div>

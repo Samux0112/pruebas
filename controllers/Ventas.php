@@ -704,8 +704,12 @@ $this->views->getView('ventas', 'exportacion', $data);
         die();
     }
 	
-	public function verificarStockTraslado($idProducto,$bodega)
+	public function verificarStockTraslado($datos)
     {
+        ob_start();
+        $array = explode(',', $datos);
+        $idProducto = $array[0];
+        $bodega = $array[1];
         $data = $this->model->getProductoTraslado($idProducto,$bodega);
         echo json_encode($data);
         die();

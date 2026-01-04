@@ -272,7 +272,7 @@ function agregarCantidad() {
 function cambiarCantidad(idProducto, cantidad) {
 	debugger;
     if ((nombreKey === 'posVenta' || nombreKey === 'posApartados') && idProducto !="0" ) {
-        const url = base_url + 'ventas/verificarStockTraslado/' + idProducto;
+        const url = base_url + 'ventas/verificarStockTraslado/' + idProducto+'/'+bodegaSalida.value;
         //hacer una instancia del objeto XMLHttpRequest 
         const http = new XMLHttpRequest();
         //Abrir una Conexion - POST - GET

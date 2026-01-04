@@ -10,9 +10,9 @@ class VentasModel extends Query{
 		return $this->select($sql);
 }
 	
-	public function getProductoTraslado($idProducto)
+	public function getProductoTraslado($idProducto,$bodega)
     {
-        $sql = "SELECT p.id, p.descripcion, s.cantidad, p.precio_venta2, p.precio_venta, m.medida,m.nombre_corto FROM productos p join medidas m on p.id_medida=m.id join Stock s on p.id = s.idProducto WHERE p.id = $idProducto";
+        $sql = "SELECT p.id, p.descripcion, s.cantidad, p.precio_venta2, p.precio_venta, m.medida,m.nombre_corto FROM productos p join medidas m on p.id_medida=m.id join Stock s on p.id = s.idProducto WHERE p.id = $idProducto and s.idBodega=$bodega";
 		
         return $this->select($sql);
     }

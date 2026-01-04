@@ -704,9 +704,9 @@ $this->views->getView('ventas', 'exportacion', $data);
         die();
     }
 	
-	public function verificarStockTraslado($idProducto)
+	public function verificarStockTraslado($idProducto,$bodega)
     {
-        $data = $this->model->getProductoTraslado($idProducto);
+        $data = $this->model->getProductoTraslado($idProducto,$bodega);
         echo json_encode($data);
         die();
     }

@@ -341,7 +341,7 @@ $html .= "<tr><td align='right'><p class='b'><b>Condición de la Operación: </b
 $html .= "<tr><td align='right'><p class='b'><b>Condición de la Operación: </b></p></td><td><p class='b'>CREDITO</p></td></tr>";
 }
 
-$html .= "<tr><td align='right'><p class='b'><b>Observaciones :</b></p></td><td><p class='b'>".($dte["dteJson"]["extension"]["observaciones"])."</p></td></tr>
+$html .= "<tr><td align='right'><p class='b'><b>Observaciones :</b></p></td><td><p class='b'>".($dte["dteJson"]["resumen"]["observaciones"])."</p></td></tr>
 </table>
 </div>
 ";

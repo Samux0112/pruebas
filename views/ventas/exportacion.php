@@ -373,9 +373,14 @@ $html .="<tr><td class='d' colspan='5' align='right'><p class='b'><b>Total Afect
 
 <div>
 <table>
-<tr><td align='right'><p class='b'><b>Valor en Letras :</b></p></td><td><p class='b'> ".($dte["dteJson"]["resumen"]["totalLetras"])."</p></td></tr>
-<tr><td><p class='b'><b>Condición de la Operación: </b></p></td><td><p class='b'>CONTADO</p></td></tr>
-<tr><td align='right'><p class='b'><b>Observaciones :</b></p></td><td><p class='b'>".($dte["dteJson"]["resumen"]["observaciones"])."</p></td></tr>
+<tr><td align='right'><p class='b'><b>Valor en Letras :</b></p></td><td><p class='b'> ".($dte["dteJson"]["resumen"]["totalLetras"])."</p></td></tr>";
+if($dte["dteJson"]["resumen"]["condicionOperacion"] == 1){
+$html .= "<tr><td align='right'><p class='b'><b>Condición de la Operación: </b></p></td><td><p class='b'>CONTADO</p></td></tr>";
+}else{
+$html .= "<tr><td align='right'><p class='b'><b>Condición de la Operación: </b></p></td><td><p class='b'>CREDITO</p></td></tr>";
+}
+
+$html .= "<tr><td align='right'><p class='b'><b>Observaciones :</b></p></td><td><p class='b'>".($dte["dteJson"]["resumen"]["observaciones"])."</p></td></tr>
 </table>
 </div>
 ";

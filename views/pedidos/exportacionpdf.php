@@ -14,7 +14,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-$sql = "select dte as objeto_json from dtes where id =(".$data['idVenta'].")";
+$sql = "select dte as objeto_json from dtesPedidos where id =(".$data['idVenta'].")";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -79,74 +79,59 @@ Factura de Exportación
 <table align = 'left'>
 <tr>
 <td>
-<p style ='font-size: 8px'><b>Código de generación:</p>
+<p style ='font-size: 8px'><b>Numero de pedido:</p>
 </td>
 <td>
-<p style ='font-size: 8px'>".$dte["dteJson"]["identificacion"]["codigoGeneracion"]."</p>
+<p style ='font-size: 8px'>".$data['idVenta']."</p>
 </td>
 </tr>
 <tr>
 <td align='right'>
-<p style ='font-size: 8px'><b>Número control:</p>
+<p style ='font-size: 8px'><b>Fecha de Generacion:</p>
 </td>
 <td>
-<p style ='font-size: 8px'>".$dte["dteJson"]["identificacion"]["numeroControl"]."</p>
+<p style ='font-size: 8px'>".$dte["fhProcesamiento"]."</p>
 </td>
 </tr>
 <tr>
 <td align='right'>
-<p style ='font-size: 8px'><b>Sello de recepción:</p>
+<p style ='font-size: 8px'><b>ipo documento:</p>
 </td>
 <td>
-<p style ='font-size: 8px'>".$dte["selloRecibido"]."</p>
+<p style ='font-size: 8px'>Factura de exportacion</p>
 </td>
 </tr>
 </table>
 </td>
 <td>
-<img src='qrimages/008_4.png' width='100px' >
 </td>
 <td>
 
 <table align = 'right'>
 <tr>
 <td align='right'>
-<p style ='font-size: 8px'><b>Modelo de Facturación:</p>
 </td>
-<td>";
-
-if($dte["dteJson"]["identificacion"]["tipoModelo"] == 2 ){
-$html .= "<p style ='font-size: 8px'>Diferido</p>
+<td>
 </td>
 </tr>
 <tr>
 <td align='right'>
-<p style ='font-size: 8px'><b>Tipo de Transmisión:</p>
 </td>
 <td>
-<p style ='font-size: 8px'>Contingencia</p>
 </td>
-</tr>";
-}else{
-$html .= "<p style ='font-size: 8px'>Previo</p>
+</tr>
 </td>
 </tr>
 <tr>
 <td align='right'>
-<p style ='font-size: 8px'><b>Tipo de Transmisión:</p>
 </td>
 <td>
-<p style ='font-size: 8px'>Normal</p>
 </td>
-</tr>";	
-}
-
-$html .= "<tr>
+</tr>
+<tr>
 <td align='right'>
-<p style ='font-size: 8px'><b>Fecha y Hora de Generación:</p>
 </td>
 <td>
-<p style ='font-size: 8px'>".$dte["fhProcesamiento"]."</p>
 </td>
 </tr>
 </table>

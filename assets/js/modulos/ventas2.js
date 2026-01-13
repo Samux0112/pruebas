@@ -621,7 +621,9 @@ xhttp.send(JSON.stringify(req));
 				tipoOperacionCompra  : tipoOperacionCompra.value, 
 				clasificacion : clasificacion.value,
 				sector : sector.value,
-				tipoGasto : tipoGasto.value
+				tipoGasto : tipoGasto.value,
+        bodega : bodegas.value,
+        idPedido: document.getElementById('idPedido').value
             }));
             //verificar estados
             http.onreadystatechange = function () {

@@ -1,7 +1,7 @@
 <?php
 require_once 'config/Config.php';
 require_once __DIR__ . '../../../mpdf/vendor/autoload.php';
-//require_once __DIR__ .'../../../phpqrcode/qrlib.php';
+require_once __DIR__ .'../../../phpqrcode/qrlib.php';
 $mpdf = new \Mpdf\Mpdf();
 $servername = HOST;
 $username = USER;

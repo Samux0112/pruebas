@@ -284,11 +284,19 @@
                             <label for="vende">Vendedor</label>
                             <select id="vende" class="form-control">
                                 <option value="Casa Matriz">Casa Matriz</option>
-                                <option value="VENDEDOR2">Vendedor2</option>
-                                <option value="VENDEDOR3">Vendedor3</option>
-                                <option value="VENDEDOR4">Vendedor4</option>
-                                <option value="VENDEDOR5">Vendedor5</option>
-                                <option value="VENDEDOR6">Vendedor6</option>
+                                <option value="LUIS ESCOBAR">LUIS ESCOBAR</option>
+                                <option value="JULIO LOPEZ">JULIO LOPEZ</option>
+                                <option value="RUBEN ESCOBAR">RUBEN ESCOBAR</option>
+                                <option value="JOSE MARIA ROMERO">JOSE MARIA ROMERO</option>				
+                                <option value="NICOLAS GONZALEZ">NICOLAS GONZALEZ</option>
+                                <option value="LUIS BAUTISTA">LUIS BAUTISTA</option>
+                                <option value="DEPARTAMENTO DE REPUESTOS">DEPARTAMENTO DE REPUESTOS</option>
+                                <option value="ROSA ALAS">ROSA ALAS</option>
+                                <option value="MARLON TORRES">MARLON TORRES</option>
+                                <option value="VENTA DE SALA SUCURSAL LAYCO">VENTA DE SALA SUCURSAL LAYCO</option>
+                                <option value="CHRISTOPHER OSORIO">CHRISTOPHER OSORIO</option>
+                                <option value="EDWIN JHOAN AGUILAR">EDWIN JHOAN AGUILAR</option>
+                                <option value="JOCELYN MEJIA">JOCELYN MEJIA</option>
                             </select>
                         </div>
                         

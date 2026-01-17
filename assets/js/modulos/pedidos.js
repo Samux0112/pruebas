@@ -501,6 +501,51 @@ var table = document.getElementById("tblPlan");
 	}
 }
 
+function detalle(idCot){
+	idCotizacion.value = idCot;
+	localStorage.removeItem('posVenta');
+listaCarrito = [];
+	const url = base_url + 'pedidos/editar/' + idCot;
+    //hacer una instancia del objeto XMLHttpRequest 
+    const http = new XMLHttpRequest();
+    //Abrir una Conexion - POST - GET
+    http.open('GET', url, true);
+    //Enviar Datos
+    http.send();
+    //verificar estados
+    http.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            const res = JSON.parse(this.responseText);
+			const productos = JSON.parse(res.productos);
+			idCliente.value = res.idCliente;
+			telefonoCliente.value = res.telefono;
+			direccionCliente.innerHTML = res.direccion;
+			buscarCliente.value = res.nombre;
+			descuento.value = res.descuento;
+			docuemi.value = res.documento;
+			contribuyente = res.contribuyente;
+            for (i=0; i<productos.length; i++){
+				
+		listaCarrito.push({
+        id: productos[i].id,
+        cantidad: productos[i].cantidad, 
+        
+        precio: productos[i].precio, 
+		descripcion : productos[i].nombre,
+		catalogo : "Normal"
+        
+    })	
+			}
+        }
+	localStorage.setItem('posVenta', JSON.stringify(listaCarrito));
+	mostrarProducto();
+	firstTab.show();
+	
+    }
+	
+	
+}
+
 function obtenerPlanesCliente(idCliente){
 	            $.ajax({
                 url: base_url + 'ventas/buscarPlanes',

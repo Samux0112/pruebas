@@ -26,7 +26,7 @@
                         </select>
                     </div>
 
-
+                    <input type="hidden" id="idPedido" name="idPedido">
                    <div class="col-md-2">
                         <label>Tipo Documento</label>
                         <div class="input-group mb-2">

@@ -10,7 +10,7 @@ const tblPlanes = document.querySelector('#tblPlanes');
 const tipo_operacion = document.querySelector('#tipo_operacion');
 const tipo_ingreso = document.querySelector('#tipo_ingreso');
 const codigoValores = document.querySelector('#codigoValores');
-
+const idPedido = document.querySelector('#idPedido');
 
 
 
@@ -502,7 +502,7 @@ var table = document.getElementById("tblPlan");
 }
 
 function detalle(idCot){
-	idCotizacion.value = idCot;
+	idPedido.value = idCot;
 	localStorage.removeItem('posVenta');
 listaCarrito = [];
 	const url = base_url + 'pedidos/editar/' + idCot;

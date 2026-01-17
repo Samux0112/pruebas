@@ -4,8 +4,8 @@
     <div class="card-body">
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <button class="nav-link active" id="nav-ventas-tab" data-bs-toggle="tab" data-bs-target="#nav-ventas" type="button" role="tab" aria-controls="nav-ventas" aria-selected="true">Pedidos</button>
-                <button class="nav-link" id="nav-historial-tab" data-bs-toggle="tab" data-bs-target="#nav-historial" type="button" role="tab" aria-controls="nav-historial" aria-selected="false">Historial</button>
+                <button class="nav-link active" id="nav-ventas-tab" data-bs-toggle="tab" data-bs-target="#nav-ventas" type="button" role="tab" aria-controls="nav-ventas" aria-selected="true">Historial</button>
+                <button class="nav-link" id="nav-historial-tab" data-bs-toggle="tab" data-bs-target="#nav-historial" type="button" role="tab" aria-controls="nav-historial" aria-selected="false">Pedidos</button>
             </div>
         </nav>
 
@@ -14,8 +14,47 @@
                 <h5 class="card-title text-center"><i class="fas fa-cash-register"></i> Nuevo Pedido</h5>
                 <hr>
 
+                                <div class="d-flex justify-content-center mb-3">
+                    <div class="form-group">
+                        <label for="desde">Desde</label>
+                        <input id="desde" class="form-control" type="date">
+                    </div>
+                    <div class="form-group">
+                        <label for="hasta">Hasta</label>
+                        <input id="hasta" class="form-control" type="date">
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover align-middle nowrap" id="tblHistorial" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+								<th>Total</th>
+								<th>Descuento</th>
+								<th>Cliente</th>
+								<th>forma de pago</th>
+                                <th>Metodo</th>
+                                <th>Docuemitido</th>
+								 <th>Correlativo</th>
+                                <th>Vendedor</th>
 
-                <div class="row mb-2">
+
+
+
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="tab-pane fade p-3" id="nav-historial" role="tabpanel" aria-labelledby="nav-historial-tab" tabindex="0">
+
+            <div class="row mb-2">
                     <div class="col-md-2">
                         <label for="docuemi">Documentos</label>
                         <select id="docuemi" class="form-control">
@@ -422,78 +461,8 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
-            <div class="tab-pane fade p-3" id="nav-historial" role="tabpanel" aria-labelledby="nav-historial-tab" tabindex="0">
-                <div class="d-flex justify-content-center mb-3">
-                    <div class="form-group">
-                        <label for="desde">Desde</label>
-                        <input id="desde" class="form-control" type="date">
-                    </div>
-                    <div class="form-group">
-                        <label for="hasta">Hasta</label>
-                        <input id="hasta" class="form-control" type="date">
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover align-middle nowrap" id="tblHistorial" style="width: 100%;">
-                        <thead>
-                            <tr>
-                                <th>Fecha</th>
-                                <th>Hora</th>
-								<th>Total</th>
-								<th>Descuento</th>
-								<th>Cliente</th>
-								<th>forma de pago</th>
-                                <th>Metodo</th>
-                                <th>Docuemitido</th>
-								 <th>Correlativo</th>
-                                <th>Vendedor</th>
-
-
-
-
-                                <th></th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-			
-            <div class="tab-pane fade p-3" id="nav-planes" role="tabpanel" aria-labelledby="nav-planes-tab" tabindex="0">
-			    <h5 class="card-title text-center"><i class="fas fa-cash-register"></i> Planes de pago</h5>
-				                    <div class="col-md-4">
-                        <label>Buscar Cliente</label>
-                        <div class="input-group mb-2">
-                            <input type="hidden" id="idClientePlan" value="1">
-                            <span class="input-group-text"><i class="fas fa-search"></i></span>
-                            <input class="form-control" type="text" id="buscarClientePlan" placeholder="Buscar Cliente">
-                        </div>
-
-                        <span class="text-danger fw-bold mb-2" id="errorCliente"></span>
-						</div>
-                <hr>
-										<div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover align-middle" id="tblPlanes" style="width: 100%;">
-                        <thead>
-                            <tr>
-                                <th>referencia</th>
-                                <th>fecha</th>
-                                <th>Monto Total</th>
-                                <th>Estado</th>
-								<th></th> 
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-				
-			</div>
         </div>
     </div>
 </div>

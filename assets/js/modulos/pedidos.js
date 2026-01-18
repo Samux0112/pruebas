@@ -1936,7 +1936,8 @@ function guardarDte(objdte,correlativo){
 				montoTotalPlan : montoTotal,
 				tipoOp : tipo_operacion.value,
 	            tipoVen : tipo_ingreso.value,
-				obser: observaciones ? observaciones.value : ""
+				obser: observaciones ? observaciones.value : "",
+				id : idPedido.value,
 
 
 				

@@ -58,6 +58,21 @@ return $this->selectAll($sql);
         
     }
 
+    public function updateVenta($productos, $total, $fecha, $hora, $metodo, $descuento, $serie, $pago, $docuemi, $numdocu, $vende,  $forma, $forma2, $idCliente, $idusuario, $correlativo, $numeroControlDte, $uuid, $codPuntoVentaMH, $sello, $vExentas, $vIva, $vGravadas, $claseDoc, $retenIva, $tipo_operacion, $tipo_ingreso, $estadoPedido, $observaciones,$id)
+    {
+
+	if($docuemi == "CREDITO FISCAL"){
+			$numdocu = "03";
+		}elseif($docuemi == "FACTURA"){
+			$numdocu = "01";
+		}
+		
+        $sql = "UPDATE pedidos SET productos = ?, total = ?, fecha = ?, hora = ?, metodo = ?, descuento = ?, serie = ?, pago = ?, docuemi = ?, numdocu = ?, vende = ?, forma = ?, forma2 = ?, id_cliente = ?, id_usuario = ?, correlativo = ?, numeroControlDte = ?, uuid = ?, codPuntoVentaMH = ?, selloRecepcion = ?, vExentas = ?, vIva = ?, vGravadas = ?, claseDoc = ?, reteIva = ?, tipo_operacion = ?, tipo_ingreso = ?, estadoPedido = ?, observaciones = ? WHERE id = ?";
+        $array = array($productos, $total, $fecha, $hora, $metodo, $descuento, $serie, $pago, $docuemi, $numdocu, $vende,  $forma, $forma2, $idCliente, $idusuario, $correlativo, $numeroControlDte, $uuid, $codPuntoVentaMH, $sello, $vExentas, $vIva, $vGravadas, $claseDoc, $retenIva, $tipo_operacion, $tipo_ingreso,$estadoPedido,$observaciones,$id);
+        return $this->save($sql, $array); 
+        
+    }
+
 	
 	
     

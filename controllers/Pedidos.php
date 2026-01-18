@@ -98,6 +98,7 @@ class Pedidos extends Controller
 			$tipo_operacion = $datos['tipoOp'];
 	        $tipo_ingreso = $datos['tipoVen'];
             $observaciones = $datos['obser'];
+            $id = $datos['id'];
 
 			
 
@@ -128,7 +129,16 @@ class Pedidos extends Controller
                     $datosProductos = json_encode($array['productos']);
                     $pago = (!empty($datos['pago'])) ? $datos['pago'] : $totalVenta;
 					$estadoPedido = "GENERADO";
-                    $venta = $this->model->registrarVenta($datosProductos, $totalVenta, $fecha, $hora, $metodo, $descuento, $serie[0], $pago, $docuemi, $numdocu, $vende, $forma, $forma2, $idCliente, $this->id_usuario, $correlativo, $numeroControlDte, $uuid, $codPuntoVentaMH, $sello, $vExentas, $vIva, $vGravadas, $claseDoc, $retenIva, $tipo_operacion, $tipo_ingreso,$estadoPedido,$observaciones);
+
+                    if($id==""){
+				//$venta = $this->model->registrarCotizacion($datosProductos, $vTotal, $fecha, $hora, $metodo, $validez, $descuento, $idCliente, $documento, $vGravadas, $vIva, $vIvaRete);	
+                $venta = $this->model->registrarVenta($datosProductos, $totalVenta, $fecha, $hora, $metodo, $descuento, $serie[0], $pago, $docuemi, $numdocu, $vende, $forma, $forma2, $idCliente, $this->id_usuario, $correlativo, $numeroControlDte, $uuid, $codPuntoVentaMH, $sello, $vExentas, $vIva, $vGravadas, $claseDoc, $retenIva, $tipo_operacion, $tipo_ingreso,$estadoPedido,$observaciones);
+				}else{
+				$venta = $this->model->updateVenta($datosProductos, $totalVenta, $fecha, $hora, $metodo, $descuento, $serie[0], $pago, $docuemi, $numdocu, $vende, $forma, $forma2, $idCliente, $this->id_usuario, $correlativo, $numeroControlDte, $uuid, $codPuntoVentaMH, $sello, $vExentas, $vIva, $vGravadas, $claseDoc, $retenIva, $tipo_operacion, $tipo_ingreso,$estadoPedido,$observaciones,$id);
+				$venta = $id;
+				}
+
+                    
 					$res = array('msg' => 'PEDIDO GENERADO', 'type' => 'success', 'idVenta' => $venta);
                     
 				   if ($venta > 0) {

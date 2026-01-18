@@ -525,6 +525,7 @@ listaCarrito = [];
 			docuemi.value = res.docuemi;
 			contribuyente = res.contribuyente;
 			observaciones.value = res.observaciones;
+			vende.value = res.vende;
             for (i=0; i<productos.length; i++){
 				
 		listaCarrito.push({

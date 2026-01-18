@@ -18,7 +18,7 @@ class Ventas extends Controller
             header('Location: ' . BASE_URL);
             exit;
         }
-        if (!verificar('ventas') && !verificar('salidas')) {
+        if (!verificar('ventas') && !verificar('salidas') && !verificar('pedidos')) {
             header('Location: ' . BASE_URL . 'admin/permisos');
             exit;
         }

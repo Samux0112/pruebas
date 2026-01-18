@@ -524,7 +524,7 @@ listaCarrito = [];
 			descuento.value = res.descuento;
 			docuemi.value = res.docuemi;
 			contribuyente = res.contribuyente;
-			observaciones = res.observaciones;
+			observaciones.value = res.observaciones;
             for (i=0; i<productos.length; i++){
 				
 		listaCarrito.push({

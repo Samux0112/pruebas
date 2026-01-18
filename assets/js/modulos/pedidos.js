@@ -798,23 +798,38 @@ alert("0000");
 
 }
 
-function anularVenta(idVenta) {
+function anularPedido(idPedido) {
     Swal.fire({
-        title: 'Esta seguro de anular la venta?',
-        text: "El stock de los productos cambiarán!",
+        title: 'Esta seguro de anular el Pedido?',
+        text: "",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Si, Anular!'
-    }).then((result) => { 
+    }).then((result) => {
         if (result.isConfirmed) {
-			   window.location.href = base_url + 'ventas/anularDte/' + idVenta;
-			    
-
+            const url = base_url + 'pedidos/anularPedido/' + idPedido;
+            //hacer una instancia del objeto XMLHttpRequest 
+            const http = new XMLHttpRequest();
+            //Abrir una Conexion - POST - GET
+            http.open('GET', url, true);
+            //Enviar Datos
+            http.send();
+            //verificar estados
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    const res = JSON.parse(this.responseText);
+                    alertaPersonalizada(res.type, res.msg);
+                    if (res.type == 'success') {
+                        tblHistorial.ajax.reload();
+                    }
+                }
+            }
         }
     })
 }
+
 
 function obtenerCliente(idCliente){
 	            $.ajax({

@@ -234,12 +234,12 @@ $this->views->getView('ventas', 'exportacion', $data);
             if ($data[$i]['estado'] == 1) {
 				if($data[$i]['metodo']=="PAGO CUOTA"){
                $data[$i]['acciones'] = '<div>
-                <button class="btn btn-warning" href="#" onclick="anularVenta(' . $data[$i]['id'] . ')" disabled><i class="fas fa-trash"></i></button>
+                <button class="btn btn-warning" href="#" onclick="anularPedido(' . $data[$i]['id'] . ')" disabled><i class="fas fa-trash"></i></button>
                 <a class="btn btn-danger" href="#" onclick="verReporte(' . $data[$i]['id'] . ')"><i class="fas fa-file-pdf"></i></a>
                 </div>';
 				}else{
 				 $data[$i]['acciones'] = '<div>
-                <a class="btn btn-warning" href="#" onclick="anularVenta(' . $data[$i]['id'] . ')"><i class="fas fa-trash"></i></a>
+                <a class="btn btn-warning" href="#" onclick="anularPedido(' . $data[$i]['id'] . ')"><i class="fas fa-trash"></i></a>
                 <a class="btn btn-danger" href="#" onclick="verReporte(' . $data[$i]['id'] . ')"><i class="fas fa-file-pdf"></i></a>
                 <a class="btn btn-warning" href="#" onclick="detalle(' . $data[$i]['id'] . ')"><i class="fas fa-file-edit"></i></a>
                 </div>';	
@@ -385,6 +385,18 @@ $this->views->getView('ventas', 'exportacion', $data);
             }
         }
         echo json_encode($data);
+        die();
+    }
+
+     public function anularPedido($idVenta)
+    {
+        $data = $this->model->anular($idVenta);
+        if ($data == 1) {
+            $res = array('msg' => 'PEDIDO ANULADO', 'type' => 'success');
+        }else{
+            $res = array('msg' => 'ERROR AL ANULAR', 'type' => 'error');
+        }
+        echo json_encode($res);
         die();
     }
 

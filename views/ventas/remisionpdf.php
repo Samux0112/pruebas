@@ -233,6 +233,14 @@ $html .= "<tr>
 <p style ='font-size: 8px'>".nomEstablecimiento."</p>
 </td>
 </tr>
+<tr>
+<td align='right'>
+<p style ='font-size: 8px'><b>Vendedor:</p>
+</td>
+<td>
+<p style ='font-size: 8px'>".$data['venta']['vende']."</p>
+</td>
+</tr>
 </table>
 </td>
 

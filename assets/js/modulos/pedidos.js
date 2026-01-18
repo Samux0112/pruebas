@@ -522,7 +522,7 @@ listaCarrito = [];
 			direccionCliente.innerHTML = res.direccion;
 			buscarCliente.value = res.nombre;
 			descuento.value = res.descuento;
-			docuemi.value = res.documento;
+			docuemi.value = res.docuemi;
 			contribuyente = res.contribuyente;
             for (i=0; i<productos.length; i++){
 				

@@ -534,7 +534,8 @@ listaCarrito = [];
         
         precio: productos[i].precio, 
 		descripcion : productos[i].nombre,
-		catalogo : "Normal"
+		catalogo : "Normal",
+		mediaMh : productos[i].mediaMh
         
     })	
 			}

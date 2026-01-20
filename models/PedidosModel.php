@@ -93,7 +93,7 @@ return $this->selectAll($sql);
 
      public function getVentas()
     {
-        $sql = "SELECT v.*, c.nombre, c.identidad, u.nombre as nomUsuario FROM pedidos v INNER JOIN clientes c ON v.id_cliente = c.id join usuarios u on v.id_usuario=u.id and v.estadoPedido = 'GENERADO';";
+        $sql = "SELECT v.*, c.nombre, c.identidad, u.nombre as nomUsuario FROM pedidos v INNER JOIN clientes c ON v.id_cliente = c.id join usuarios u on v.id_usuario=u.id and v.estadoPedido = 'GENERADO' OR v.estadoPedido = 'ANULADO';";
         return $this->selectAll($sql);
     }
 	public function getProductoCotizacion($id)

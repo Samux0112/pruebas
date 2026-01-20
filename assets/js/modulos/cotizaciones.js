@@ -199,7 +199,7 @@ function mostrarProducto() {
 					if(descuento.value!=''){
 						calculoDescuento = parseFloat(descuento.value);
 					}
-					var calculoTotalVenta = res.totalVenta - calculoDescuento ;
+					var calculoTotalVenta = parseFloat(res.totalVenta) - calculoDescuento ;
                     totalPagar.value = calculoTotalVenta;
 					
 					if(docuemi.value=='CREDITO FISCAL'){

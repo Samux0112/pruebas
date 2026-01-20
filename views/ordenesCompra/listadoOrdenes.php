@@ -56,7 +56,7 @@ require 'views/templates/header.php';
                                                     ?>
                                                     <button type="button" class="btn btn-success btn-sm ms-1 btnCompletarCompra" data-id="<?php echo htmlspecialchars($orden['id']); ?>" <?php echo ($orden['estado'] !== 'aprobado') ? 'disabled' : ''; ?>>Completar compra</button>
                                                     <?php } ?>
-                                                    <?php if (isset($_SESSION['rol_usuario']) && in_array($_SESSION['rol_usuario'], ['ADMINISTRADOR', 'SUPERVISOR','CONTADOR'])): ?>
+                                                    <?php if (isset($_SESSION['rol_usuario']) && in_array($_SESSION['rol_usuario'], ['ADMINISTRADOR', 'INVENTARIO', 'SUPERVISOR','CONTADOR'])): ?>
                                                         <button type="button" class="btn btn-warning btn-sm ms-1 btnAutorizarOrden" data-id="<?php echo htmlspecialchars($orden['id']); ?>">Autorizar</button>
                                                     <?php endif; ?>
                                                 </td>

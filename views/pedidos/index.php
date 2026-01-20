@@ -335,6 +335,7 @@
                                 <option value="CHRISTOPHER OSORIO">CHRISTOPHER OSORIO</option>
                                 <option value="EDWIN JHOAN AGUILAR">EDWIN JHOAN AGUILAR</option>
                                 <option value="JOCELYN MEJIA">JOCELYN MEJIA</option>
+                                <option value="VICTOR BONIFACIO">VICTOR BONIFACIO</option>
                             </select>
                         </div>
                         

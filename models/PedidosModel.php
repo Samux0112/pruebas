@@ -143,8 +143,9 @@ return $this->selectAll($sql);
 	
     public function anular($idVenta)
     {
-        $sql = "UPDATE pedidos SET estado = ? WHERE id = ?";
-        $array = array(0, $idVenta);
+        $estado = "ANULADO";
+        $sql = "UPDATE pedidos SET estado = ?, estadoPedido = ? WHERE id = ?";
+        $array = array(0, $estado, $idVenta);
         return $this->save($sql, $array);
     }
 	

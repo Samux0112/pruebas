@@ -291,7 +291,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //cargar datos con el plugin datatables
     tblHistorial = $('#tblHistorial').DataTable({
         ajax: {
-            url: base_url + 'ventas/listar',
+            url: base_url + 'ventas/listarHistorial',
             dataSrc: ''
         },
         columns: [

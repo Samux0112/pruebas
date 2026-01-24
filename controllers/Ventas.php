@@ -518,6 +518,38 @@ $this->views->getView('ventas', 'exportacion', $data);
         echo json_encode($data);
         die();
     }
+
+    public function listarHistorial()
+    {
+        $data = $this->model->getVentas();
+        for ($i = 0; $i < count($data); $i++) {
+            if ($data[$i]['estado'] == 1) {
+				if($data[$i]['metodo']=="PAGO CUOTA"){
+               $data[$i]['acciones'] = '<div>
+                
+                <a class="btn btn-danger" href="#" onclick="verReporte(' . $data[$i]['id'] . ')"><i class="fas fa-file-pdf"></i></a>
+                </div>';
+                }elseif($data[$i]['docuemi']=="RECIBO DE VENTA"){
+                    $data[$i]['acciones'] = '<div>
+               
+                <a class="btn btn-danger" href="#" onclick="verRecibo(' . $data[$i]['id'] . ')"><i class="fas fa-file-pdf"></i></a>
+                </div>';
+				}else{
+				 $data[$i]['acciones'] = '<div>
+                
+                <a class="btn btn-danger" href="#" onclick="verReporte(' . $data[$i]['id'] . ')"><i class="fas fa-file-pdf"></i></a>
+                </div>';	
+				}
+            } else {
+                $data[$i]['acciones'] = '<div>
+                <span class="badge bg-info">Anulado</span>
+                <a class="btn btn-danger" href="#" onclick="verReporte(' . $data[$i]['id'] . ')"><i class="fas fa-file-pdf"></i></a>
+                </div>';
+            }
+        }
+        echo json_encode($data);
+        die();
+    }
 	
 	public function listarClientes()
     {

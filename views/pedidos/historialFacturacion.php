@@ -9,7 +9,8 @@
 
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active p-3" id="nav-ventas" role="tabpanel" aria-labelledby="nav-ventas-tab" tabindex="0">
-              
+              <h5 class="card-title text-center"><i class="fas fa-cash-register"></i> Historial de pedidos facturados</h5>
+                <hr>
                             <div class="d-flex justify-content-center mb-3">
                     <div class="form-group">
                         <label for="desde">Desde</label>

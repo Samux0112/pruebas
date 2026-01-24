@@ -345,6 +345,13 @@ $this->views->getView('ventas', 'exportacion', $data);
         $data['script'] = 'detallePedido.js';
         $this->views->getView('pedidos', 'detallePedido', $data);
     }
+
+    public function historialFacturacion()
+    {		
+        $data['title'] = 'HistorialFacturacion';
+        $data['script'] = 'historialFacturacion.js';
+        $this->views->getView('pedidos', 'historialFacturacion', $data);
+    }
 	
 	public function updatePedido()
     {

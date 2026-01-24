@@ -200,7 +200,7 @@
                             <li> <a href="<?php echo BASE_URL . 'pedidos/despacho'; ?>"><i class="bx bx-right-arrow-alt"></i>Despacho</a>
                             </li>
                             <?php } if (verificar('pedidos')) { ?>
-                            <li> <a href="<?php echo BASE_URL . 'pedidos/historialFacturacion'; ?>"><i class="bx bx-right-arrow-alt"></i>Despacho</a>
+                            <li> <a href="<?php echo BASE_URL . 'pedidos/historialFacturacion'; ?>"><i class="bx bx-right-arrow-alt"></i>Pedidos facturados</a>
                             </li>
 					<?php } if (verificar('pedidos') || verificar('FacturarPedidos') || verificar('despacho') ) { ?>
 					</ul>

@@ -4,15 +4,59 @@
     <div class="card-body">
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <button class="nav-link active" id="nav-ventas-tab" data-bs-toggle="tab" data-bs-target="#nav-ventas" type="button" role="tab" aria-controls="nav-ventas" aria-selected="true">Ventas</button>
-                <button class="nav-link" id="nav-historial-tab" data-bs-toggle="tab" data-bs-target="#nav-historial" type="button" role="tab" aria-controls="nav-historial" aria-selected="false">Historial</button>
-				<button class="nav-link" id="nav-planes-tab" data-bs-toggle="tab" data-bs-target="#nav-planes" type="button" role="tab" aria-controls="nav-planes" aria-selected="false">Planes de pago</button>
-            </div>
+                <button class="nav-link active" id="nav-ventas-tab" data-bs-toggle="tab" data-bs-target="#nav-ventas" type="button" role="tab" aria-controls="nav-ventas" aria-selected="true">Historial</button>
         </nav>
 
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active p-3" id="nav-ventas" role="tabpanel" aria-labelledby="nav-ventas-tab" tabindex="0">
-                <h5 class="card-title text-center"><i class="fas fa-cash-register"></i> Nueva Ventass</h5>
+              
+                            <div class="d-flex justify-content-center mb-3">
+                    <div class="form-group">
+                        <label for="desde">Desde</label>
+                        <input id="desde" class="form-control" type="date">
+                    </div>
+                    <div class="form-group">
+                        <label for="hasta">Hasta</label>
+                        <input id="hasta" class="form-control" type="date">
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover align-middle nowrap" id="tblHistorial" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+								<th>Total</th>
+								<th>Descuento</th>
+								<th>Cliente</th>
+								<th>forma de pago</th>
+                                <th>Referencia de pago</th>
+                                <th>Metodo</th>
+                                <th>Docuemitido</th>
+								 <th>Correlativo</th>
+                                <th>Vendedor</th>
+                                <th>Cajero</th>
+                                <th>Serie</th>
+								<th>Numero de Control</th>
+								<th>Codigo de generacion</th>
+
+
+
+
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        </tbody>
+                    </table>
+
+                </div>
+                
+            </div>
+            <div class="tab-pane fade p-3" id="nav-historial" role="tabpanel" aria-labelledby="nav-historial-tab" tabindex="0">
+			
+			<h5 class="card-title text-center"><i class="fas fa-cash-register"></i> Nueva Ventass</h5>
                 <hr>
 
 
@@ -462,50 +506,7 @@
                     </div>
                 </div>
                 
-            </div>
-            <div class="tab-pane fade p-3" id="nav-historial" role="tabpanel" aria-labelledby="nav-historial-tab" tabindex="0">
-                <div class="d-flex justify-content-center mb-3">
-                    <div class="form-group">
-                        <label for="desde">Desde</label>
-                        <input id="desde" class="form-control" type="date">
-                    </div>
-                    <div class="form-group">
-                        <label for="hasta">Hasta</label>
-                        <input id="hasta" class="form-control" type="date">
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover align-middle nowrap" id="tblHistorial" style="width: 100%;">
-                        <thead>
-                            <tr>
-                                <th>Fecha</th>
-                                <th>Hora</th>
-								<th>Total</th>
-								<th>Descuento</th>
-								<th>Cliente</th>
-								<th>forma de pago</th>
-                                <th>Referencia de pago</th>
-                                <th>Metodo</th>
-                                <th>Docuemitido</th>
-								 <th>Correlativo</th>
-                                <th>Vendedor</th>
-                                <th>Cajero</th>
-                                <th>Serie</th>
-								<th>Numero de Control</th>
-								<th>Codigo de generacion</th>
 
-
-
-
-                                <th></th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                        </tbody>
-                    </table>
-
-                </div>
             </div>
 			
             <div class="tab-pane fade p-3" id="nav-planes" role="tabpanel" aria-labelledby="nav-planes-tab" tabindex="0">

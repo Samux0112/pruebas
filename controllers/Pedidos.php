@@ -347,7 +347,8 @@ $this->views->getView('ventas', 'exportacion', $data);
     }
 
     public function historialFacturacion()
-    {		
+    {	$data['busqueda'] = 'busqueda.js';
+        $data['carrito'] = 'posVenta';	
         $data['title'] = 'HistorialFacturacion';
         $data['script'] = 'historialFacturacion.js';
         $this->views->getView('pedidos', 'historialFacturacion', $data);

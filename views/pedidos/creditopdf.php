@@ -98,6 +98,22 @@ Comprobante de pedido
 <p style ='font-size: 8px'>Credito Fiscal</p>
 </td>
 </tr>
+<tr>
+<td align='right'>
+<p style ='font-size: 8px'><b>Fecha desde :</p>
+</td>
+<td>
+<p style ='font-size: 8px'>".$data['venta']['fecha_desde']."</p>
+</td>
+</tr>
+<tr>
+<td align='right'>
+<p style ='font-size: 8px'><b>Fecha hasta:</p>
+</td>
+<td>
+<p style ='font-size: 8px'>".$data['venta']['fecha_hasta']."</p>
+</td>
+</tr>
 </table>
 </td>
 <td>

@@ -53,8 +53,15 @@
                 </div>
             </div>
             <div class="tab-pane fade p-3" id="nav-historial" role="tabpanel" aria-labelledby="nav-historial-tab" tabindex="0">
-
             <div class="row mb-2">
+                <div class="col-md-3">
+                    <label for="fecha_desde">Fecha desde</label>
+                    <input id="fecha_desde" class="form-control" type="date">
+                </div>
+                <div class="col-md-3">
+                    <label for="fecha_hasta">Fecha hasta</label>
+                    <input id="fecha_hasta" class="form-control" type="date">
+                </div>
                     <div class="col-md-2">
                         <label for="docuemi">Documentos</label>
                         <select id="docuemi" class="form-control">

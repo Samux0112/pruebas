@@ -11,9 +11,8 @@ const tipo_operacion = document.querySelector('#tipo_operacion');
 const tipo_ingreso = document.querySelector('#tipo_ingreso');
 const codigoValores = document.querySelector('#codigoValores');
 const idPedido = document.querySelector('#idPedido');
-
-
-
+const fecha_desde = document.querySelector('#fecha_desde');
+const fecha_hasta = document.querySelector('#fecha_hasta');
 
 var ventasGravadas = 0;
 var totalPagarSD =0;
@@ -526,6 +525,8 @@ listaCarrito = [];
 			contribuyente = res.contribuyente;
 			observaciones.value = res.observaciones;
 			vende.value = res.vende;
+			fecha_desde.value = res.fecha_desde;
+			fecha_hasta.value = res.fecha_hasta;
             for (i=0; i<productos.length; i++){
 				
 		listaCarrito.push({
@@ -1956,6 +1957,8 @@ function guardarDte(objdte,correlativo){
 	            tipoVen : tipo_ingreso.value,
 				obser: observaciones ? observaciones.value : "",
 				id : idPedido.value,
+				fecha_desde : fecha_desde.value,
+				fecha_hasta : fecha_hasta.value
 
 
 				

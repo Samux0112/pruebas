@@ -99,6 +99,8 @@ class Pedidos extends Controller
 	        $tipo_ingreso = $datos['tipoVen'];
             $observaciones = $datos['obser'];
             $id = $datos['id'];
+            $fecha_desde = isset($datos['fecha_desde']) ? $datos['fecha_desde'] : null;
+            $fecha_hasta = isset($datos['fecha_hasta']) ? $datos['fecha_hasta'] : null;
 
 			
 
@@ -132,9 +134,9 @@ class Pedidos extends Controller
 
                     if($id==""){
 				//$venta = $this->model->registrarCotizacion($datosProductos, $vTotal, $fecha, $hora, $metodo, $validez, $descuento, $idCliente, $documento, $vGravadas, $vIva, $vIvaRete);	
-                $venta = $this->model->registrarVenta($datosProductos, $totalVenta, $fecha, $hora, $metodo, $descuento, $serie[0], $pago, $docuemi, $numdocu, $vende, $forma, $forma2, $idCliente, $this->id_usuario, $correlativo, $numeroControlDte, $uuid, $codPuntoVentaMH, $sello, $vExentas, $vIva, $vGravadas, $claseDoc, $retenIva, $tipo_operacion, $tipo_ingreso,$estadoPedido,$observaciones);
+                $venta = $this->model->registrarVenta($datosProductos, $totalVenta, $fecha, $hora, $metodo, $descuento, $serie[0], $pago, $docuemi, $numdocu, $vende, $forma, $forma2, $idCliente, $this->id_usuario, $correlativo, $numeroControlDte, $uuid, $codPuntoVentaMH, $sello, $vExentas, $vIva, $vGravadas, $claseDoc, $retenIva, $tipo_operacion, $tipo_ingreso,$estadoPedido,$observaciones, $fecha_desde, $fecha_hasta);
 				}else{
-				$venta = $this->model->updateVenta($datosProductos, $totalVenta, $fecha, $hora, $metodo, $descuento, $serie[0], $pago, $docuemi, $numdocu, $vende, $forma, $forma2, $idCliente, $this->id_usuario, $correlativo, $numeroControlDte, $uuid, $codPuntoVentaMH, $sello, $vExentas, $vIva, $vGravadas, $claseDoc, $retenIva, $tipo_operacion, $tipo_ingreso,$estadoPedido,$observaciones,$id);
+                $venta = $this->model->updateVenta($datosProductos, $totalVenta, $fecha, $hora, $metodo, $descuento, $serie[0], $pago, $docuemi, $numdocu, $vende, $forma, $forma2, $idCliente, $this->id_usuario, $correlativo, $numeroControlDte, $uuid, $codPuntoVentaMH, $sello, $vExentas, $vIva, $vGravadas, $claseDoc, $retenIva, $tipo_operacion, $tipo_ingreso,$estadoPedido,$observaciones, $fecha_desde, $fecha_hasta, $id);
 				$venta = $id;
 				}
 

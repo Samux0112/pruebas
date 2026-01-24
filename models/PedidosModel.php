@@ -44,33 +44,29 @@ return $this->selectAll($sql);
 
 }
     public function registrarVenta($productos, $total, $fecha, $hora, $metodo, $descuento, $serie, $pago, $docuemi, $numdocu, $vende,  $forma, $forma2, $idCliente, $idusuario, $correlativo, $numeroControlDte, $uuid, $codPuntoVentaMH, $sello, $vExentas, $vIva, $vGravadas, $claseDoc, $retenIva, $tipo_operacion, $tipo_ingreso, $estadoPedido, $observaciones)
+    public function registrarVenta($productos, $total, $fecha, $hora, $metodo, $descuento, $serie, $pago, $docuemi, $numdocu, $vende,  $forma, $forma2, $idCliente, $idusuario, $correlativo, $numeroControlDte, $uuid, $codPuntoVentaMH, $sello, $vExentas, $vIva, $vGravadas, $claseDoc, $retenIva, $tipo_operacion, $tipo_ingreso, $estadoPedido, $observaciones, $fecha_desde, $fecha_hasta)
     {
-
-	if($docuemi == "CREDITO FISCAL"){
-			$numdocu = "03";
-		}elseif($docuemi == "FACTURA"){
-			$numdocu = "01";
-		}
-		
-        $sql = "INSERT INTO pedidos (productos, total, fecha, hora, metodo, descuento, serie, pago, docuemi, numdocu, vende, forma, forma2, id_cliente, id_usuario, correlativo, numeroControlDte, uuid, codPuntoVentaMH, selloRecepcion, vExentas, vIva, vGravadas, claseDoc, reteIva,tipo_operacion,tipo_ingreso,estadoPedido, observaciones) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        $array = array($productos, $total, $fecha, $hora, $metodo, $descuento, $serie, $pago, $docuemi, $numdocu, $vende,  $forma, $forma2, $idCliente, $idusuario, $correlativo, $numeroControlDte, $uuid, $codPuntoVentaMH, $sello, $vExentas, $vIva, $vGravadas, $claseDoc, $retenIva, $tipo_operacion, $tipo_ingreso,$estadoPedido,$observaciones);
-        return $this->insertar($sql, $array); 
-        
+        if($docuemi == "CREDITO FISCAL"){
+            $numdocu = "03";
+        }elseif($docuemi == "FACTURA"){
+            $numdocu = "01";
+        }
+        $sql = "INSERT INTO pedidos (productos, total, fecha, hora, metodo, descuento, serie, pago, docuemi, numdocu, vende, forma, forma2, id_cliente, id_usuario, correlativo, numeroControlDte, uuid, codPuntoVentaMH, selloRecepcion, vExentas, vIva, vGravadas, claseDoc, reteIva, tipo_operacion, tipo_ingreso, estadoPedido, observaciones, fecha_desde, fecha_hasta) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $array = array($productos, $total, $fecha, $hora, $metodo, $descuento, $serie, $pago, $docuemi, $numdocu, $vende, $forma, $forma2, $idCliente, $idusuario, $correlativo, $numeroControlDte, $uuid, $codPuntoVentaMH, $sello, $vExentas, $vIva, $vGravadas, $claseDoc, $retenIva, $tipo_operacion, $tipo_ingreso, $estadoPedido, $observaciones, $fecha_desde, $fecha_hasta);
+        return $this->insertar($sql, $array);
     }
 
     public function updateVenta($productos, $total, $fecha, $hora, $metodo, $descuento, $serie, $pago, $docuemi, $numdocu, $vende,  $forma, $forma2, $idCliente, $idusuario, $correlativo, $numeroControlDte, $uuid, $codPuntoVentaMH, $sello, $vExentas, $vIva, $vGravadas, $claseDoc, $retenIva, $tipo_operacion, $tipo_ingreso, $estadoPedido, $observaciones,$id)
+    public function updateVenta($productos, $total, $fecha, $hora, $metodo, $descuento, $serie, $pago, $docuemi, $numdocu, $vende,  $forma, $forma2, $idCliente, $idusuario, $correlativo, $numeroControlDte, $uuid, $codPuntoVentaMH, $sello, $vExentas, $vIva, $vGravadas, $claseDoc, $retenIva, $tipo_operacion, $tipo_ingreso, $estadoPedido, $observaciones, $fecha_desde, $fecha_hasta, $id)
     {
-
-	if($docuemi == "CREDITO FISCAL"){
-			$numdocu = "03";
-		}elseif($docuemi == "FACTURA"){
-			$numdocu = "01";
-		}
-		
-        $sql = "UPDATE pedidos SET productos = ?, total = ?, fecha = ?, hora = ?, metodo = ?, descuento = ?, serie = ?, pago = ?, docuemi = ?, numdocu = ?, vende = ?, forma = ?, forma2 = ?, id_cliente = ?, id_usuario = ?, correlativo = ?, numeroControlDte = ?, uuid = ?, codPuntoVentaMH = ?, selloRecepcion = ?, vExentas = ?, vIva = ?, vGravadas = ?, claseDoc = ?, reteIva = ?, tipo_operacion = ?, tipo_ingreso = ?, estadoPedido = ?, observaciones = ? WHERE id = ?";
-        $array = array($productos, $total, $fecha, $hora, $metodo, $descuento, $serie, $pago, $docuemi, $numdocu, $vende,  $forma, $forma2, $idCliente, $idusuario, $correlativo, $numeroControlDte, $uuid, $codPuntoVentaMH, $sello, $vExentas, $vIva, $vGravadas, $claseDoc, $retenIva, $tipo_operacion, $tipo_ingreso,$estadoPedido,$observaciones,$id);
-        return $this->save($sql, $array); 
-        
+        if($docuemi == "CREDITO FISCAL"){
+            $numdocu = "03";
+        }elseif($docuemi == "FACTURA"){
+            $numdocu = "01";
+        }
+        $sql = "UPDATE pedidos SET productos = ?, total = ?, fecha = ?, hora = ?, metodo = ?, descuento = ?, serie = ?, pago = ?, docuemi = ?, numdocu = ?, vende = ?, forma = ?, forma2 = ?, id_cliente = ?, id_usuario = ?, correlativo = ?, numeroControlDte = ?, uuid = ?, codPuntoVentaMH = ?, selloRecepcion = ?, vExentas = ?, vIva = ?, vGravadas = ?, claseDoc = ?, reteIva = ?, tipo_operacion = ?, tipo_ingreso = ?, estadoPedido = ?, observaciones = ?, fecha_desde = ?, fecha_hasta = ? WHERE id = ?";
+        $array = array($productos, $total, $fecha, $hora, $metodo, $descuento, $serie, $pago, $docuemi, $numdocu, $vende, $forma, $forma2, $idCliente, $idusuario, $correlativo, $numeroControlDte, $uuid, $codPuntoVentaMH, $sello, $vExentas, $vIva, $vGravadas, $claseDoc, $retenIva, $tipo_operacion, $tipo_ingreso, $estadoPedido, $observaciones, $fecha_desde, $fecha_hasta, $id);
+        return $this->save($sql, $array);
     }
 
 	

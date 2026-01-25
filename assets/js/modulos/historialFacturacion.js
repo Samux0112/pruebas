@@ -734,7 +734,7 @@ function verPlanPago(){
 function verReporte(idVenta) {
     Swal.fire({
         title: 'Desea Generar Reporte?',
-        showDenyButton: true,
+        showDenyButton: false,
 		showCloseButton: true,
         showCancelButton: true,
         confirmButtonText: 'Ticked',

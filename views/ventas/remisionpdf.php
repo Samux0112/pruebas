@@ -262,11 +262,15 @@ $html .= "<tr>
 </td>
 </tr>
 <tr>
-<td align='right'>
-<p style ='font-size: 8px'><b>NIT:</p>
-</td>
+<td align='right'>";
+if(strlen($dte["dteJson"]["receptor"]["numDocumento"])<11){
+$html .= "<p style ='font-size: 8px'><b>DUI:</p>";
+}else{
+$html .= "<p style ='font-size: 8px'><b>NIT:</p>";	
+}
+$html .="</td>
 <td>
-<p style ='font-size: 8px'>".$dte["dteJson"]["receptor"]["nit"]."</p>
+<p style ='font-size: 8px'>".$dte["dteJson"]["receptor"]["numDocumento"]."</p>
 </td>
 </tr>
 <tr>

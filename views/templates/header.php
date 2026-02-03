@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/header-colors.css" />
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/DataTables/datatables.min.css" />
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/plugins/fullcalendar/css/main.min.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/plugins/select2/css/select2.min.css" />
 
     <title><?php echo TITLE . ' - ' . $data['title']; ?></title>
 </head>
@@ -339,8 +340,29 @@
                         <div class="menu-title">Catalogo de Cuentas</div>
                     </a>
                 </li>
-                <?php } ?>		  
-            </ul>
+                  <?php } ?>
+                    <li>
+                        <a href="javascript:;" class="has-arrow">
+                            <div class="parent-icon"><i class="fa-solid fa-calculator"></i>
+                            </div>
+                            <div class="menu-title">Contabilidad</div>
+                        </a>
+                        <ul>
+                            <li><a href="<?php echo BASE_URL . 'tipoPartida'; ?>"><i class="bx bx-right-arrow-alt"></i>Tipos de Partida</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" class="has-arrow">
+                            <div class="parent-icon"><i class="fa-solid fa-university"></i>
+                            </div>
+                            <div class="menu-title">Bancos</div>
+                        </a>
+                        <ul>
+                            <li><a href="<?php echo BASE_URL . 'bancos'; ?>"><i class="bx bx-right-arrow-alt"></i>Bancos</a></li>
+                            <li><a href="<?php echo BASE_URL . 'cheques'; ?>"><i class="bx bx-right-arrow-alt"></i>Cheques</a></li>
+                        </ul>
+                    </li>
+               </ul>
             
             <!--end navigation-->
         </div>

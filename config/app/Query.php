@@ -22,7 +22,7 @@ class Query extends Conexion{
         $result = $this->con->prepare($sql);
         $data = $result->execute($array);
         if ($data) {
-            $res = $this->con->lastInsertId();
+            $res = 1;
         } else {
             $res = 0;
         }

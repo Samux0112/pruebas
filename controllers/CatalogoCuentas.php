@@ -18,7 +18,7 @@ class CatalogoCuentas extends Controller
             header('Location: ' . BASE_URL);
             exit;
         }
-        if (!verificar('catalogoCuentas')) {
+        if (empty($_SESSION['permisos']) || !in_array('contabilidad', $_SESSION['permisos'])) {
             header('Location: ' . BASE_URL . 'admin/permisos');
             exit;
         }

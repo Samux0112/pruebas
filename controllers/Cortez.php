@@ -18,11 +18,10 @@ class Cortez extends Controller
             header('Location: ' . BASE_URL);
             exit;
         }
-        if (!verificar('Cortez')) {
+        if (empty($_SESSION['permisos']) || !in_array('contabilidad', $_SESSION['permisos'])) {
             header('Location: ' . BASE_URL . 'admin/permisos');
             exit;
         }
-        $this->id_usuario = $_SESSION['id_usuario'];
     }
     public function index()
     {

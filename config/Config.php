@@ -1,6 +1,7 @@
 <?php
-define('BASE_URL', 'https://airismed.top/pruebas/');
-define('HOST', 'localhost');
+// define('BASE_URL', 'https://airismed.top/pruebas/');
+define('BASE_URL', 'http://localhost/pruebas/');
+define('HOST', '162.241.123.36');
 define('USER', 'airis1e9_postwo');
 define('PASS', 'Garrufo16$$');
 define('DBNAME', 'airis1e9_postwo');
@@ -14,7 +15,6 @@ define('PUERTO_SMTP', '465');
 define('nit','06140305851270');
 
 // Configuraciones Facturacion Electronica
-
 define('apiAutorizador','https://apitest.dtes.mh.gob.sv/seguridad/auth');
 define('pasApiMH','Gatoperro12$');
 define('apiFirmador','https://pnn1jei9yi.execute-api.us-east-1.amazonaws.com/dev/firmador');

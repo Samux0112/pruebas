@@ -112,6 +112,7 @@
 <script src="<?php echo BASE_URL; ?>assets/js/bootstrap.bundle.min.js"></script>
 <!--plugins-->
 <script src="<?php echo BASE_URL; ?>assets/js/jquery.min.js"></script>
+<script src="<?php echo BASE_URL; ?>assets/plugins/select2/js/select2.min.js"></script>
 <script src="<?php echo BASE_URL; ?>assets/plugins/simplebar/js/simplebar.min.js"></script>
 <script src="<?php echo BASE_URL; ?>assets/plugins/metismenu/js/metisMenu.min.js"></script>
 <script src="<?php echo BASE_URL; ?>assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
@@ -183,6 +184,7 @@
 <?php if (!empty($data['script'])) { ?>
     <script src="<?php echo BASE_URL . 'assets/js/modulos/' . $data['script']; ?>"></script>
 <?php } ?>
+<script src="<?php echo BASE_URL; ?>views/cheques/js/cheques.js"></script>
 </body>
 
 </html>

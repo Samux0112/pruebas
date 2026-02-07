@@ -1,8 +1,12 @@
-const firstTabEl = document.querySelector('#nav-tab button:last-child')
-const firstTab = new bootstrap.Tab(firstTabEl)
+const firstTabEl = document.querySelector('#nav-tab button:last-child');
+if (firstTabEl) {
+    const firstTab = new bootstrap.Tab(firstTabEl);
+}
 
-const primerTabEl = document.querySelector('#nav-tab button:first-child')
-const primerTab = new bootstrap.Tab(primerTabEl)
+const primerTabEl = document.querySelector('#nav-tab button:first-child');
+if (primerTabEl) {
+    const primerTab = new bootstrap.Tab(primerTabEl);
+}
 
 function insertarRegistros(url, idFormulario, tbl, idButton, accion) {
     //crear formData

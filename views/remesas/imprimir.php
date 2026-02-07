@@ -2,12 +2,12 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Cheque - <?php echo $data['cheque']['numero_cheque'] ?? ''; ?></title>
+    <title>Remesa - <?php echo $data['remesa']['id'] ?? ''; ?></title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: Arial, sans-serif; font-size: 10px; background: #fff; }
         
-        .cheque {
+        .documento {
             width: 100%;
             max-width: 200mm;
             height: 260mm;
@@ -18,7 +18,7 @@
             background: #fff;
         }
         
-        .cheque.anulado {
+        .documento.anulado {
             background: repeating-linear-gradient(
                 45deg,
                 #ffcccc,
@@ -41,7 +41,7 @@
             pointer-events: none;
         }
         
-        .cheque.anulado .watermark { display: block; }
+        .documento.anulado .watermark { display: block; }
         
         .info-anulacion {
             display: none;
@@ -56,7 +56,7 @@
             border: 3px solid #cc0000;
         }
         
-        .cheque.anulado .info-anulacion { display: block; }
+        .documento.anulado .info-anulacion { display: block; }
         
         .anulado-titulo { font-size: 30px; color: #cc0000; font-weight: bold; }
         .anulado-motivo { color: #cc0000; font-size: 12px; margin-top: 8px; }
@@ -66,7 +66,16 @@
             font-weight: bold; 
             font-size: 16px; 
             text-align: center; 
-            margin-bottom: 5mm;
+            margin-bottom: 3mm;
+        }
+        
+        .documento-titulo {
+            font-weight: bold; 
+            font-size: 14px; 
+            text-align: center; 
+            margin-bottom: 3mm;
+            text-transform: uppercase;
+            color: #333;
         }
         
         .header-info {
@@ -81,38 +90,21 @@
             font-size: 12px;
         }
         
-        .monto-grande {
-            font-weight: bold; 
-            font-size: 14px;
-            margin-top: 2mm;
-        }
-        
-        .beneficiario-box { 
-            border: 1px solid #000; 
-            padding: 2mm 3mm; 
-            font-weight: bold; 
-            font-size: 11px; 
+        .info-section {
             margin: 2mm 0;
-            min-height: 8mm;
-        }
-        
-        .monto-box { 
-            border: 1px solid #000; 
-            padding: 2mm 3mm; 
-            margin: 2mm 0;
-            font-weight: bold;
-        }
-        
-        .monto-letras { 
-            font-size: 9px; 
-            font-style: italic; 
-            margin-bottom: 1mm; 
-        }
-        
-        .partida-info {
-            margin: 3mm 0;
             font-size: 9px;
         }
+        
+        .info-box { 
+            border: 1px solid #000; 
+            padding: 2mm 3mm; 
+            font-weight: bold; 
+            font-size: 10px; 
+            margin: 1mm 0;
+            min-height: 6mm;
+        }
+        
+        .label { font-weight: bold; color: #333; }
         
         .partida-info-mejorada {
             margin: 4mm 0;
@@ -128,26 +120,15 @@
             align-items: baseline;
         }
         
-        .partida-row:last-child {
-            margin-bottom: 0;
-        }
+        .partida-row:last-child { margin-bottom: 0; }
         
         .partida-label {
             font-weight: bold;
             color: #333;
-            min-width: 90px;
+            min-width: 120px;
         }
         
-        .partida-value {
-            color: #000;
-        }
-        
-        .partida-label { font-weight: bold; }
-        
-        .detalle-cheque {
-            margin: 3mm 0;
-            font-size: 9px;
-        }
+        .partida-value { color: #000; }
         
         .partida-tabla { 
             width: 100%; 
@@ -176,49 +157,50 @@
         .firma-cell { 
             display: table-cell; 
             text-align: center; 
-            width: 33.33%; 
+            padding: 0 2mm;
         }
         
-        .firma-linea { 
-            border-top: 1px solid #000; 
-            height: 25px; 
-            margin: 0 auto 2px; 
-            width: 80%; 
+        .firma-linea {
+            border-top: 1px solid #000;
+            margin-bottom: 1mm;
+            padding-top: 1mm;
         }
         
-        .firma-label { 
-            font-size: 7px; 
-            color: #666; 
-        }
+        .firma-texto { font-size: 7px; }
+        .firma-label { font-size: 8px; font-weight: bold; margin-top: 8px; }
         
-        .firma-texto {
-            font-size: 8px;
-            margin-top: 2px;
-            color: #333;
+        .tipo-documento {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: bold;
+            margin-bottom: 2mm;
         }
+        .tipo-documento.remesa { background: #17a2b8; color: white; }
+        .tipo-documento.transferencia { background: #28a745; color: white; }
     </style>
 </head>
 <body>
     <?php
+    $remesa = $data['remesa'] ?? [];
+    $detalle = isset($data['detalle']) ? $data['detalle'] : [];
     $empresa = isset($data['empresa']) ? $data['empresa'] : [
         'nombre' => 'FABIANSCORP',
         'direccion' => 'San Salvador'
     ];
-    $cheque = $data['cheque'] ?? [];
-    $detalle = isset($data['detalle']) ? $data['detalle'] : [];
-    $montoLetras = isset($cheque['monto']) ? numeroALetras($cheque['monto'], 'DÓLARES', 'CENTAVOS') : '';
     ?>
     
-    <div class="cheque <?php echo ($cheque['estado'] ?? '') == 'anulado' ? 'anulado' : ''; ?>">
+    <div class="documento <?php echo ($remesa['estado'] ?? '') == 'anulado' ? 'anulado' : ''; ?>">
         <div class="watermark">ANULADO</div>
         
-        <?php if (($cheque['estado'] ?? '') == 'anulado'): ?>
+        <?php if (($remesa['estado'] ?? '') == 'anulado'): ?>
         <div class="info-anulacion">
             <div class="anulado-titulo">ANULADO</div>
-            <div class="anulado-motivo"><?php echo $cheque['motivo_anulacion'] ?? ''; ?></div>
-            <div class="anulado-fecha"><?php echo !empty($cheque['fecha_anulacion']) ? 'Fecha: ' . date('d/m/Y H:i', strtotime($cheque['fecha_anulacion'])) : ''; ?></div>
-            <?php if (!empty($cheque['anulado_por_nombre'])): ?>
-            <div class="anulado-fecha">Anulado por: <?php echo $cheque['anulado_por_nombre']; ?></div>
+            <div class="anulado-motivo"><?php echo $remesa['motivo_anulacion'] ?? ''; ?></div>
+            <div class="anulado-fecha"><?php echo !empty($remesa['fecha_anulacion']) ? 'Fecha: ' . date('d/m/Y H:i', strtotime($remesa['fecha_anulacion'])) : ''; ?></div>
+            <?php if (!empty($remesa['anulado_por_nombre'])): ?>
+            <div class="anulado-fecha">Anulado por: <?php echo $remesa['anulado_por_nombre']; ?></div>
             <?php endif; ?>
         </div>
         <?php endif; ?>
@@ -226,48 +208,55 @@
         <!-- Empresa centrada -->
         <div class="empresa-nombre"><?php echo strtoupper($empresa['nombre']); ?></div>
         
+        <!-- Título del documento -->
+        <div class="documento-titulo">Remesa / Transferencia</div>
+        
+        <?php 
+        $tipoClase = $remesa['tipo_transaccion'] ?? 'remesa';
+        $tipoTexto = ($remesa['tipo_transaccion'] ?? 'remesa') == 'remesa' ? 'REMESA' : 'TRANSFERENCIA';
+        ?>
+        <div class="tipo-documento <?php echo $tipoClase; ?>"><?php echo $tipoTexto; ?></div>
+        
         <!-- Header con fecha y monto -->
         <div class="header-info">
             <div>
-                <div>LUGAR Y FECHA: <?php echo $empresa['direccion'] . ', ' . (!empty($cheque['fecha_emision']) ? date('d/m/Y', strtotime($cheque['fecha_emision'])) : ''); ?></div>
+                <div>LUGAR Y FECHA: <?php echo $empresa['direccion'] . ', ' . (!empty($remesa['fecha_creacion']) ? date('d/m/Y', strtotime($remesa['fecha_creacion'])) : ''); ?></div>
             </div>
             <div class="header-right">
-                US$ <?php echo number_format($cheque['monto'] ?? 0, 2); ?>
+                US$ <?php echo number_format($remesa['monto'] ?? 0, 2); ?>
             </div>
         </div>
         
         <!-- Beneficiario -->
-        <div><strong>PÁGUESE A LA ORDEN DE:</strong></div>
-        <div class="beneficiario-box"><?php echo $cheque['proveedor'] ?? ''; ?></div>
-        
-        <!-- Monto en letras -->
-        <div><strong>LA SUMA DE:</strong></div>
-        <div class="monto-box">
-            <div class="monto-letras"><?php echo $montoLetras; ?></div>
-        </div>
-        
-        <!-- Información de partida - Mejorada -->
-        <div class="partida-info-mejorada">
-            <div class="partida-row">
-                <span class="partida-label">NO. PARTIDA: </span> 
-                <span class="partida-value"> <?php echo $cheque['id'] ?? ''; ?></span>
-            </div>
-            <div class="partida-row">
-                <span class="partida-label">BANCO:</span> 
-                <span class="partida-value"> <?php echo $cheque['banco'] ?? ''; ?></span>
-            </div>
-            <div class="partida-row">
-                <span class="partida-label">NO. CHEQUE: </span> 
-                <span class="partida-value"> <?php echo $cheque['numero_cheque'] ?? ''; ?></span>
-            </div>
+        <div class="info-section">
+            <div><span class="label">TIPO PARTIDA REMESA:</span></div>
+            <div class="info-box"><?php echo $remesa['tipo_partida_remesa'] ?? ''; ?></div>
         </div>
         
         <!-- Concepto -->
-        <div><strong>CONCEPTO:</strong> <?php echo $cheque['concepto'] ?? ''; ?></div>
+        <div class="info-section">
+            <div><span class="label">CONCEPTO:</span> <?php echo $remesa['concepto'] ?? ''; ?></div>
+        </div>
+        
+        <!-- Información de documento -->
+        <div class="partida-info-mejorada">
+            <div class="partida-row">
+                <span class="partida-label">CORRELATIVO:</span> 
+                <span class="partida-value">REM-<?php echo str_pad($remesa['id'] ?? '', 6, '0', STR_PAD_LEFT); ?></span>
+            </div>
+            <div class="partida-row">
+                <span class="partida-label">BANCO / CUENTA:</span> 
+                <span class="partida-value"><?php echo $remesa['banco_nombre'] ?? ''; ?> - <?php echo $remesa['banco_cuenta'] ?? ''; ?></span>
+            </div>
+            <div class="partida-row">
+                <span class="partida-label">CUENTA CONTABLE:</span> 
+                <span class="partida-value"><?php echo $remesa['banco_cuenta'] ?? ''; ?></span>
+            </div>
+        </div>
         
         <!-- Partida de Egreso -->
         <div class="detalle-cheque">
-            <div class="partida-titulo">PARTIDA DE EGRESO <?php echo 'PEGR-' . str_pad($cheque['id'] ?? '', 6, '0', STR_PAD_LEFT); ?></div>
+            <div class="partida-titulo">PARTIDA DE EGRESO <?php echo 'REMR-' . str_pad($remesa['id'] ?? '', 6, '0', STR_PAD_LEFT); ?></div>
             <?php if (!empty($detalle)): ?>
             <table class="partida-tabla">
                 <thead>
@@ -282,7 +271,7 @@
                     <?php 
                     $totalDebe = 0;
                     $totalHaber = 0;
-                    $numeroCheque = $cheque['numero_cheque'] ?? '';
+                    $numeroRemesa = $remesa['id'] ?? '';
                     foreach ($detalle as $row): 
                         $cuenta = $row['cuenta_contable'] ?? ($row['cuenta'] ?? 'N/A');
                         $nombreCuenta = $row['nombre_cuenta'] ?? '';
@@ -294,8 +283,8 @@
                         else $totalHaber += $monto;
                         
                         $detalleConcepto = trim($cuenta . ' ' . $nombreCuenta);
-                        if (!empty($numeroCheque)) {
-                            $detalleConcepto .= ' - CHEQUE ' . $numeroCheque;
+                        if (!empty($numeroRemesa)) {
+                            $detalleConcepto .= ' - REMESA REMR-' . str_pad($numeroRemesa, 6, '0', STR_PAD_LEFT);
                         }
                     ?>
                     <tr>
@@ -328,82 +317,20 @@
             </div>
             <div class="firma-cell">
                 <div class="firma-linea"></div>
-                <div class="firma-texto">RECIBIDO POR</div>
-                <div class="firma-label">AUTORIZO</div>
+                <div class="firma-texto">AUTORIZADO POR</div>
+                <div class="firma-label">CONTABILIDAD</div>
             </div>
             <div class="firma-cell">
                 <div class="firma-linea"></div>
-                <div class="firma-texto">ENTREGADO POR</div>
-                <div class="firma-label">ENTREGUE</div>
+                <div class="firma-texto">RECIBI CONFORME</div>
+                <div class="firma-label">BENEFICIARIO</div>
             </div>
+        </div>
+        
+        <!-- Pie de página -->
+        <div style="position: absolute; bottom: 3mm; left: 8mm; right: 8mm; text-align: center; font-size: 7px; color: #999;">
+            Documento generado el <?php echo date('d/m/Y H:i'); ?> | <?php echo $empresa['nombre']; ?>
         </div>
     </div>
 </body>
 </html>
-
-<?php
-function numeroALetras($numero, $moneda, $centavos) {
-    $numero = round($numero, 2);
-    $entero = intval($numero);
-    $centavos = round(($numero - $entero) * 100);
-    
-    $unidades = ['', 'UNO', 'DOS', 'TRES', 'CUATRO', 'CINCO', 'SEIS', 'SIETE', 'OCHO', 'NUEVE'];
-    $decenas = ['', 'DIEZ', 'VEINTE', 'TREINTA', 'CUARENTA', 'CUENTAENTA', 'SESENTA', 'SETENTA', 'OCHENTA', 'NOVENTA'];
-    $centenas = ['', 'CIENTO', 'DOSCIENTOS', 'TRESCIENTOS', 'CUATROCIENTOS', 'QUINIENTOS', 'SEISCIENTOS', 'SETECIENTOS', 'OCHOCIENTOS', 'NOVECIENTOS'];
-    
-    function convertirMillones($n, $unidades, $decenas, $centenas) {
-        if ($n >= 1000000) {
-            return convertirMillones(intval($n / 1000000), $unidades, $decenas, $centenas) . ' MILLONES ' . convertirMiles($n % 1000000, $unidades, $decenas, $centenas);
-        } else {
-            return convertirMiles($n, $unidades, $decenas, $centenas);
-        }
-    }
-    
-    function convertirMiles($n, $unidades, $decenas, $centenas) {
-        if ($n >= 1000) {
-            $miles = intval($n / 1000);
-            if ($miles == 1) {
-                return 'MIL ' . convertirCientos($n % 1000, $unidades, $decenas, $centenas);
-            } else {
-                return convertirCientos($miles, $unidades, $decenas, $centenas) . ' MIL ' . convertirCientos($n % 1000, $unidades, $decenas, $centenas);
-            }
-        } else {
-            return convertirCientos($n, $unidades, $decenas, $centenas);
-        }
-    }
-    
-    function convertirCientos($n, $unidades, $decenas, $centenas) {
-        if ($n >= 100) {
-            return $centenas[intval($n / 100)] . ' ' . convertirDecenas($n % 100, $unidades, $decenas);
-        } else {
-            return convertirDecenas($n, $unidades, $decenas);
-        }
-    }
-    
-    function convertirDecenas($n, $unidades, $decenas) {
-        if ($n >= 10) {
-            if ($n >= 10 && $n < 20) {
-                $especiales = ['DIEZ', 'ONCE', 'DOCE', 'TRECE', 'CATORCE', 'QUINCE', 'DIECISEIS', 'DIECISIETE', 'DIECIOCHO', 'DIECINUEVE'];
-                return $especiales[$n - 10];
-            } else {
-                return $decenas[intval($n / 10)] . ($n % 10 > 0 ? ' Y ' . $unidades[$n % 10] : '');
-            }
-        } else {
-            return $unidades[$n];
-        }
-    }
-    
-    $letras = '';
-    if ($entero == 0) {
-        $letras = 'CERO';
-    } else {
-        $letras = convertirMillones($entero, $unidades, $decenas, $centenas);
-    }
-    
-    if ($centavos > 0) {
-        $letras .= ' CON ' . convertirDecenas($centavos, $unidades, $decenas) . ' ' . $centavos;
-    }
-    
-    return $letras . ' ' . $moneda . ($centavos == 1 ? '' : '');
-}
-?>

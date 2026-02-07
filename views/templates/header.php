@@ -360,6 +360,8 @@
                         <ul>
                             <li><a href="<?php echo BASE_URL . 'bancos'; ?>"><i class="bx bx-right-arrow-alt"></i>Bancos</a></li>
                             <li><a href="<?php echo BASE_URL . 'cheques'; ?>"><i class="bx bx-right-arrow-alt"></i>Cheques</a></li>
+                            <li><a href="<?php echo BASE_URL . 'bancos/fondos'; ?>"><i class="bx bx-right-arrow-alt"></i>Fondos de Chequeras</a></li>
+                            <li><a href="<?php echo BASE_URL . 'remesas'; ?>"><i class="bx bx-right-arrow-alt"></i>Remesas y Transf.</a></li>
                         </ul>
                     </li>
                </ul>

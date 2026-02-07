@@ -12,7 +12,7 @@ class Cheques extends Controller
             header('Location: ' . BASE_URL);
             exit;
         }
-        if (empty($_SESSION['permisos']) || !in_array('contabilidad', $_SESSION['permisos'])) {
+        if (empty($_SESSION['permisos']) || (!in_array('contabilidad', $_SESSION['permisos']) && !in_array('auxiliar contable', $_SESSION['permisos']) && !in_array('administrador', $_SESSION['permisos']))) {
             header('Location: ' . BASE_URL . 'admin/permisos');
             exit;
         }
@@ -33,7 +33,6 @@ class Cheques extends Controller
 
     public function listar()
     {
-        // Temporal: verificar que hay sesión activa
         if (empty($_SESSION['id_usuario'])) {
             $res = array('msg' => 'SESION EXPIRADA', 'type' => 'warning');
             echo json_encode($res, JSON_UNESCAPED_UNICODE);
@@ -57,18 +56,6 @@ class Cheques extends Controller
         die();
     }
 
-    public function getCorrelativo($idBanco)
-    {
-        if (empty($_SESSION['id_usuario'])) {
-            $res = array('msg' => 'SESION EXPIRADA', 'type' => 'warning');
-            echo json_encode($res, JSON_UNESCAPED_UNICODE);
-            die();
-        }
-        $data = $this->model->getSiguienteCorrelativo($idBanco);
-        echo json_encode($data);
-        die();
-    }
-
     public function registrar()
     {
         if (empty($_SESSION['id_usuario'])) {
@@ -78,33 +65,34 @@ class Cheques extends Controller
         }
         if (isset($_POST)) {
             $numero_cheque = strClean($_POST['numero_cheque']);
-            $id_banco = strClean($_POST['id_banco']);
-            $id_proveedor = strClean($_POST['id_proveedor']);
+            $id_banco = intval($_POST['id_banco']);
+            $proveedor = strClean($_POST['proveedor']);
             $concepto = strClean($_POST['concepto']);
-            $monto = strClean($_POST['monto']);
+            $monto = floatval($_POST['monto']);
             $fecha_emision = strClean($_POST['fecha_emision']);
             $detalle = json_decode($_POST['detalle'], true);
 
-            // Si numero_cheque está vacío, generarlo automáticamente
-            if (empty($numero_cheque) && !empty($id_banco)) {
-                $correlativo = $this->model->getSiguienteCorrelativo($id_banco);
-                if (!empty($correlativo) && isset($correlativo['correlativo'])) {
-                    $numero_cheque = $correlativo['prefijo'] . str_pad($correlativo['correlativo'], $correlativo['longitud'], '0', STR_PAD_LEFT);
-                } else {
-                    // Fallback: generar correlativo simple
-                    $numero_cheque = $id_banco . date('YmdHis');
-                }
-            }
-
-            if (empty($numero_cheque) || empty($id_banco) || $id_proveedor === '' || $id_proveedor === null) {
+            if (empty($numero_cheque) || empty($id_banco)) {
                 $res = array('msg' => 'TODOS LOS CAMPOS SON REQUERIDOS', 'type' => 'warning');
             } else if (empty($detalle) || count($detalle) == 0) {
                 $res = array('msg' => 'AGREGUE EL DETALLE CONTABLE', 'type' => 'warning');
             } else {
+                // Verificar si el proveedor existe, si no, crearlo
+                $idProveedor = $this->model->buscarProveedorPorNombre($proveedor);
+                if (!$idProveedor) {
+                    // Crear nuevo proveedor
+                    $idProveedor = $this->model->crearProveedorSimple($proveedor);
+                    if (!$idProveedor) {
+                        $res = array('msg' => 'ERROR AL CREAR PROVEEDOR', 'type' => 'error');
+                        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+                        die();
+                    }
+                }
+                
                 $datosCheque = array(
                     $numero_cheque,
                     $id_banco,
-                    $id_proveedor,
+                    $proveedor,
                     $concepto,
                     $monto,
                     $fecha_emision,
@@ -124,7 +112,38 @@ class Cheques extends Controller
                         );
                         $this->model->registrarDetalleCheque($datosDetalle);
                     }
-                    $this->model->actualizarCorrelativo($id_banco);
+                    $this->model->actualizarCorrelativoBanco($id_banco);
+                    
+                    // Verificar si la tabla tiene el campo referencia
+                    $sqlCheck = "SHOW COLUMNS FROM fondos_banco LIKE 'referencia'";
+                    $hasReferencia = $this->model->select($sqlCheck);
+                    
+                    // Registrar movimiento de descuento en fondos_banco
+                    if ($hasReferencia) {
+                        $datosMovimientoCheque = array(
+                            $id_banco,
+                            $fecha_emision,
+                            "CHEQUE No. $numero_cheque - $proveedor - $concepto",
+                            $monto,
+                            'cheque',
+                            $numero_cheque,
+                            $_SESSION['id_usuario']
+                        );
+                    } else {
+                        $datosMovimientoCheque = array(
+                            $id_banco,
+                            $fecha_emision,
+                            "CHEQUE No. $numero_cheque - $proveedor - $concepto",
+                            $monto,
+                            'cheque',
+                            $_SESSION['id_usuario']
+                        );
+                    }
+                    $this->model->registrarMovimientoCheque($datosMovimientoCheque);
+                    
+                    // Descontar del saldo del banco
+                    $this->model->actualizarSaldoBanco($id_banco, -$monto);
+                    
                     $res = array('msg' => 'CHEQUE REGISTRADO', 'type' => 'success');
                 } else {
                     $res = array('msg' => 'ERROR AL REGISTRAR CHEQUE', 'type' => 'error');
@@ -134,21 +153,6 @@ class Cheques extends Controller
             $res = array('msg' => 'ERROR DESCONOCIDO', 'type' => 'error');
         }
         echo json_encode($res, JSON_UNESCAPED_UNICODE);
-        die();
-    }
-
-    public function getCuentasBancarias()
-    {
-        if (empty($_SESSION['id_usuario'])) {
-            $res = array('msg' => 'SESION EXPIRADA', 'type' => 'warning');
-            echo json_encode($res, JSON_UNESCAPED_UNICODE);
-            die();
-        }
-        
-        $proveedor_id = intval($_GET['proveedor_id']);
-        
-        $data = $this->model->getCuentasBancariasProveedor($proveedor_id);
-        echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
 
@@ -198,10 +202,76 @@ class Cheques extends Controller
         $dompdf->setOptions($options);
         $dompdf->loadHtml($html);
 
-        $dompdf->setPaper('letter', 'landscape');
+        $dompdf->setPaper('letter', 'portrait');
 
         $dompdf->render();
 
         $dompdf->stream('cheque_' . $data['cheque']['numero_cheque'] . '.pdf', array('Attachment' => false));
+    }
+
+    // Fondos de Banco
+    public function listarFondos()
+    {
+        if (empty($_SESSION['id_usuario'])) {
+            $res = array('msg' => 'SESION EXPIRADA', 'type' => 'warning');
+            echo json_encode($res, JSON_UNESCAPED_UNICODE);
+            die();
+        }
+        $id_banco = isset($_GET['id_banco']) ? intval($_GET['id_banco']) : null;
+        $data = $this->model->getFondosBanco($id_banco);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function registrarFondo()
+    {
+        if (empty($_SESSION['id_usuario'])) {
+            $res = array('msg' => 'SESION EXPIRADA', 'type' => 'warning');
+            echo json_encode($res, JSON_UNESCAPED_UNICODE);
+            die();
+        }
+        if (isset($_POST)) {
+            $id_banco = intval($_POST['id_banco']);
+            $fecha = strClean($_POST['fecha']);
+            $concepto = strClean($_POST['concepto']);
+            $monto = floatval($_POST['monto']);
+
+            if (empty($id_banco) || empty($fecha) || empty($concepto) || $monto <= 0) {
+                $res = array('msg' => 'TODOS LOS CAMPOS SON REQUERIDOS', 'type' => 'warning');
+            } else {
+                $datosFondo = array(
+                    $id_banco,
+                    $fecha,
+                    $concepto,
+                    $monto,
+                    $_SESSION['id_usuario']
+                );
+
+                $idFondo = $this->model->registrarFondo($datosFondo);
+
+                if ($idFondo > 0) {
+                    $this->model->actualizarSaldoBanco($id_banco, $monto);
+                    $res = array('msg' => 'FONDO REGISTRADO', 'type' => 'success');
+                } else {
+                    $res = array('msg' => 'ERROR AL REGISTRAR FONDO', 'type' => 'error');
+                }
+            }
+        } else {
+            $res = array('msg' => 'ERROR DESCONOCIDO', 'type' => 'error');
+        }
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function getSaldosBancos()
+    {
+        if (empty($_SESSION['id_usuario'])) {
+            $res = array('msg' => 'SESION EXPIRADA', 'type' => 'warning');
+            echo json_encode($res, JSON_UNESCAPED_UNICODE);
+            die();
+        }
+        $data = $this->model->getSaldosBancos();
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
     }
 }

@@ -7,7 +7,7 @@ class Bancos extends Controller {
             header('Location: ' . BASE_URL);
             exit;
         }
-        if (empty($_SESSION['permisos']) || !in_array('contabilidad', $_SESSION['permisos'])) {
+        if (empty($_SESSION['permisos']) || (!in_array('contabilidad', $_SESSION['permisos']) && !in_array('contador', $_SESSION['permisos']) && !in_array('auxiliar contable', $_SESSION['permisos']) && !in_array('administrador', $_SESSION['permisos']))) {
             header('Location: ' . BASE_URL . 'admin/permisos');
             exit;
         }
@@ -19,7 +19,6 @@ class Bancos extends Controller {
         $data['partidas'] = $this->model->getPartidasContables();
         $data['cuentas'] = $this->model->getCuentasContables();
         $data['bancos'] = $this->model->getAllBancos();
-        $data['proveedores'] = $this->model->getProveedores();
         $this->views->getView('bancos', 'index', $data);
     }
 
@@ -112,11 +111,12 @@ class Bancos extends Controller {
             $numero_cuenta = strClean($_POST['numero_cuenta']);
             $cuenta_contable = strClean($_POST['cuenta_contable']);
             $cuenta_pos = isset($_POST['cuenta_pos']) ? intval($_POST['cuenta_pos']) : 0;
+            $correlativo_cheque = isset($_POST['correlativo_cheque']) ? intval($_POST['correlativo_cheque']) : 1;
 
             if (empty($nombre) || empty($numero_cuenta) || empty($cuenta_contable)) {
                 $res = array('msg' => 'TODOS LOS CAMPOS SON REQUERIDOS', 'type' => 'warning');
             } else {
-                $result = $this->model->insertarBanco($nombre, $numero_cuenta, $cuenta_contable, $cuenta_pos);
+                $result = $this->model->insertarBanco($nombre, $numero_cuenta, $cuenta_contable, $cuenta_pos, $correlativo_cheque);
                 if ($result > 0) {
                     $res = array('msg' => 'BANCO REGISTRADO', 'type' => 'success');
                 } else {
@@ -136,11 +136,12 @@ class Bancos extends Controller {
             $numero_cuenta = strClean($_POST['numero_cuenta']);
             $cuenta_contable = strClean($_POST['cuenta_contable']);
             $cuenta_pos = isset($_POST['cuenta_pos']) ? intval($_POST['cuenta_pos']) : 0;
+            $correlativo_cheque = isset($_POST['correlativo_cheque']) ? intval($_POST['correlativo_cheque']) : 1;
 
             if (empty($nombre) || empty($numero_cuenta) || empty($cuenta_contable) || $id == 0) {
                 $res = array('msg' => 'TODOS LOS CAMPOS SON REQUERIDOS', 'type' => 'warning');
             } else {
-                $result = $this->model->actualizarBanco($id, $nombre, $numero_cuenta, $cuenta_contable, $cuenta_pos);
+                $result = $this->model->actualizarBanco($id, $nombre, $numero_cuenta, $cuenta_contable, $cuenta_pos, $correlativo_cheque);
                 if ($result > 0) {
                     $res = array('msg' => 'BANCO MODIFICADO', 'type' => 'success');
                 } else {
@@ -172,100 +173,12 @@ class Bancos extends Controller {
         echo json_encode($data);
         die();
     }
-    
-    // Cuentas Bancarias
-    public function listarCuentasBancarias()
+
+    // Fondos de Chqueras
+    public function fondos()
     {
-        $data = $this->model->getAllCuentasBancarias();
-        echo json_encode($data, JSON_UNESCAPED_UNICODE);
-        die();
-    }
-    
-    public function getCuentaBancaria($id)
-    {
-        $data = $this->model->getCuentaBancariaById($id);
-        echo json_encode($data);
-        die();
-    }
-    
-    public function registrarCuentaBancaria()
-    {
-        if (isset($_POST)) {
-            $banco_id = intval($_POST['banco_id']);
-            $numero_cuenta = strClean($_POST['numero_cuenta']);
-            $cuenta_contable = strClean($_POST['cuenta_contable']);
-            $propietario_id = intval($_POST['propietario_id']);
-            $tipo_cuenta = $_POST['tipo_cuenta'];
-            
-            if (empty($banco_id) || empty($numero_cuenta) || empty($cuenta_contable) || 
-                empty($propietario_id) || empty($tipo_cuenta)) {
-                $res = array('msg' => 'TODOS LOS CAMPOS SON REQUERIDOS', 'type' => 'warning');
-            } else {
-                $datos = array(
-                    'banco_id' => $banco_id,
-                    'numero_cuenta' => $numero_cuenta,
-                    'cuenta_contable' => $cuenta_contable,
-                    'propietario_id' => $propietario_id,
-                    'tipo_cuenta' => $tipo_cuenta
-                );
-                
-                $result = $this->model->insertarCuentaBancaria($datos);
-                if ($result > 0) {
-                    $res = array('msg' => 'CUENTA BANCARIA REGISTRADA', 'type' => 'success');
-                } else {
-                    $res = array('msg' => 'ERROR AL REGISTRAR', 'type' => 'error');
-                }
-            }
-            echo json_encode($res);
-            die();
-        }
-    }
-    
-    public function modificarCuentaBancaria()
-    {
-        if (isset($_POST)) {
-            $id = intval($_POST['id']);
-            $banco_id = intval($_POST['banco_id']);
-            $numero_cuenta = strClean($_POST['numero_cuenta']);
-            $cuenta_contable = strClean($_POST['cuenta_contable']);
-            $propietario_id = intval($_POST['propietario_id']);
-            $tipo_cuenta = $_POST['tipo_cuenta'];
-            
-            if (empty($banco_id) || empty($numero_cuenta) || empty($cuenta_contable) || 
-                empty($propietario_id) || empty($tipo_cuenta) || $id == 0) {
-                $res = array('msg' => 'TODOS LOS CAMPOS SON REQUERIDOS', 'type' => 'warning');
-            } else {
-                $datos = array(
-                    'banco_id' => $banco_id,
-                    'numero_cuenta' => $numero_cuenta,
-                    'cuenta_contable' => $cuenta_contable,
-                    'propietario_id' => $propietario_id,
-                    'tipo_cuenta' => $tipo_cuenta
-                );
-                
-                $result = $this->model->actualizarCuentaBancaria($id, $datos);
-                if ($result > 0) {
-                    $res = array('msg' => 'CUENTA BANCARIA MODIFICADA', 'type' => 'success');
-                } else {
-                    $res = array('msg' => 'ERROR AL MODIFICAR', 'type' => 'error');
-                }
-            }
-            echo json_encode($res);
-            die();
-        }
-    }
-    
-    public function eliminarCuentaBancaria($id)
-    {
-        if (isset($id)) {
-            $result = $this->model->eliminarCuentaBancaria($id);
-            if ($result == 1) {
-                $res = array('msg' => 'CUENTA BANCARIA ELIMINADA', 'type' => 'success');
-            } else {
-                $res = array('msg' => 'ERROR AL ELIMINAR', 'type' => 'error');
-            }
-            echo json_encode($res);
-            die();
-        }
+        $data['title'] = 'Fondos de Chqueras';
+        $data['bancos'] = $this->model->getAllBancos();
+        $this->views->getView('bancos', 'fondos', $data);
     }
 }

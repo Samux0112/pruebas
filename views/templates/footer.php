@@ -184,7 +184,6 @@
 <?php if (!empty($data['script'])) { ?>
     <script src="<?php echo BASE_URL . 'assets/js/modulos/' . $data['script']; ?>"></script>
 <?php } ?>
-<script src="<?php echo BASE_URL; ?>views/cheques/js/cheques.js"></script>
 </body>
 
 </html>

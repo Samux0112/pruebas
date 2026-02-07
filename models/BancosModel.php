@@ -76,92 +76,23 @@ class BancosModel extends Query {
         return $this->select($sql);
     }
 
-    public function insertarBanco($nombre, $numero_cuenta, $cuenta_contable, $pos)
+    public function insertarBanco($nombre, $numero_cuenta, $cuenta_contable, $pos, $correlativo_cheque)
     {
-        $sql = "INSERT INTO bancos (nombre, numero_cuenta, cuenta_contable, pos) VALUES (?,?,?,?)";
-        $array = array($nombre, $numero_cuenta, $cuenta_contable, $pos);
+        $sql = "INSERT INTO bancos (nombre, numero_cuenta, cuenta_contable, pos, correlativo_cheque) VALUES (?,?,?,?,?)";
+        $array = array($nombre, $numero_cuenta, $cuenta_contable, $pos, $correlativo_cheque);
         return $this->insertar($sql, $array);
     }
 
-    public function actualizarBanco($id, $nombre, $numero_cuenta, $cuenta_contable, $pos)
+    public function actualizarBanco($id, $nombre, $numero_cuenta, $cuenta_contable, $pos, $correlativo_cheque)
     {
-        $sql = "UPDATE bancos SET nombre=?, numero_cuenta=?, cuenta_contable=?, pos=? WHERE id=?";
-        $array = array($nombre, $numero_cuenta, $cuenta_contable, $pos, $id);
+        $sql = "UPDATE bancos SET nombre=?, numero_cuenta=?, cuenta_contable=?, pos=?, correlativo_cheque=? WHERE id=?";
+        $array = array($nombre, $numero_cuenta, $cuenta_contable, $pos, $correlativo_cheque, $id);
         return $this->save($sql, $array);
     }
 
     public function eliminarBanco($id)
     {
         $sql = "UPDATE bancos SET estado=0 WHERE id=?";
-        $array = array($id);
-        return $this->save($sql, $array);
-    }
-    
-    // Proveedores
-    public function getProveedores()
-    {
-        $sql = "SELECT id, ruc, nombre FROM proveedor WHERE estado = 1 ORDER BY nombre";
-        return $this->selectAll($sql);
-    }
-    
-    // Cuentas Bancarias
-    public function getAllCuentasBancarias()
-    {
-        $sql = "SELECT cb.*, b.nombre as nombre_banco, cc.nombre_cuenta, p.nombre as nombre_propietario, p.ruc
-                FROM cuentas_bancarias cb 
-                LEFT JOIN bancos b ON cb.banco_id = b.id 
-                LEFT JOIN cuentas_contables cc ON cb.cuenta_contable = cc.codigo 
-                LEFT JOIN proveedor p ON cb.`proveedor_id` = p.id
-                WHERE cb.estado = 1 
-                ORDER BY cb.id DESC";
-        return $this->selectAll($sql);
-    }
-    
-    public function getCuentaBancariaById($id)
-    {
-        $sql = "SELECT cb.*, b.nombre as nombre_banco, cc.nombre_cuenta, p.nombre as nombre_propietario, p.ruc
-                FROM cuentas_bancarias cb 
-                LEFT JOIN bancos b ON cb.banco_id = b.id 
-                LEFT JOIN cuentas_contables cc ON cb.cuenta_contable = cc.codigo 
-                LEFT JOIN proveedor p ON cb.`proveedor_id` = p.id
-                WHERE cb.id = $id";
-        return $this->select($sql);
-    }
-    
-    public function insertarCuentaBancaria($datos)
-    {
-        $sql = "INSERT INTO cuentas_bancarias 
-                (banco_id, numero_cuenta, cuenta_contable, `proveedor_id`, tipo_cuenta) 
-                VALUES (?, ?, ?, ?, ?)";
-        $array = array(
-            $datos['banco_id'],
-            $datos['numero_cuenta'],
-            $datos['cuenta_contable'],
-            $datos['propietario_id'],
-            $datos['tipo_cuenta']
-        );
-        return $this->insertar($sql, $array);
-    }
-    
-    public function actualizarCuentaBancaria($id, $datos)
-    {
-        $sql = "UPDATE cuentas_bancarias SET 
-                banco_id=?, numero_cuenta=?, cuenta_contable=?, `proveedor_id`=?, tipo_cuenta=? 
-                WHERE id=?";
-        $array = array(
-            $datos['banco_id'],
-            $datos['numero_cuenta'],
-            $datos['cuenta_contable'],
-            $datos['propietario_id'],
-            $datos['tipo_cuenta'],
-            $id
-        );
-        return $this->save($sql, $array);
-    }
-    
-    public function eliminarCuentaBancaria($id)
-    {
-        $sql = "UPDATE cuentas_bancarias SET estado=0 WHERE id=?";
         $array = array($id);
         return $this->save($sql, $array);
     }

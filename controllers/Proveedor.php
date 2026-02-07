@@ -218,4 +218,36 @@ class Proveedor extends Controller
         echo json_encode($array, JSON_UNESCAPED_UNICODE);
         die();
     }
+    
+    // Registrar proveedor desde modulo de cheques (solo nombre)
+    public function registrarSimple()
+    {
+        if (empty($_SESSION['id_usuario'])) {
+            $res = array('msg' => 'SESION EXPIRADA', 'type' => 'warning');
+            echo json_encode($res, JSON_UNESCAPED_UNICODE);
+            die();
+        }
+        if (isset($_POST)) {
+            $nombre = strClean($_POST['nombre']);
+            
+            if (empty($nombre)) {
+                $res = array('msg' => 'EL NOMBRE ES REQUERIDO', 'type' => 'warning');
+            } else {
+                // Generar RUC temporal
+                $ruc = 'GEN-' . time();
+                $telefono = '';
+                $correo = '';
+                $direccion = '';
+                
+                $data = $this->model->registrar($ruc, $nombre, $telefono, $correo, $direccion);
+                if ($data > 0) {
+                    $res = array('msg' => 'PROVEEDOR REGISTRADO', 'type' => 'success');
+                } else {
+                    $res = array('msg' => 'ERROR AL REGISTRAR', 'type' => 'error');
+                }
+            }
+            echo json_encode($res, JSON_UNESCAPED_UNICODE);
+            die();
+        }
+    }
 }

@@ -1,133 +1,101 @@
-// DataTables para Tipos de Transacción
-let tblTransaccion = $('#tblTransaccion').DataTable({
-    ajax: {
-        url: base_url + 'bancos/listarTransaccion',
-        dataSrc: '',
-        xhrFields: { withCredentials: true }
-    },
-    columns: [
-        { data: 'id' },
-        { data: 'nombre' },
-        { data: 'nombre_partida' },
-        { data: 'tipo_transaccion' },
-        {
-            data: null,
-            render: function(data, type, row) {
-                return `
-                    <button class="btn btn-warning btn-sm" onclick="editarTransaccion(${row.id})"><i class="fa-solid fa-edit"></i></button>
-                    <button class="btn btn-danger btn-sm" onclick="eliminarTransaccion(${row.id})"><i class="fa-solid fa-trash"></i></button>
-                `;
+// DataTables para Tipos de Transacción - Lazy initialization
+let tblTransaccion;
+function inicializarTablaTransaccion() {
+    if (tblTransaccion) return;
+    tblTransaccion = $('#tblTransaccion').DataTable({
+        ajax: {
+            url: base_url + 'bancos/listarTransaccion',
+            dataSrc: ''
+        },
+        columns: [
+            { data: 'id' },
+            { data: 'nombre' },
+            { data: 'nombre_partida' },
+            { data: 'tipo_transaccion' },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    return `
+                        <button class="btn btn-warning btn-sm" onclick="editarTransaccion(${row.id})"><i class="fa-solid fa-edit"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="eliminarTransaccion(${row.id})"><i class="fa-solid fa-trash"></i></button>
+                    `;
+                }
             }
-        }
-    ],
-    language: {
-        url: base_url + 'assets/js/spanish.json'
-    },
-    dom: 'Bfrtip',
-    responsive: true,
-    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+        ],
+        language: {
+            url: base_url + 'assets/js/espanol.json'
+        },
+        responsive: true
+    });
+}
+
+// DataTables para Bancos - Lazy initialization
+let tblBancos;
+function inicializarTablaBancos() {
+    if (tblBancos) return;
+    tblBancos = $('#tblBancos').DataTable({
+        ajax: {
+            url: base_url + 'bancos/listarBancos',
+            dataSrc: ''
+        },
+        columns: [
+            { data: 'id' },
+            { data: 'nombre' },
+            { data: 'numero_cuenta' },
+            { 
+                data: null,
+                render: function(data) {
+                    if (data.nombre_cuenta) {
+                        return data.cuenta_contable + ' - ' + data.nombre_cuenta;
+                    }
+                    return data.cuenta_contable;
+                }
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    if (row.pos == 1) {
+                        return '<span class="badge bg-success">SI</span>';
+                    } else {
+                        return '<span class="badge bg-secondary">NO</span>';
+                    }
+                }
+            },
+            { data: 'correlativo_cheque' },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    return `
+                        <button class="btn btn-warning btn-sm" onclick="editarBanco(${row.id})"><i class="fa-solid fa-edit"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="eliminarBanco(${row.id})"><i class="fa-solid fa-trash"></i></button>
+                    `;
+                }
+            }
+        ],
+        language: {
+            url: base_url + 'assets/js/espanol.json'
+        },
+        responsive: true
+    });
+}
+
+// Inicializar cuando se muestra cada tab
+$('#nav-transaccion-tab').on('shown.bs.tab', function() {
+    inicializarTablaTransaccion();
 });
 
-// DataTables para Bancos
-let tblBancos = $('#tblBancos').DataTable({
-    ajax: {
-        url: base_url + 'bancos/listarBancos',
-        dataSrc: '',
-        xhrFields: { withCredentials: true }
-    },
-    columns: [
-        { data: 'id' },
-        { data: 'nombre' },
-        { data: 'numero_cuenta' },
-        { 
-            data: null,
-            render: function(data) {
-                if (data.nombre_cuenta) {
-                    return data.cuenta_contable + ' - ' + data.nombre_cuenta;
-                }
-                return data.cuenta_contable;
-            }
-        },
-        {
-            data: null,
-            render: function(data, type, row) {
-                if (row.pos == 1) {
-                    return '<span class="badge bg-success">SI</span>';
-                } else {
-                    return '<span class="badge bg-secondary">NO</span>';
-                }
-            }
-        },
-        {
-            data: null,
-            render: function(data, type, row) {
-                return `
-                    <button class="btn btn-warning btn-sm" onclick="editarBanco(${row.id})"><i class="fa-solid fa-edit"></i></button>
-                    <button class="btn btn-danger btn-sm" onclick="eliminarBanco(${row.id})"><i class="fa-solid fa-trash"></i></button>
-                `;
-            }
-        }
-    ],
-    language: {
-        url: base_url + 'assets/js/spanish.json'
-    },
-    dom: 'Bfrtip',
-    responsive: true,
-    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+$('#nav-bancos-tab').on('shown.bs.tab', function() {
+    inicializarTablaBancos();
 });
 
-// DataTables para Cuentas Bancarias
-let tblCuentasBancarias = $('#tblCuentasBancarias').DataTable({
-    ajax: {
-        url: base_url + 'bancos/listarCuentasBancarias',
-        dataSrc: '',
-        xhrFields: { withCredentials: true }
-    },
-    columns: [
-        { data: 'id' },
-        { data: 'nombre_banco' },
-        { data: 'numero_cuenta' },
-        { 
-            data: null,
-            render: function(data) {
-                return data.nombre_propietario + '<br><small class="text-muted">RUC: ' + data.ruc + '</small>';
-            }
-        },
-        { 
-            data: null,
-            render: function(data) {
-                if (data.nombre_cuenta) {
-                    return data.cuenta_contable + ' - ' + data.nombre_cuenta;
-                }
-                return data.cuenta_contable;
-            }
-        },
-        {
-            data: null,
-            render: function(data) {
-                if (data.tipo_cuenta == '1') {
-                    return '<span class="badge bg-primary">Corriente</span>';
-                } else {
-                    return '<span class="badge bg-info">Ahorro</span>';
-                }
-            }
-        },
-        {
-            data: null,
-            render: function(data, type, row) {
-                return `
-                    <button class="btn btn-warning btn-sm" onclick="editarCuentaBancaria(${row.id})"><i class="fa-solid fa-edit"></i></button>
-                    <button class="btn btn-danger btn-sm" onclick="eliminarCuentaBancaria(${row.id})"><i class="fa-solid fa-trash"></i></button>
-                `;
-            }
-        }
-    ],
-    language: {
-        url: base_url + 'assets/js/spanish.json'
-    },
-    dom: 'Bfrtip',
-    responsive: true,
-    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+// Si ya está activo al cargar
+$(document).ready(function() {
+    if ($('#nav-transaccion').hasClass('show active')) {
+        inicializarTablaTransaccion();
+    }
+    if ($('#nav-bancos').hasClass('show active')) {
+        inicializarTablaBancos();
+    }
 });
 
 // Funciones para Tipos de Transacción
@@ -144,7 +112,6 @@ function editarTransaccion(id) {
     $.ajax({
         url: base_url + 'bancos/getTransaccion/' + id,
         type: 'GET',
-        xhrFields: { withCredentials: true },
         success: function(response) {
             const data = JSON.parse(response);
             $('#id_transaccion').val(data.id);
@@ -173,7 +140,6 @@ function eliminarTransaccion(id) {
             $.ajax({
                 url: base_url + 'bancos/eliminarTransaccion/' + id,
                 type: 'GET',
-                xhrFields: { withCredentials: true },
                 success: function(response) {
                     const res = JSON.parse(response);
                     Swal.fire('Eliminado', res.msg, res.type);
@@ -209,7 +175,6 @@ $('#formTransaccion').submit(function(e) {
         data: formData,
         processData: false,
         contentType: false,
-        xhrFields: { withCredentials: true },
         success: function(response) {
             const res = JSON.parse(response);
             Swal.fire('Éxito', res.msg, res.type);
@@ -236,14 +201,14 @@ function editarBanco(id) {
     $.ajax({
         url: base_url + 'bancos/getBanco/' + id,
         type: 'GET',
-        xhrFields: { withCredentials: true },
         success: function(response) {
             const data = JSON.parse(response);
             $('#id_banco').val(data.id);
             $('#nombre_banco').val(data.nombre);
-            $('#numero_cuenta').val(data.numero_cuenta);
-            $('#cuenta_contable').val(data.cuenta_contable).trigger('change');
-            $('#cuenta_pos').val(data.pos);
+            $('#numero_cuenta_banco').val(data.numero_cuenta);
+            $('#cuenta_contable_banco').val(data.cuenta_contable).trigger('change');
+            $('#cuenta_pos_banco').val(data.pos);
+            $('#correlativo_cheque_banco').val(data.correlativo_cheque || 1);
             $('#titleModalBanco').text('Editar Banco');
             $('#btnAccionBanco').text('Actualizar');
             $('#modalBanco').modal('show');
@@ -266,7 +231,6 @@ function eliminarBanco(id) {
             $.ajax({
                 url: base_url + 'bancos/eliminarBanco/' + id,
                 type: 'GET',
-                xhrFields: { withCredentials: true },
                 success: function(response) {
                     const res = JSON.parse(response);
                     Swal.fire('Eliminado', res.msg, res.type);
@@ -284,6 +248,7 @@ $('#formBanco').submit(function(e) {
     const numero_cuenta = $('#numero_cuenta_banco').val();
     const cuenta_contable = $('#cuenta_contable_banco').val();
     const cuenta_pos = $('#cuenta_pos_banco').val();
+    const correlativo_cheque = $('#correlativo_cheque_banco').val();
 
     if (nombre == '' || numero_cuenta == '' || cuenta_contable == '') {
         Swal.fire('Atención', 'Todos los campos son requeridos', 'warning');
@@ -297,6 +262,7 @@ $('#formBanco').submit(function(e) {
     formData.append('numero_cuenta', numero_cuenta);
     formData.append('cuenta_contable', cuenta_contable);
     formData.append('cuenta_pos', cuenta_pos);
+    formData.append('correlativo_cheque', correlativo_cheque);
 
     $.ajax({
         url: url,
@@ -304,7 +270,6 @@ $('#formBanco').submit(function(e) {
         data: formData,
         processData: false,
         contentType: false,
-        xhrFields: { withCredentials: true },
         success: function(response) {
             const res = JSON.parse(response);
             Swal.fire('Éxito', res.msg, res.type);
@@ -313,131 +278,5 @@ $('#formBanco').submit(function(e) {
                 tblBancos.ajax.reload();
             }
         }
-    });
-});
-
-// Funciones para Cuentas Bancarias
-function modalCuentaBancaria() {
-    $('#formCuentaBancaria')[0].reset();
-    $('#id_cuenta_bancaria').val('');
-    $('#banco_id').val('').trigger('change');
-    $('#cuenta_contable_cb').val('').trigger('change');
-    $('#propietario_cb').val('').trigger('change');
-    $('#titleModalCuenta').text('Nueva Cuenta Bancaria');
-    $('#btnAccionCuenta').text('Registrar');
-    $('#modalCuentaBancaria').modal('show');
-}
-
-function editarCuentaBancaria(id) {
-    $.ajax({
-        url: base_url + 'bancos/getCuentaBancaria/' + id,
-        type: 'GET',
-        xhrFields: { withCredentials: true },
-        success: function(response) {
-            const data = JSON.parse(response);
-            $('#id_cuenta_bancaria').val(data.id);
-            $('#banco_id').val(data.banco_id).trigger('change');
-            $('#numero_cuenta_cb').val(data.numero_cuenta);
-            $('#cuenta_contable_cb').val(data.cuenta_contable).trigger('change');
-            $('#propietario_cb').val(data.proveedor_id).trigger('change');
-            $('#tipo_cuenta_cb').val(data.tipo_cuenta);
-            $('#titleModalCuenta').text('Editar Cuenta Bancaria');
-            $('#btnAccionCuenta').text('Actualizar');
-            $('#modalCuentaBancaria').modal('show');
-        }
-    });
-}
-
-function eliminarCuentaBancaria(id) {
-    Swal.fire({
-        title: '¿Estás seguro?',
-        text: 'La cuenta bancaria será eliminada',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Sí, eliminar',
-        cancelButtonText: 'Cancelar'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: base_url + 'bancos/eliminarCuentaBancaria/' + id,
-                type: 'GET',
-                xhrFields: { withCredentials: true },
-                success: function(response) {
-                    const res = JSON.parse(response);
-                    Swal.fire('Eliminado', res.msg, res.type);
-                    tblCuentasBancarias.ajax.reload();
-                }
-            });
-        }
-    });
-}
-
-$('#formCuentaBancaria').submit(function(e) {
-    e.preventDefault();
-    const id = $('#id_cuenta_bancaria').val();
-    const banco_id = $('#banco_id').val();
-    const numero_cuenta = $('#numero_cuenta_cb').val();
-    const cuenta_contable = $('#cuenta_contable_cb').val();
-    const propietario_id = $('#propietario_cb').val();
-    const tipo_cuenta = $('#tipo_cuenta_cb').val();
-
-    if (banco_id == '' || numero_cuenta == '' || cuenta_contable == '' || 
-        propietario_id == '' || tipo_cuenta == '') {
-        Swal.fire('Atención', 'Todos los campos son requeridos', 'warning');
-        return;
-    }
-
-    const url = id ? base_url + 'bancos/modificarCuentaBancaria' : base_url + 'bancos/registrarCuentaBancaria';
-    const formData = new FormData();
-    formData.append('id', id);
-    formData.append('banco_id', banco_id);
-    formData.append('numero_cuenta', numero_cuenta);
-    formData.append('cuenta_contable', cuenta_contable);
-    formData.append('propietario_id', propietario_id);
-    formData.append('tipo_cuenta', tipo_cuenta);
-
-    $.ajax({
-        url: url,
-        type: 'POST',
-        data: formData,
-        processData: false,
-        contentType: false,
-        xhrFields: { withCredentials: true },
-        success: function(response) {
-            const res = JSON.parse(response);
-            Swal.fire('Éxito', res.msg, res.type);
-            if (res.type === 'success') {
-                $('#modalCuentaBancaria').modal('hide');
-                tblCuentasBancarias.ajax.reload();
-            }
-        }
-    });
-});
-
-// Inicializar Select2 para los campos del modal Cuentas Bancarias
-$(document).ready(function() {
-    $('#modalCuentaBancaria').on('shown.bs.modal', function() {
-        // Banco
-        $('#banco_id').select2({
-            dropdownParent: $('#modalCuentaBancaria'),
-            placeholder: 'Buscar banco...',
-            allowClear: true
-        });
-        
-        // Cuenta Contable
-        $('#cuenta_contable_cb').select2({
-            dropdownParent: $('#modalCuentaBancaria'),
-            placeholder: 'Buscar cuenta contable...',
-            allowClear: true
-        });
-        
-        // Propietario (Proveedor)
-        $('#propietario_cb').select2({
-            dropdownParent: $('#modalCuentaBancaria'),
-            placeholder: 'Buscar proveedor...',
-            allowClear: true
-        });
     });
 });
